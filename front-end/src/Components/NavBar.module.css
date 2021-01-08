@@ -1,0 +1,133 @@
+.navbar {
+  background-color: #7f8c8d;
+  display: flex;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  width: 8rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-right: auto;
+  border: 1px solid rgba(255, 0, 0, 0);
+}
+
+.search:hover {
+  border: 1px solid #f1c40f;
+  border-radius: 5px;
+}
+
+.search input {
+  border-radius: 5px 0 0 5px;
+  border: none;
+  padding: 0;
+  outline: none;
+  height: 1.4rem;
+  width: 100%;
+  background-color: #ecf0f1;
+}
+
+.search div {
+  height: 1.4rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 5px 5px 0;
+  background-color: #2980b9;
+}
+
+.cartdesktop {
+  display: none;
+}
+
+.logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.menu {
+  margin-left: 2rem;
+  margin-right: auto;
+}
+
+.cart {
+  margin-right: 2rem;
+  margin-left: auto;
+}
+
+@media only screen and (min-width: 768px) {
+  /* Below removes the burger menu */
+
+  .navbar {
+    justify-content: space-evenly;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  /* The logo */
+
+  .logo {
+    order: 1;
+    margin-left: 2rem;
+  }
+
+  /* Shopping cart below */
+
+  .cart {
+    display: none;
+  }
+
+  .cartdesktop {
+    background-color: #ecf0f1;
+    display: flex;
+    border-radius: 3px;
+    margin: 0;
+    order: 3;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 2rem;
+    height: 2.5rem;
+    transition: all 0.5s;
+  }
+
+  .cartdesktop:hover {
+    background-color: #2980b9;
+  }
+
+  .cartdesktop:hover > * {
+    color: #ecf0f1;
+    text-decoration: none;
+  }
+
+  .cartdesktop a {
+    color: #2980b9;
+    text-decoration: none;
+  }
+
+  .search {
+    width: 30%;
+    margin-bottom: 0;
+    order: 2;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .search input,
+  .search div {
+    height: 2rem;
+  }
+}
