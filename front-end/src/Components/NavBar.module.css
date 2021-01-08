@@ -16,11 +16,10 @@
 
 .search {
   display: flex;
-  width: 100%;
+  width: 80%;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
-  margin-right: auto;
+  margin: 0 auto 1rem;
   border: 1px solid rgba(255, 0, 0, 0);
 }
 
@@ -34,7 +33,9 @@
   border: none;
   padding: 0;
   outline: none;
+  margin: auto;
   height: 1.4rem;
+  min-width: 4rem;
   width: 100%;
   background-color: #ecf0f1;
 }
@@ -68,11 +69,28 @@
   margin-left: auto;
 }
 
+.links {
+  display: none;
+}
+
 @media only screen and (min-width: 768px) {
   /* Below removes the burger menu */
 
-  .navbar {
-    justify-content: space-evenly;
+  .links {
+    display: flex;
+    order: 2;
+  }
+
+  .links a {
+    color: #ecf0f1;
+    margin: 0 1rem;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 1s;
+  }
+
+  .links a:hover {
+    border-color: #ecf0f1;
   }
 
   .menu {
@@ -83,7 +101,7 @@
 
   .logo {
     order: 1;
-    margin-left: 2rem;
+    margin-left: 1.5rem;
   }
 
   /* Shopping cart below */
@@ -96,11 +114,10 @@
     background-color: #ecf0f1;
     display: flex;
     border-radius: 3px;
-    margin: 0;
+    margin: 0 2.5rem 0 2rem;
     order: 3;
     align-items: center;
     justify-content: space-evenly;
-    margin-right: 2rem;
     height: 2.5rem;
     transition: all 0.5s;
   }
@@ -120,14 +137,27 @@
   }
 
   .search {
-    width: 30%;
+    width: 20%;
     margin-bottom: 0;
     order: 2;
-    margin: 0 2rem 0 2rem;
+    margin: 0 auto 0 2rem;
   }
 
   .search input,
   .search div {
     height: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1028px) {
+  .search {
+    width: 25%;
+    margin-bottom: 0;
+    order: 2;
+    margin: 0 auto 0 2rem;
+  }
+
+  .links a {
+    margin: 0 2rem;
   }
 }

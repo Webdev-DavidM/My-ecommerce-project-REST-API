@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styles from './NavBar.module.css';
 import Logo from './UIelements/Logo';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Basket from './UIelements/Basket';
 import SearchBar from './UIelements/SearchBar';
 // As part of this navigation page I will have nested routing
 
@@ -24,35 +25,19 @@ export default class NavBar extends Component {
           {/*This hamburger menu below will dispappear in desktop mode*/}
           <div
             className={styles.menu}
-            style={{ width: '1.5rem', height: '1.5rem' }}>
+            style={{ width: '1.5rem', height: '1.5rem', color: '#ecf0f1' }}>
             <i
               class='fas fa-bars'
               style={{ color: '#ecf0f1', width: '100%', height: '100%' }}></i>
           </div>
           <Logo size='2rem' />
-          <div
-            className={styles.cartdesktop}
-            style={{ width: '5rem', height: '2rem', color: '#2980b9' }}>
-            <Link to='/shopping-basket' color='red'>
-              <i
-                class='fas fa-shopping-cart'
-                style={{ width: '0.9rem', height: '0.9rem' }}>
-                {' '}
-              </i>
-              <span>£799 &#127;&#127;&#40;2&#41;</span>
-            </Link>
-          </div>
-          <div
-            className={styles.cart}
-            style={{ width: '1.5rem', height: '1.5rem' }}>
-            <NavLink to='/shopping-basket'>
-              <i
-                color='#2980b9'
-                class='fas fa-shopping-cart'
-                style={{ color: '#ecf0f1', width: '100%', height: '100%' }}></i>
-            </NavLink>
-          </div>
+          <Basket />
           <SearchBar />
+          <div className={styles.links}>
+            <Link to='/account'>Account</Link>
+            <Link to='/admin'>Admin</Link>
+            <Link to='/stores'>Stores</Link>
+          </div>
         </div>
       </div>
     );
