@@ -1,9 +1,49 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
   font-family: 'Mukta', sans-serif;
   background-color: #ecf0f1;
   width: 100vw;
   height: 100vh;
   min-width: 320px;
   box-sizing: border-box;
+  margin: auto;
+}
+
+.menufade-enter {
+  opacity: 0;
+}
+.menufade-enter-active {
+  opacity: 1;
+  transition: all 0.3s;
+}
+.menufade-exit {
+  opacity: 1;
+}
+.menufade-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* This is the css for the side menu transition */
+
+.sidemenu {
+  width: 90%;
+  height: 100%;
+}
+
+.sidemenu-enter {
+  opacity: 0;
+}
+.sidemenu-enter-active {
+  opacity: 1;
+  transition: all 0.3s;
+}
+.sidemenu-exit {
+  opacity: 1;
+}
+.sidemenu-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s, transform 0.3s;
 }

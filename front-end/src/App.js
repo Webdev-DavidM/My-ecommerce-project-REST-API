@@ -1,19 +1,19 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
+import LandingPage from './Pages/LandingPage';
 
 import Navbar from './Components/NavBar';
 
 // Here I am using lazy loading which is code splitting which will only loads components when needed and
 // hopefully should speed up my application
-const LandingPage = lazy(() => import('./Pages/LandingPage'));
+
 const Account = lazy(() => import('./Pages/Account'));
 const Admin = lazy(() => import('./Pages/Admin'));
 const SignIn = lazy(() => import('./Pages/SignIn'));
 const Product = lazy(() => import('./Pages/Product'));
 const ShoppingBasket = lazy(() => import('./Pages/ShoppingBasket'));
 const Category = lazy(() => import('./Pages/Category'));
-
 const NotFound = lazy(() => import('./Components/NotFound'));
 
 function App() {
