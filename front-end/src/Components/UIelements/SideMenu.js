@@ -42,6 +42,7 @@ export default class SideMenu extends Component {
                 this.state.selectedCat === cat ? styles.categoryItemMove : '';
               return (
                 <div
+                  onClick={() => this.props.closeSide()}
                   className={`${styles.categoryItem} ${iconMove} `}
                   onMouseEnter={(e) => this.showSubCategory(e)}>
                   <Link to={`/${cat}`}>{cat}</Link>
@@ -53,7 +54,7 @@ export default class SideMenu extends Component {
           <div className={styles.sidesubcategories}>
             {this.state.showSubCat &&
               this.state.categories[this.state.selectedCat].map((subCat) => (
-                <div>
+                <div onClick={() => this.props.closeSide()}>
                   <Link
                     to={`${
                       this.state.selectedCat

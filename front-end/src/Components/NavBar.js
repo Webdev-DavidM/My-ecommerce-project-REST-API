@@ -84,6 +84,8 @@ export default class NavBar extends Component {
               <DropDownMenu
                 mouseEnter={this.showDropMenu}
                 mouseLeave={this.closeDropMenu}
+                // closeSide={this.closeSideMenu}
+                closeMain={this.closeDropMenu}
               />
             </CSSTransition>
           )}
@@ -98,8 +100,7 @@ export default class NavBar extends Component {
               unmountOnExit>
               <SideMenu
                 closeSide={this.closeSideMenu}
-                // mouseEnter={this.showSideMenu}
-                // mouseLeave={this.closeSideMenu}
+                closeMain={this.closeDropMenu}
               />
             </CSSTransition>
           )}

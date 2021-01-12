@@ -1,6 +1,12 @@
+.landingpage {
+  background-color: #ecf0f1;
+  max-width: 1500px;
+  margin: auto;
+}
+
 .mainimage {
   width: 100%;
-  height: 100%;
+  height: auto;
   text-align: center;
 }
 
@@ -8,4 +14,126 @@
   width: 80%;
   margin: 1rem auto;
   height: auto;
+}
+
+/* running section */
+
+.running {
+  width: 75%;
+  height: auto;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.running img {
+  width: 100%;
+  height: 100%;
+}
+
+.catdetailsrunning {
+  position: absolute;
+  left: 68%;
+  top: 66%;
+  width: 10%;
+  height: 15%;
+}
+
+.catdetailsrunning p {
+  font-size: 1.4rem;
+  margin: 0.2rem 0.2rem 0rem 0;
+}
+
+/* cycling section */
+
+.cycling {
+  width: 75%;
+  height: auto;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cycling img {
+  width: 100%;
+  height: 100%;
+}
+
+.catdetailscycling {
+  position: absolute;
+  left: 16%;
+  top: 1%;
+  width: 10%;
+  height: 15%;
+}
+
+.catdetailscycling p {
+  font-size: 1.4rem;
+  margin: 0 0.2rem 0rem 0;
+}
+/* swimming section */
+
+.swimming {
+  width: 75%;
+  height: auto;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.swimming img {
+  width: 100%;
+  height: 100%;
+}
+
+.catdetailsswimming {
+  position: absolute;
+  left: 80%;
+  top: 0%;
+  width: 10%;
+  height: 15%;
+}
+
+.catdetailsswimming p {
+  font-size: 1.4rem;
+  margin: 0 0.2rem 0rem 0;
+}
+
+/* outdoor */
+
+.outdoor {
+  width: 75%;
+  height: auto;
+  margin: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outdoor img {
+  width: 100%;
+  height: 100%;
+}
+
+.catdetailsoutdoor {
+  position: absolute;
+  left: 0%;
+  top: 52%;
+  width: 10%;
+  height: 15%;
+}
+
+.catdetailsoutdoor p {
+  font-size: 1.4rem;
+  margin: 0 0.2rem 0rem 0;
 }
