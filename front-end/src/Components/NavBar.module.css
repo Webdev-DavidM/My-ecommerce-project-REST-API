@@ -70,9 +70,31 @@
   margin-right: auto;
 }
 
+.menu:hover {
+  cursor: pointer;
+}
+
+.menu svg {
+  color: #ecf0f1;
+  transition: color 0.5s;
+}
+
+.menu:hover svg {
+  color: #f1c40f;
+}
+
 .cart {
   margin-right: 2rem;
   margin-left: auto;
+}
+
+.cart a svg {
+  color: #ecf0f1;
+  transition: color 0.5s;
+}
+
+.cart a svg:hover {
+  color: #f1c40f;
 }
 
 .links {
@@ -187,7 +209,7 @@
   }
 
   .categoryItemMove svg {
-    margin-left: 45%;
+    margin-left: 40%;
   }
 
   .categoryItemMove {
@@ -205,7 +227,7 @@
   }
 
   .categoryImage {
-    width: 30%;
+    width: 40%;
     height: 100%;
     margin-left: auto;
   }
@@ -324,6 +346,12 @@
     margin-bottom: 0;
     order: 2;
     margin: 0 auto 0 2rem;
+  }
+
+  .categoryImage {
+    width: 60%;
+    height: 100%;
+    margin-left: auto;
   }
 
   .links a {

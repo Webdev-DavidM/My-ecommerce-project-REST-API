@@ -63,7 +63,7 @@ export default class DropDownMenu extends Component {
         </div>
         <div className={styles.categoryImage}>
           <img
-            src={`${process.env.PUBLIC_URL}/images/fitness-photo.jpg`}
+            src={`${process.env.PUBLIC_URL}/images/fitness image.png`}
             alt='fitness'></img>
         </div>
       </div>

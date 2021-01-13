@@ -25,7 +25,7 @@ export default class Basket extends Component {
             <i
               color='#2980b9'
               class='fas fa-shopping-cart'
-              style={{ color: '#ecf0f1', width: '100%', height: '100%' }}></i>
+              style={{ width: '100%', height: '100%' }}></i>
           </Link>
         </div>
       </>

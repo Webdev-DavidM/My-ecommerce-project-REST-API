@@ -15,9 +15,9 @@ const Admin = lazy(() => import('./Pages/Admin'));
 const SignIn = lazy(() => import('./Pages/SignIn'));
 const Product = lazy(() => import('./Pages/Product'));
 const ShoppingBasket = lazy(() => import('./Pages/ShoppingBasket'));
-const Category = lazy(() => import('./Pages/Category'));
+const MainCategory = lazy(() => import('./Pages/MainCategory'));
 const NotFound = lazy(() => import('./Components/NotFound'));
-const CategoryArea = lazy(() => import('./Pages/CategoryArea'));
+const SubCategory = lazy(() => import('./Pages/SubCategory'));
 
 export default class App extends Component {
   state = {
@@ -63,8 +63,8 @@ export default class App extends Component {
                   path='/shopping-basket'
                   component={ShoppingBasket}
                 />
-                <Route exact path='/:category/:type' component={CategoryArea} />
-                <Route exact path='/:category' component={Category} />
+                <Route exact path='/:category/:type' component={SubCategory} />
+                <Route exact path='/:category' component={MainCategory} />
                 <Route component={NotFound} />
               </Switch>
             </Suspense>

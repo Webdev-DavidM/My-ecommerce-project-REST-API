@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './LandingPage.module.css';
 import ShopButton from '../Components/UIelements/ShopButton';
+import Media from 'react-media';
 
 const LandingPage = () => {
   return (
@@ -8,10 +9,17 @@ const LandingPage = () => {
       <header>
         THE UK'S <span>&#127; NO.1 &#127;</span> ONLINE FITNESS STORE
       </header>
-      <div className={styles.mainimage}>
+
+      <div className={styles.mainimagemobile}>
         <img
           src={`${process.env.PUBLIC_URL}/images/landing-page-main-image.jpg`}
           alt='Man on a bike smiling'></img>
+      </div>
+
+      <div className={styles.mainimagedesktop}>
+        <img
+          src={`${process.env.PUBLIC_URL}/images/cycling-desktop.jpg`}
+          alt='Woman on a bike riding'></img>
       </div>
 
       <header className={styles.title2}>

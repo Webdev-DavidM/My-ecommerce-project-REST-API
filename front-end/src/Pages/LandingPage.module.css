@@ -26,16 +26,20 @@ header span {
   padding: 0.5rem;
 }
 
-.mainimage {
+.mainimagemobile {
   width: 100%;
   height: auto;
   text-align: center;
 }
 
-.mainimage img {
+.mainimagemobile img {
   width: 80%;
   margin: 0.5rem auto 0.5rem auto;
   height: auto;
+}
+
+.mainimagedesktop {
+  display: none;
 }
 
 /* running section */
@@ -43,12 +47,11 @@ header span {
 .running {
   width: 75%;
   height: auto;
-  margin: auto;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
+  margin: 1rem auto 1rem auto;
 }
 
 .running img {
@@ -74,12 +77,12 @@ header span {
 .cycling {
   width: 75%;
   height: auto;
-  margin: auto;
+  /* margin: auto; */
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
+  margin: 1rem auto 1rem auto;
 }
 
 .cycling img {
@@ -104,12 +107,11 @@ header span {
 .swimming {
   width: 75%;
   height: auto;
-  margin: auto;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
+  margin: 1rem auto 1rem auto;
 }
 
 .swimming img {
@@ -135,11 +137,11 @@ header span {
 .outdoor {
   width: 75%;
   height: auto;
-  margin: auto;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1rem auto 1rem auto;
 }
 
 .outdoor img {
@@ -163,6 +165,23 @@ header span {
 @media only screen and (min-width: 768px) {
   header {
     font-size: 1.8rem;
+  }
+
+  .mainimagemobile {
+    display: none;
+  }
+
+  .mainimagedesktop {
+    display: inline-flex;
+    width: 100%;
+    max-height: 20%;
+    position: relative;
+  }
+
+  .mainimagedesktop img:first-child {
+    width: 75%;
+    margin: 0.5rem auto 0.5rem auto;
+    height: auto;
   }
 }
 

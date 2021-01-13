@@ -45,7 +45,7 @@ export default class NavBar extends Component {
               style={{ width: '1.5rem', height: '1.5rem', color: '#ecf0f1' }}>
               <i
                 class='fas fa-bars'
-                style={{ color: '#ecf0f1', width: '100%', height: '100%' }}></i>
+                style={{ width: '100%', height: '100%' }}></i>
             </div>
             <Logo size='2rem' />
             <Basket />
