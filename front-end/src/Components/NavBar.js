@@ -84,7 +84,6 @@ export default class NavBar extends Component {
               <DropDownMenu
                 mouseEnter={this.showDropMenu}
                 mouseLeave={this.closeDropMenu}
-                // closeSide={this.closeSideMenu}
                 closeMain={this.closeDropMenu}
               />
             </CSSTransition>

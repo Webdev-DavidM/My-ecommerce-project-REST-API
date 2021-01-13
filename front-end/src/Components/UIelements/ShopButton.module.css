@@ -2,8 +2,8 @@
   border: 3px solid #2c3e50;
   display: inline-flex;
   padding: 0 0.2rem;
-  color: #2c3e50;
-  width: 3rem;
+  color: hsl(210, 29%, 24%);
+  width: auto;
   height: 2rem;
   justify-content: center;
   align-items: center;

@@ -160,6 +160,10 @@
 
   /* This is the dropdown menu section */
 
+  .dropdown {
+    width: 20%;
+  }
+
   .dropdown div {
     padding: 0.2rem;
   }

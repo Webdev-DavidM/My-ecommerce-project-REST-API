@@ -5,12 +5,25 @@ import ShopButton from '../Components/UIelements/ShopButton';
 const LandingPage = () => {
   return (
     <div className={styles.landingpage}>
+      <header>
+        THE UK'S <span>&#127; NO.1 &#127;</span> ONLINE FITNESS STORE
+      </header>
       <div className={styles.mainimage}>
         <img
           src={`${process.env.PUBLIC_URL}/images/landing-page-main-image.jpg`}
           alt='Man on a bike smiling'></img>
       </div>
 
+      <header className={styles.title2}>
+        <strong>
+          DM Sports <span> + &#127;</span>
+        </strong>
+        NEXT DAY DELIVERY AND FREE RETURNS FOR ONLY &#127;{' '}
+        <strong>£9.99</strong>
+        <div>
+          <ShopButton url='/running' name='FIND OUT MORE' width='8rem' />
+        </div>
+      </header>
       <div className={styles.running}>
         <img
           src={`${process.env.PUBLIC_URL}/images/running-montage.png`}
@@ -19,7 +32,7 @@ const LandingPage = () => {
         <div className={styles.catdetailsrunning}>
           {' '}
           <p>RUN</p>
-          <ShopButton url='/running' />
+          <ShopButton url='/running' name='SHOP' />
         </div>
       </div>
 
@@ -31,7 +44,7 @@ const LandingPage = () => {
         <div className={styles.catdetailscycling}>
           {' '}
           <p>CYCLE</p>
-          <ShopButton url='/cycling' />
+          <ShopButton url='/cycling' name='SHOP' />
         </div>
       </div>
       <div className={styles.swimming}>
@@ -42,7 +55,7 @@ const LandingPage = () => {
         <div className={styles.catdetailsswimming}>
           {' '}
           <p>SWIM</p>
-          <ShopButton url='/swimming' />
+          <ShopButton url='/swimming' name='SHOP' />
         </div>
       </div>
       <div className={styles.outdoor}>
@@ -53,7 +66,7 @@ const LandingPage = () => {
         <div className={styles.catdetailsoutdoor}>
           {' '}
           <p>OUTDOOR</p>
-          <ShopButton url='/outdoor' />
+          <ShopButton url='/outdoor' name='SHOP' />
         </div>
       </div>
     </div>

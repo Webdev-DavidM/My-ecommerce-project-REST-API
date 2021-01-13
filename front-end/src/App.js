@@ -72,7 +72,7 @@ export default class App extends Component {
           <CSSTransition
             in={this.state.showArrowToTop}
             onClick={() => window.scrollTo(0, 0)}
-            timeout={1000}
+            timeout={500}
             classNames='menuarrow'
             unmountOnExit>
             <div className='menuarrow'>

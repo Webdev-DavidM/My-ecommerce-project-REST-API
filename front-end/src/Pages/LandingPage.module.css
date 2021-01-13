@@ -1,7 +1,29 @@
 .landingpage {
   background-color: #ecf0f1;
-  max-width: 1500px;
   margin: auto;
+}
+
+header {
+  background-color: #e3e7e8;
+  height: auto;
+  min-height: 50px;
+  font-size: 1.2rem;
+  color: #2c3e50;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  padding: 0.5rem;
+}
+
+header span {
+  color: #e67e22;
+}
+
+.title2 {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0.5rem 0;
+  padding: 0.5rem;
 }
 
 .mainimage {
@@ -12,7 +34,7 @@
 
 .mainimage img {
   width: 80%;
-  margin: 1rem auto;
+  margin: 0.5rem auto 0.5rem auto;
   height: auto;
 }
 
@@ -136,4 +158,30 @@
 .catdetailsoutdoor p {
   font-size: 1.4rem;
   margin: 0 0.2rem 0rem 0;
+}
+
+@media only screen and (min-width: 768px) {
+  header {
+    font-size: 1.8rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  header {
+    font-size: 2.5rem;
+  }
+
+  .title2 {
+    display: flex;
+    font-size: 1.8rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .title2 div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
