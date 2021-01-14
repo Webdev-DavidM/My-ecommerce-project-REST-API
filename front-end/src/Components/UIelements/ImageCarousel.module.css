@@ -2,17 +2,19 @@
   display: flex;
   position: relative;
   overflow: hidden;
+  margin: 1rem 0;
 }
 
 .carousel div {
   scroll-snap-align: start;
   flex-shrink: 0;
-
+  display: flex;
   width: 100%;
-  height: 300px;
+  height: 250px;
+
   right: 0%;
   position: relative;
-  transition: all 2s;
+  transition: all 0.5s;
 }
 
 .carouselmoveright div {
@@ -24,7 +26,40 @@
 }
 
 .carousel div img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 100%;
+}
+
+.carousel div span {
+  display: none;
+}
+
+.carousel div span span {
+  font-size: 3rem;
+  color: #2c3e50;
+  height: 3rem;
+}
+
+.carousel div span span p {
+  font-size: 3rem;
+  color: #2c3e50;
+  height: 2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .carousel div img {
+    object-fit: contain;
+    width: 50%;
+    height: 100%;
+  }
+
+  .carousel div span {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }

@@ -2,10 +2,12 @@ import React from 'react';
 import styles from './ShopButton.module.css';
 import { Link } from 'react-router-dom';
 
-const ShopButton = ({ url, name, width }) => {
+const ShopButton = ({ url, name, width, height }) => {
   console.log(width);
   return (
-    <div className={styles.shopbutton} style={{ width: `${width}` }}>
+    <div
+      className={styles.shopbutton}
+      style={{ width: `${width}`, height: `${height}` }}>
       <Link to={`${url}`}>{name} </Link>
     </div>
   );

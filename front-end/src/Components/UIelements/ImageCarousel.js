@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import styles from './ImageCarousel.module.css';
+import ShopButton from './ShopButton';
+
 export default class ImageCarousel extends Component {
   state = {
     currentImageIndex: 0,
-    images: [
-      'https://lh3.googleusercontent.com/oxPeODS2m6rYIVbhcQChRtOWEYeGDwbeeeB1cDU2o_WYAVPU61VIgx-_6BAh5gSL8Sw=h900',
-      'https://i0.wp.com/www.universodegatos.com/wp-content/uploads/2017/04/fivfelv7.jpg?resize=582%2C328',
-    ],
+    images: ['cycle-slide1.jpg', 'cycle-slide2.png'],
     moveright: false,
     moveleft: false,
   };
@@ -32,30 +31,11 @@ export default class ImageCarousel extends Component {
         moveleft: !prevState.moveleft,
         moveright: !prevState.moveright,
       }));
-    }, 5000);
+    }, 8000);
+    setInterval(() => {
+      this.setState({ showButton: true });
+    }, 11000);
   };
-
-  //   previousSlide = () => {
-  //     const lastIndex = imgUrls.length - 1;
-  //     const { currentImageIndex } = this.state;
-  //     const shouldResetIndex = currentImageIndex === 0;
-  //     const index = shouldResetIndex ? lastIndex : currentImageIndex - 1;
-
-  //     this.setState({
-  //       currentImageIndex: index,
-  //     });
-  //   };
-
-  //   nextSlide = () => {
-  //     const lastIndex = imgUrls.length - 1;
-  //     const { currentImageIndex } = this.state;
-  //     const shouldResetIndex = currentImageIndex === lastIndex;
-  //     const index = shouldResetIndex ? 0 : currentImageIndex + 1;
-
-  //     this.setState({
-  //       currentImageIndex: index,
-  //     });
-  //   };
 
   render() {
     let style = this.state.moveright ? styles.carouselmoveright : '';
@@ -66,14 +46,20 @@ export default class ImageCarousel extends Component {
             console.log(index, url);
             return (
               <div key={index}>
-                <img src={`${url}`} alt='' />
+                <span>
+                  {index === 0 ? (
+                    <span>BIKES</span>
+                  ) : (
+                    <span>LATEST 2021 MODELS</span>
+                  )}
+
+                  <ShopButton name='Shop Now' width='5rem' height='2rem' />
+                </span>
+                <img src={`${process.env.PUBLIC_URL}/images/${url}`} alt='' />
               </div>
             );
           })}
         </div>
-
-        <button onClick={() => this.moveRight()}>Click to Right</button>
-        <button onClick={() => this.moveLeft()}>Click to Left</button>
       </>
     );
   }
