@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImageCarousel from '../Components/UIelements/ImageCarousel';
 import styles from './MainCategory.module.css';
+import { Link } from 'react-router-dom';
 
 export default class MainCategory extends Component {
   render() {
@@ -22,13 +23,23 @@ export default class MainCategory extends Component {
           </p>
         </div>
         <div className={styles.categorybody}>
-          <aside>menu</aside>
+          <aside>
+            <p>Bikes</p>
+            <hr></hr>
+            <ul>
+              <li>
+                <Link to=''>Road Bikes</Link>
+              </li>
+              <li>
+                <Link to=''>Mountain Bikes</Link>
+              </li>
+              <li>
+                <Link to=''>Hybrid bikes</Link>
+              </li>
+            </ul>
+          </aside>
           <main>
             <div className={styles.category}>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
-                alt=''
-              />
               <img
                 src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
                 alt=''

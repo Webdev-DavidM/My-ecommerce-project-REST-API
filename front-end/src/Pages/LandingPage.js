@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './LandingPage.module.css';
 import ShopButton from '../Components/UIelements/ShopButton';
-import Media from 'react-media';
 
 const LandingPage = () => {
   return (
