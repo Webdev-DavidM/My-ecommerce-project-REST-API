@@ -3,7 +3,6 @@ import styles from './ShopButton.module.css';
 import { Link } from 'react-router-dom';
 
 const ShopButton = ({ url, name, width, height }) => {
-  console.log(width);
   return (
     <div
       className={styles.shopbutton}

@@ -25,7 +25,6 @@ export default class DropDownMenu extends Component {
 
   render() {
     let listOfCategories = Object.keys(this.state.categories);
-    console.log(this.props);
 
     return (
       <div
@@ -39,7 +38,7 @@ export default class DropDownMenu extends Component {
               this.state.selectedCat === cat ? styles.categoryItemMove : '';
             return (
               <div
-                // onClick={() => this.props.close}
+                key={cat}
                 className={`${styles.categoryItem} ${iconMove} `}
                 onMouseEnter={(e) => this.showSubCategory(e)}>
                 <Link to={`/${cat}`}>{cat}</Link>
@@ -51,7 +50,7 @@ export default class DropDownMenu extends Component {
         <div className={styles.subcategories}>
           {this.state.showSubCat &&
             this.state.categories[this.state.selectedCat].map((subCat) => (
-              <div onClick={() => this.setState({})}>
+              <div onClick={() => this.setState({})} key={subCat}>
                 <Link
                   to={`${
                     this.state.selectedCat

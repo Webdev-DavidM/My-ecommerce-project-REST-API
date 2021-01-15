@@ -12,7 +12,7 @@ export default class MainCategory extends Component {
         />
         <div className={styles.categoryheader}>
           <p>
-            DM sports / <bold>Cycle</bold>
+            DM sports / <strong>Cycle</strong>
           </p>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor
@@ -40,6 +40,14 @@ export default class MainCategory extends Component {
           </aside>
           <main>
             <div className={styles.category}>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
+                alt=''
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
+                alt=''
+              />
               <img
                 src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
                 alt=''

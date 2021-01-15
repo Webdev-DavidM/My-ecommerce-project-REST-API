@@ -69,7 +69,7 @@ export default class SideMenu extends Component {
             onClick={() => this.props.closeSide()}
             style={{ width: '1.8rem', height: '1.8rem' }}>
             <i
-              class='fas fa-window-close'
+              className='fas fa-window-close'
               style={{ width: '100%', height: 'auto' }}></i>
           </div>
         </div>

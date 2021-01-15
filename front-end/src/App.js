@@ -17,7 +17,7 @@ const Product = lazy(() => import('./Pages/Product'));
 const ShoppingBasket = lazy(() => import('./Pages/ShoppingBasket'));
 const MainCategory = lazy(() => import('./Pages/MainCategory'));
 const NotFound = lazy(() => import('./Components/NotFound'));
-const SubCategory = lazy(() => import('./Pages/SubCategory'));
+const Products = lazy(() => import('./Pages/Products'));
 
 export default class App extends Component {
   state = {
@@ -63,7 +63,7 @@ export default class App extends Component {
                   path='/shopping-basket'
                   component={ShoppingBasket}
                 />
-                <Route exact path='/:category/:type' component={SubCategory} />
+                <Route exact path='/:category/:type' component={Products} />
                 <Route exact path='/:category' component={MainCategory} />
                 <Route component={NotFound} />
               </Switch>
@@ -76,7 +76,7 @@ export default class App extends Component {
             classNames='menuarrow'
             unmountOnExit>
             <div className='menuarrow'>
-              <i class='fas fa-arrow-circle-up'></i>
+              <i className='fas fa-arrow-circle-up'></i>
             </div>
           </CSSTransition>
         </div>

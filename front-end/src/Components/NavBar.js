@@ -44,7 +44,7 @@ export default class NavBar extends Component {
               onMouseEnter={() => this.setState({ showSideMenu: true })}
               style={{ width: '1.5rem', height: '1.5rem', color: '#ecf0f1' }}>
               <i
-                class='fas fa-bars'
+                className='fas fa-bars'
                 style={{ width: '100%', height: '100%' }}></i>
             </div>
             <Logo size='2rem' />

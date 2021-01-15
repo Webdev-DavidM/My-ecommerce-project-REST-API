@@ -43,7 +43,6 @@ export default class ImageCarousel extends Component {
       <>
         <div className={`${styles.carousel} ${style}`}>
           {this.state.images.map((url, index) => {
-            console.log(index, url);
             return (
               <div key={index}>
                 <span>

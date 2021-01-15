@@ -8,7 +8,7 @@ export default class SearchBar extends Component {
         <input type='text' id='fname' name='fname'></input>
         <div>
           {' '}
-          <i class='fas fa-search '></i>{' '}
+          <i className='fas fa-search '></i>{' '}
         </div>
       </div>
     );
