@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
+import styles from './MobileProductFilterMenu.module.css';
 
-export default class MobileProductFilterMenu extends Component {
-  render() {
-    return <div>Products</div>;
-  }
-}
+const MobileProductFilterMenu = () => {
+  return <div className={styles.mobilefilter}></div>;
+};
+
+export default MobileProductFilterMenu;

@@ -15,7 +15,7 @@ import Media from 'react-media';
 export default class NavBar extends Component {
   state = {
     showSideMenu: false,
-    showDropDownMenu: false,
+    showDropDownMenu: true,
   };
 
   showDropMenu = (e) => {

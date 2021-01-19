@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import styles from './Products.module.css';
 import { Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
+import MobileProductFilterMenu from '../Components/UIelements/MobileProductFilterMenu';
+import Media from 'react-media';
+
 import ProductItem from '../Components/UIelements/ProductItem';
+import ProductFilters from '../Components/UIelements/ProductFilters';
 
 export default class Products extends Component {
   state = {
@@ -43,6 +48,7 @@ export default class Products extends Component {
         reviews: [],
       },
     ],
+    showFilterMenu: false,
   };
 
   componentDidMount = () => {};
@@ -54,12 +60,38 @@ export default class Products extends Component {
       <ProductItem details={product} key={index} />
     ));
     return (
-      <div className={styles.products}>
-        <span>{<Link to={`/${category}`}>{category}/ &#32;</Link>}</span>
-        &#32;
-        <span>{<Link to={`${category}/${type}`}>{type}</Link>}</span>
+      <>
+        <div className={styles.products}>
+          <span>{<Link to={'/'}>home / &#32;</Link>}</span>
+          <span>
+            {<Link to={`/${category}`}>{category} &#32;/ &#32;</Link>}
+          </span>
+          &#32;
+          <span>{<Link to={`${category}/${type}`}>{type}</Link>}</span>
+        </div>
+
+        <div className={styles.typeandfilter}>
+          <p className={styles.type}>
+            {type}s &#127;<span>(21)</span>
+          </p>
+          <span
+            onMouseEnter={() => this.setState({ showFilterMenu: true })}
+            onMouseLeave={() => this.setState({ showFilterMenu: false })}
+            className={styles.filtericon}>
+            <i class='fas fa-sort-amount-down-alt'></i>
+          </span>
+
+          <CSSTransition
+            in={this.state.showFilterMenu}
+            timeout={500}
+            classNames='mobilefilter'
+            unMountOnExit>
+            <MobileProductFilterMenu />
+          </CSSTransition>
+        </div>
+        <Media query='(min-width: 768px)' render={() => <ProductFilters />} />
         <div className={styles.productitems}>{products}</div>
-      </div>
+      </>
     );
   }
 }

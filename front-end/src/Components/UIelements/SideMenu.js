@@ -27,7 +27,6 @@ export default class SideMenu extends Component {
 
   render() {
     let listOfCategories = Object.keys(this.state.categories);
-    console.log(listOfCategories);
 
     return (
       <>
@@ -67,10 +66,14 @@ export default class SideMenu extends Component {
           <div
             className={styles.closebutton}
             onClick={() => this.props.closeSide()}
-            style={{ width: '1.8rem', height: '1.8rem' }}>
+            style={{ width: '1.6rem', height: '1.6rem' }}>
             <i
               className='fas fa-window-close'
-              style={{ width: '100%', height: 'auto' }}></i>
+              style={{
+                width: 'inherit',
+                height: 'inherit',
+                backgroundColor: 'white',
+              }}></i>
           </div>
         </div>
       </>

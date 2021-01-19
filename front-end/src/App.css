@@ -2,7 +2,7 @@
   /* text-align: center; */
   font-family: 'Mukta', sans-serif;
   width: 100vw;
-  height: auto;
+  height: 100vh;
   min-width: 320px;
   box-sizing: border-box;
   margin: auto;
@@ -26,6 +26,7 @@
 .menufade-enter-active {
   opacity: 1;
   transition: all 0.3s;
+  margin: auto;
 }
 .menufade-exit {
   opacity: 1;
@@ -37,11 +38,6 @@
 }
 
 /* This is the css for the side menu transition */
-
-.sidemenu {
-  width: 90%;
-  height: 100%;
-}
 
 .sidemenu-enter {
   opacity: 0;
@@ -104,3 +100,13 @@
 .menuarrow:hover svg {
   color: #2c3e50;
 }
+
+/* css for the mobile filter menu transition */
+
+/* .mobilefilter {
+  width: 300px;
+  height: 300px;
+  background-color: grey;
+  z-index: 100;
+  position: absolute;
+} */
