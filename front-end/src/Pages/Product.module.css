@@ -17,6 +17,11 @@ hr {
   margin: 1rem auto;
 }
 
+.productinfo {
+  display: flex;
+  flex-direction: column;
+}
+
 .sizecontainer {
   display: flex;
   justify-content: space-between;
@@ -86,4 +91,23 @@ input {
 
 .addtocartbtn:hover {
   background-color: #d35400;
+}
+
+@media only screen and (min-width: 768px) {
+  .productinfo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .column2 {
+    width: 49%;
+    order: 1;
+    padding: 0 5rem;
+  }
+
+  .column1 {
+    order: 2;
+    width: 49%;
+  }
 }

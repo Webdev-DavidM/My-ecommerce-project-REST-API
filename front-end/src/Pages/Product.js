@@ -33,65 +33,73 @@ export default class Product extends Component {
         <span>reviews</span>
         <hr></hr>
         <ProductImageCarousel />
-        <p className={styles.price}>£999.99</p>
-        <p>Colour: Black Quartz</p>
-        <div></div>
 
-        <div className={styles.sizecontainer}>
-          <form
-            onClick={() =>
-              this.setState((prevState) => ({
-                dropdownSelected: !prevState.dropdownSelected,
-              }))
-            }>
-            <span>Please select</span>{' '}
-            {!this.state.dropdownSelected && (
-              <span>
-                <i class='fas fa-arrow-down'></i>
-              </span>
-            )}
-            {this.state.dropdownSelected && dropdown}
-          </form>
-        </div>
-        <br></br>
-        <div className={styles.quantity}>
-          <form>Quantity:</form>
-          <button
-            className={styles.qtybtn}
-            onClick={() =>
-              this.setState((prevState) => ({
-                quantity: prevState.quantity - 1,
-              }))
-            }>
-            -
-          </button>
-          <input type='input' value={this.state.quantity}></input>
-          <button
-            className={styles.qtybtn}
-            onClick={() =>
-              this.setState((prevState) => ({
-                quantity: prevState.quantity + 1,
-              }))
-            }>
-            +
-          </button>
-          <br></br>
-        </div>
-        <button className={styles.addtocartbtn}>
-          {' '}
-          <i
-            className='fas fa-shopping-cart'
-            style={{ width: '1rem', height: '1rem' }}>
+        <div className={styles.productinfo}>
+          <div className={styles.column1}>
             {' '}
-          </i>
-          &nbsp; &nbsp;Add to Basket
-        </button>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad pariatur
-          nemo saepe, distinctio, maiores sapiente ea consequuntur odio sit,
-          voluptatibus iste aspernatur quis nisi! Expedita, unde! Minus deleniti
-          culpa odit. Praesentium eligendi illo doloremque nisi perferendis
-        </p>
+            <p className={styles.price}>£999.99</p>
+            <p>Colour: Black Quartz</p>
+            <div></div>
+            <div className={styles.sizecontainer}>
+              <form
+                onClick={() =>
+                  this.setState((prevState) => ({
+                    dropdownSelected: !prevState.dropdownSelected,
+                  }))
+                }>
+                <span>Please select</span>{' '}
+                {!this.state.dropdownSelected && (
+                  <span>
+                    <i class='fas fa-arrow-down'></i>
+                  </span>
+                )}
+                {this.state.dropdownSelected && dropdown}
+              </form>
+            </div>
+            <br></br>
+            <div className={styles.quantity}>
+              <form>Quantity:</form>
+              <button
+                className={styles.qtybtn}
+                onClick={() =>
+                  this.setState((prevState) => ({
+                    quantity: prevState.quantity - 1,
+                  }))
+                }>
+                -
+              </button>
+              <input type='input' value={this.state.quantity}></input>
+              <button
+                className={styles.qtybtn}
+                onClick={() =>
+                  this.setState((prevState) => ({
+                    quantity: prevState.quantity + 1,
+                  }))
+                }>
+                +
+              </button>
+              <br></br>
+            </div>
+            <button className={styles.addtocartbtn}>
+              {' '}
+              <i
+                className='fas fa-shopping-cart'
+                style={{ width: '1rem', height: '1rem' }}>
+                {' '}
+              </i>
+              &nbsp; &nbsp;Add to Basket
+            </button>
+          </div>
+          <div className={styles.column2}>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad
+              pariatur nemo saepe, distinctio, maiores sapiente ea consequuntur
+              odio sit, voluptatibus iste aspernatur quis nisi! Expedita, unde!
+              Minus deleniti culpa odit. Praesentium eligendi illo doloremque
+              nisi perferendis
+            </p>
+          </div>
+        </div>
       </div>
     );
   }

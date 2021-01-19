@@ -10,9 +10,12 @@
 .myslides img {
   vertical-align: middle;
   width: 80%;
-  height: 250px;
+  height: 300px;
   margin: 1rem auto;
   max-height: 320px;
+}
+
+.myslides button {
 }
 
 /* Slideshow container */
@@ -116,6 +119,21 @@
   to {
     opacity: 1;
   }
+}
+
+.imagegallery span {
+  display: inline-flex;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid grey;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 1rem;
+}
+
+.imagegallery span img {
+  width: 95%;
+  height: 95%;
 }
 
 /* On smaller screens, decrease text size */
