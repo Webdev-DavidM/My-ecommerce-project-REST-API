@@ -25,11 +25,9 @@ export default class App extends Component {
   };
   componentDidMount = () => {
     window.addEventListener('scroll', () => {
-      console.log(window.innerHeight, window.scrollY);
       if (window.scrollY > 122) {
         this.setState({ showArrowToTop: true });
       }
-      console.log(window.innerHeight - 122);
       if (window.innerHeight - 122 < window.innerHeight - window.scrollY) {
         this.setState({ showArrowToTop: false });
       }

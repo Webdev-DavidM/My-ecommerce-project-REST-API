@@ -44,7 +44,12 @@ export default class Product extends Component {
                 dropdownSelected: !prevState.dropdownSelected,
               }))
             }>
-            Please select
+            <span>Please select</span>{' '}
+            {!this.state.dropdownSelected && (
+              <span>
+                <i class='fas fa-arrow-down'></i>
+              </span>
+            )}
             {this.state.dropdownSelected && dropdown}
           </form>
         </div>
