@@ -2,6 +2,7 @@ import { StylesProvider } from '@material-ui/core';
 import React, { Component } from 'react';
 import styles from './Product.module.css';
 import ProductImageCarousel from '../Components/UIelements/ProductImageCarousel';
+import Reviews from '../Components/UIelements/Reviews';
 
 export default class Product extends Component {
   state = {
@@ -30,7 +31,7 @@ export default class Product extends Component {
     return (
       <div className={styles.product}>
         <p className={styles.title}>Vitus road bike</p>
-        <span>reviews</span>
+        <Reviews />
         <hr></hr>
         <ProductImageCarousel />
 

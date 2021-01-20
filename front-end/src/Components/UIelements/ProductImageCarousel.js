@@ -2,8 +2,6 @@ import styles from './ProductImageCarousel.module.css';
 import React, { Component } from 'react';
 import Media from 'react-media';
 
-import FilterButton from './FilterButton';
-
 export default class ProductImageCarousel extends Component {
   state = {
     productId: '',

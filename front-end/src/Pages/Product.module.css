@@ -1,8 +1,7 @@
 .product {
-  height: 100%;
-  width: 100%;
   color: #2c3e50;
   padding: 1rem;
+  background-color: #ecf0f1;
 }
 
 .title,
@@ -103,7 +102,7 @@ input {
   .column2 {
     width: 49%;
     order: 1;
-    padding: 0 5rem;
+    padding: 0 1rem;
   }
 
   .column1 {
