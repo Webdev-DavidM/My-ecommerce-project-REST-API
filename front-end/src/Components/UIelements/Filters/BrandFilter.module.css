@@ -63,27 +63,22 @@
   padding-bottom: 0;
 }
 
-.resetbest {
+.clearbrand {
   border: none;
   display: inline-block;
   width: 100%;
   padding: 0.5rem;
-  border-radius: 3px;
-  margin: 0 0 1rem 0;
   background-color: #f1c40f;
   transition: all 1s;
-}
-
-.resetbest :hover {
-  border: none;
-  display: inline-block;
-  width: 100%;
-  padding: 0.5rem;
-  margin: 00 1rem 0;
-  background-color: #f39c12;
   border-radius: 3px;
+  margin-bottom: 1rem;
 }
 
-.resetbest :focus {
+.clearbrand:hover {
+  outline: none;
+  background-color: #f39c12;
+}
+
+.clearbrand:focus {
   outline: none;
 }

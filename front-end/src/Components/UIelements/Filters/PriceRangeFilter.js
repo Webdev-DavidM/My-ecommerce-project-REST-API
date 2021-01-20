@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import styles from './PriceRange.module.css';
+import styles from './PriceRangeFilter.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
-export default class PriceRange extends Component {
+export default class PriceRangeFilter extends Component {
   state = {
     menu: false,
     lowerPriceRange: 0,
@@ -75,8 +75,8 @@ export default class PriceRange extends Component {
                 onChange={(e) => this.inputHigherPriceRange(e.target.value)}
               />
             </div>
-            <button className={styles.apply}>Apply</button>
-            <button className={styles.reset}> Reset</button>
+            <button className={styles.applyprice}>Apply</button>
+            <button className={styles.resetprice}> Reset</button>
           </div>
         </div>
       </>

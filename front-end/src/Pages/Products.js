@@ -76,18 +76,22 @@ export default class Products extends Component {
           </p>
           <span
             onMouseEnter={() => this.setState({ showFilterMenu: true })}
-            onMouseLeave={() => this.setState({ showFilterMenu: false })}
             className={styles.filtericon}>
             <i class='fas fa-sort-amount-down-alt'></i>
           </span>
 
-          <CSSTransition
-            in={this.state.showFilterMenu}
-            timeout={500}
-            classNames='mobilefilter'
-            unMountOnExit>
-            <MobileProductFilterMenu />
-          </CSSTransition>
+          <Media
+            query='(max-width: 768px)'
+            render={() => (
+              <CSSTransition
+                in={this.state.showFilterMenu}
+                timeout={300}
+                classNames='mobilefilter'
+                unmountOnExit>
+                <MobileProductFilterMenu />
+              </CSSTransition>
+            )}
+          />
         </div>
         <Media query='(min-width: 768px)' render={() => <ProductFilters />} />
         <div className={styles.productitems}>{products}</div>

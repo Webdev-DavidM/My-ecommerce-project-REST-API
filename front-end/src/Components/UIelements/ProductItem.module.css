@@ -19,16 +19,18 @@
 
 .productitem div {
   width: 50%;
-
   display: flex;
   justify-content: center;
   overflow: hidden;
 }
 
+.productitem div a {
+  display: flex;
+}
+
 .productitem div img {
   width: 75%;
   height: 75%;
-
   margin: auto;
 }
 

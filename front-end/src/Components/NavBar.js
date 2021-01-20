@@ -51,7 +51,7 @@ export default class NavBar extends Component {
             <Basket />
             <SearchBar />
             <div className={styles.links}>
-              <Link to='/account'>Account</Link>
+              <Link to='/account'>Your Account</Link>
               <Link to='/admin'>Admin</Link>
               <Link to='/stores'>Stores</Link>
             </div>

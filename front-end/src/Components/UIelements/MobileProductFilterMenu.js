@@ -1,8 +1,66 @@
-import React from 'react';
 import styles from './MobileProductFilterMenu.module.css';
+import React, { Component } from 'react';
+import BestSellingFilter from '../UIelements/Filters/BestSellingFilter';
+import PriceRangeFilter from '../UIelements/Filters/PriceRangeFilter';
+import StockFilter from '../UIelements/Filters/StockFilter';
+import BrandFilter from '../UIelements/Filters/BrandFilter';
 
-const MobileProductFilterMenu = () => {
-  return <div className={styles.mobilefilter}></div>;
-};
+export default class MobileProductFilterMenu extends Component {
+  state = {
+    chosenFilter: '',
+    filters: ['Best selling', 'Price range', 'Stock', 'Brand'],
+  };
 
-export default MobileProductFilterMenu;
+  componentDidMount = () => {
+    // get the filter from from redux
+  };
+
+  render() {
+    let filterToShow;
+
+    switch (this.state.chosenFilter) {
+      case 'Best selling':
+        filterToShow = <BestSellingFilter />;
+        break;
+      case 'Price range':
+        filterToShow = <PriceRangeFilter />;
+        break;
+      case 'Stock':
+        filterToShow = <StockFilter />;
+        break;
+      case 'Brand':
+        filterToShow = <BrandFilter />;
+        break;
+      default:
+        filterToShow = null;
+    }
+
+    let options = this.state.filters.map((filter, index) => {
+      return (
+        <div className={styles.filtercat} key={index}>
+          <button
+            onClick={() => this.setState({ chosenFilter: filter })}
+            className={styles.filterbtn}
+            style={
+              this.state.chosenFilter === filter
+                ? { backgroundColor: '#f1c40f' }
+                : null
+            }
+          />
+          <span className={styles.filterdesc}>{filter}</span>
+        </div>
+      );
+    });
+    return (
+      <div className={styles.mobilefilter}>
+        <div className={styles.optionscontainer}>
+          {this.state.chosenFilter === '' ? (
+            options
+          ) : (
+            <div className={styles.importedfilter}>{filterToShow}</div>
+          )}
+        </div>
+      </div>
+    );
+  }
+}

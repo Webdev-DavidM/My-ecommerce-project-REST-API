@@ -1,4 +1,3 @@
-import { StylesProvider } from '@material-ui/core';
 import React, { Component } from 'react';
 import styles from './Product.module.css';
 import ProductImageCarousel from '../Components/UIelements/ProductImageCarousel';

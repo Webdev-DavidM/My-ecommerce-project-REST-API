@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import styles from './BestSellingFilter.module.css';
+import styles from './BrandFilter.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
-export default class BestSellingFilter extends Component {
+export default class BrandFilter extends Component {
   state = {
     menu: false,
-    categories: [
-      'Best Selling',
-      'Price: low to high',
-      'Price: high to low',
-      'Customer reviews',
-    ],
+    brands: ['vitus', 'specialised', 'raleigh', 'awesome'],
     selectedDropDown: '',
   };
 
@@ -27,11 +22,16 @@ export default class BestSellingFilter extends Component {
     }));
   };
 
+  componentDidMount = () => {
+    // here i will need to iterate over all the products to see what brands
+    // there are then display, for now I will hard code in state
+  };
+
   render() {
     let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
 
-    let buttons = this.state.categories.map((category) => {
+    let brands = this.state.brands.map((category) => {
       return (
         <div>
           <button
@@ -58,7 +58,7 @@ export default class BestSellingFilter extends Component {
             onClick={() => {
               this.dropdownMenu();
             }}>
-            Best selling &#127; &#127; &#127; &#127;
+            Brands &#127; &#127; &#127; &#127;
             {this.state.menu ? (
               <FontAwesomeIcon icon={faAngleUp} />
             ) : (
@@ -66,8 +66,8 @@ export default class BestSellingFilter extends Component {
             )}
           </div>
           <div class={`${styles.dropdowncontent} ${dropdownClicked}`}>
-            {buttons}
-            <button className={styles.resetbest}> Reset</button>
+            {brands}
+            <button className={styles.clearbrand}> Reset</button>
           </div>
         </div>
       </>

@@ -52,6 +52,8 @@ export default class App extends Component {
               }>
               <Switch>
                 <Route exact path='/' component={LandingPage} />
+                {/* {below will redirect the user to the sign in screen if they click on the 
+                account button and dont have one} */}
                 <Route exact path='/sign-in' component={SignIn} />
                 <Route exact path='/account' component={Account} />
                 <Route exact path='/admin' component={Admin} />

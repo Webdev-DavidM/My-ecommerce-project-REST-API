@@ -42,7 +42,7 @@
   width: 75%;
 }
 
-.typeandfilter span {
+.filtericon {
   margin: auto;
   text-align: center;
 }
@@ -81,7 +81,22 @@
   .products span a {
     color: #2980b9;
     text-decoration: none;
-
     transition: all 0.3s;
   }
+}
+
+.mobilefilter-enter {
+  opacity: 0;
+}
+.mobilefilter-enter-active {
+  opacity: 1;
+  transition: all 0.3s;
+}
+.mobilefilter-exit {
+  opacity: 1;
+}
+.mobilefilter-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s, transform 0.3s;
 }
