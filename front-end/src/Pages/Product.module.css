@@ -29,7 +29,6 @@ hr {
   width: 100%;
   margin: auto;
   min-height: 2rem;
-
   height: auto;
   background-color: white;
   border: none;
@@ -48,14 +47,23 @@ option {
   justify-content: space-between;
   padding: 0.2rem;
 }
-.qtybtn {
+.qtybtn1 {
   height: 2rem;
   width: 2rem;
   border: none;
   background-color: #2c3e50;
   color: white;
   transition: all 0.5s;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
+}
+.qtybtn2 {
+  height: 2rem;
+  width: 2rem;
+  border: none;
+  background-color: #2c3e50;
+  color: white;
+  transition: all 0.5s;
+  border-radius: 0 5px 5px 0;
 }
 
 .qtybtn:hover {

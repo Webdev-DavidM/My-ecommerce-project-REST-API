@@ -60,7 +60,7 @@ export default class Product extends Component {
             <div className={styles.quantity}>
               <form>Quantity:</form>
               <button
-                className={styles.qtybtn}
+                className={styles.qtybtn1}
                 onClick={() =>
                   this.setState((prevState) => ({
                     quantity: prevState.quantity - 1,
@@ -70,7 +70,7 @@ export default class Product extends Component {
               </button>
               <input type='input' value={this.state.quantity}></input>
               <button
-                className={styles.qtybtn}
+                className={styles.qtybtn2}
                 onClick={() =>
                   this.setState((prevState) => ({
                     quantity: prevState.quantity + 1,
@@ -78,7 +78,9 @@ export default class Product extends Component {
                 }>
                 +
               </button>
-              <br></br>
+              <br />
+              <br />
+              <span style={{ color: 'red' }}>Hurry only 2 left in stock</span>
             </div>
             <button className={styles.addtocartbtn}>
               {' '}
