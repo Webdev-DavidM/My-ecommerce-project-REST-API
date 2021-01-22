@@ -11,7 +11,7 @@ import { CircularProgress } from '@material-ui/core';
 // hopefully should speed up my application
 
 const Account = lazy(() => import('./Pages/Account'));
-const Admin = lazy(() => import('./Pages/Admin'));
+const AdminProducts = lazy(() => import('./Pages/AdminProducts'));
 const SignIn = lazy(() => import('./Pages/SignIn'));
 const Product = lazy(() => import('./Pages/Product'));
 const ShoppingBasket = lazy(() => import('./Pages/ShoppingBasket'));
@@ -57,7 +57,7 @@ export default class App extends Component {
                 account button and dont have one} */}
                 <Route exact path='/sign-in' component={SignIn} />
                 <Route exact path='/account' component={Account} />
-                <Route exact path='/admin' component={Admin} />
+                <Route exact path='/admin' component={AdminProducts} />
                 <Route exact path='/order/:id' component={OrderDetails} />
                 <Route exact path='/product/:id' component={Product} />
                 <Route
