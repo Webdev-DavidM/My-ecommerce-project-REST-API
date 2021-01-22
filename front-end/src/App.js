@@ -13,6 +13,7 @@ import { CircularProgress } from '@material-ui/core';
 const Account = lazy(() => import('./Pages/Account'));
 const AdminProducts = lazy(() => import('./Pages/AdminProducts'));
 const SignIn = lazy(() => import('./Pages/SignIn'));
+const SignUp = lazy(() => import('./Pages/SignUp'));
 const Product = lazy(() => import('./Pages/Product'));
 const ShoppingBasket = lazy(() => import('./Pages/ShoppingBasket'));
 const MainCategory = lazy(() => import('./Pages/MainCategory'));
@@ -56,6 +57,7 @@ export default class App extends Component {
                 {/* {below will redirect the user to the sign in screen if they click on the 
                 account button and dont have one} */}
                 <Route exact path='/sign-in' component={SignIn} />
+                <Route exact path='/sign-up' component={SignUp} />
                 <Route exact path='/account' component={Account} />
                 <Route exact path='/admin' component={AdminProducts} />
                 <Route exact path='/order/:id' component={OrderDetails} />

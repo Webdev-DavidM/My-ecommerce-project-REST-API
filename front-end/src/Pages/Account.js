@@ -44,7 +44,6 @@ export default class Account extends Component {
         />
         <div className={styles.orderscontainer}>
           <h3>Your Recent orders</h3>
-          <button className={styles.ordersbtn}>View all orders</button>
         </div>
         <div
           style={{

@@ -4,7 +4,7 @@ import styles from './Admin.module.css';
 const AdminProducts = () => {
   return (
     <div className={styles.adminproducts}>
-      <header>
+      <header className={styles.title}>
         <p>PRODUCTS</p>
         <button className={styles.createbtn}>+ Create product</button>
       </header>
