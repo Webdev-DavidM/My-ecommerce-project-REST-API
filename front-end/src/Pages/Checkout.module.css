@@ -1,0 +1,74 @@
+.checkoutcontainer {
+  width: calc(100%- 2rem);
+  height: auto;
+  padding: 1rem;
+  color: #2c3e50;
+  background-color: #ecf0f1;
+}
+
+.checkoutcontainer hr {
+  background-color: #bdc3c7;
+}
+
+.checkoutcontainer h4 {
+  margin: 1rem 0 0.5rem 0;
+}
+
+.deliveryaddress span {
+  padding: 1rem;
+  border: 1px solid #bdc3c7;
+  width: calc(100%-2rem);
+  display: block;
+  border-radius: 3px;
+}
+
+.itemcontainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.details {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+  height: 7rem;
+  width: 100%;
+
+  padding: 1rem;
+}
+
+.imagecontainer {
+  height: 100%;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.itemdetails {
+  width: 30%;
+
+  padding: 0 0.2rem;
+}
+
+.imagecontainer img {
+  width: 60%;
+  height: 60%;
+  padding: 0.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .itemcontainer {
+    flex-direction: row;
+  }
+  .priceandquanity {
+    width: 40%;
+  }
+  .itemcost {
+    margin-right: 1rem;
+  }
+  .details {
+    width: 50%;
+  }
+}

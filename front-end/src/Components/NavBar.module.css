@@ -88,12 +88,16 @@
   margin-left: auto;
 }
 
-.cart a svg {
+.cart a svg,
+.user a svg,
+.store a svg {
   color: #ecf0f1;
   transition: color 0.5s;
 }
 
-.cart a svg:hover {
+.cart a svg:hover,
+.user a svg:hover,
+.store a svg:hover {
   color: #f1c40f;
 }
 
@@ -267,7 +271,9 @@
     border-color: #ecf0f1;
   }
 
-  .menu {
+  .menu,
+  .store,
+  .user {
     display: none;
   }
 

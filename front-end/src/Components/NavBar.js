@@ -39,6 +39,7 @@ export default class NavBar extends Component {
         <div>
           <div className={styles.navbar}>
             {/*This hamburger menu below will dispappear in desktop mode*/}
+
             <div
               className={styles.menu}
               onMouseEnter={() => this.setState({ showSideMenu: true })}
@@ -48,6 +49,32 @@ export default class NavBar extends Component {
                 style={{ width: '100%', height: '100%' }}></i>
             </div>
             <Logo size='2rem' />
+            <div
+              className={styles.user}
+              onMouseEnter={() => this.setState({ showSideMenu: true })}
+              style={{
+                width: '1.3rem',
+                height: '1.3rem',
+                color: '#ecf0f1',
+                marginLeft: 'auto',
+              }}>
+              <i
+                className='fas fa-store'
+                style={{ width: '100%', height: '100%' }}></i>
+            </div>
+            <div
+              className={styles.store}
+              onMouseEnter={() => this.setState({ showSideMenu: true })}
+              style={{
+                width: '1.3rem',
+                height: '1.3rem',
+                color: '#ecf0f1',
+                marginLeft: 'auto',
+              }}>
+              <i
+                className='fas fa-user'
+                style={{ width: '100%', height: '100%' }}></i>
+            </div>
             <Basket />
             <SearchBar />
             <div className={styles.links}>

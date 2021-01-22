@@ -3,7 +3,7 @@ import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
 import styles from './ShoppingBasket.module.css';
 
 import CheckoutItem from '../Components/UIelements/CheckoutItem';
-import CheckOut from '../Pages/CheckOut';
+import CheckOut from './Checkout';
 
 export default class ShoppingBasket extends Component {
   state = {

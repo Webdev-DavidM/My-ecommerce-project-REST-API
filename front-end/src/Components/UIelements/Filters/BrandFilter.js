@@ -23,12 +23,17 @@ export default class BrandFilter extends Component {
   };
 
   componentDidMount = () => {
+    this.props.mobile && this.setState({ menu: true });
+
     // here i will need to iterate over all the products to see what brands
     // there are then display, for now I will hard code in state
   };
 
   render() {
-    let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
+    let dropdownClicked =
+      this.state.menu || this.props.showDropDown
+        ? styles.dropdownclicked
+        : null;
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
 
     let brands = this.state.brands.map((category) => {

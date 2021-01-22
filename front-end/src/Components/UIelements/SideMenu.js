@@ -35,6 +35,7 @@ export default class SideMenu extends Component {
           //   onMouseEnter={() => this.props.mouseEnter()}
           //   onMouseLeave={() => this.props.mouseLeave()}>
         >
+          <div className={styles.maincats}></div>
           <div className={styles.sidecategories}>
             {listOfCategories.map((cat) => {
               let iconMove =

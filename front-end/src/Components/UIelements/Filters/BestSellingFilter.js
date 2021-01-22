@@ -27,8 +27,15 @@ export default class BestSellingFilter extends Component {
     }));
   };
 
+  componentDidMount = () => {
+    this.props.mobile && this.setState({ menu: true });
+  };
+
   render() {
-    let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
+    let dropdownClicked =
+      this.state.menu || this.props.showDropDown
+        ? styles.dropdownclicked
+        : null;
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
 
     let buttons = this.state.categories.map((category) => {

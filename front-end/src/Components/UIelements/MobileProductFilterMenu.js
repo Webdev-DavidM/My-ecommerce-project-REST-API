@@ -20,16 +20,16 @@ export default class MobileProductFilterMenu extends Component {
 
     switch (this.state.chosenFilter) {
       case 'Best selling':
-        filterToShow = <BestSellingFilter />;
+        filterToShow = <BestSellingFilter mobile={true} showDropDown={true} />;
         break;
       case 'Price range':
-        filterToShow = <PriceRangeFilter />;
+        filterToShow = <PriceRangeFilter mobile={true} showDropDown={true} />;
         break;
       case 'Stock':
-        filterToShow = <StockFilter />;
+        filterToShow = <StockFilter mobile={true} showDropDown={true} />;
         break;
       case 'Brand':
-        filterToShow = <BrandFilter />;
+        filterToShow = <BrandFilter mobile={true} showDropDown={true} />;
         break;
       default:
         filterToShow = null;

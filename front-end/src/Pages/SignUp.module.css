@@ -18,6 +18,12 @@
   margin: 0.5rem 0;
   border: 1px solid #bdc3c7;
   border-radius: 4px;
+  outline: none;
+}
+
+.signupcontainer form input:focus,
+.signupcontainer form input:active {
+  outline: 1px solid #f1c40f;
 }
 
 .signupcontainer a {
