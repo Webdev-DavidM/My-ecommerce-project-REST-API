@@ -24,7 +24,6 @@
 .categorybtns p {
   width: 100%;
 }
-
 .createbtn {
   width: 8rem;
   height: 2.5rem;
@@ -62,7 +61,6 @@
 .productlist {
   border: 1px solid #bdc3c7;
   width: 100%;
-  min-height: 500px;
 }
 
 .productitem {

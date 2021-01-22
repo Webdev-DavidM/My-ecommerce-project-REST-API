@@ -21,6 +21,7 @@ const MainCategory = lazy(() => import('./Pages/MainCategory'));
 const NotFound = lazy(() => import('./Components/NotFound'));
 const Products = lazy(() => import('./Pages/Products'));
 const OrderDetails = lazy(() => import('./Pages/OrderDetails'));
+const AdminEditProduct = lazy(() => import('./Pages/AdminEditProduct'));
 
 export default class App extends Component {
   state = {
@@ -61,7 +62,17 @@ export default class App extends Component {
                 <Route exact path='/sign-up' component={SignUp} />
                 <Route exact path='/account' component={Account} />
                 <Route exact path='/admin' component={AdminProducts} />
+                <Route
+                  exact
+                  path='/admin/product/:id'
+                  component={AdminEditProduct}
+                />
                 <Route exact path='/admin-orders' component={AdminOrders} />
+                <Route
+                  exact
+                  path='/admin/product/id'
+                  component={AdminEditProduct}
+                />
                 <Route exact path='/order/:id' component={OrderDetails} />
                 <Route exact path='/product/:id' component={Product} />
                 <Route
