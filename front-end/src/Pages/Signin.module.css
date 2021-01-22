@@ -35,11 +35,11 @@ button {
   border-radius: 3px;
   transition: all 1s;
   border: none;
+  color: white;
 }
 
 button:hover {
   background-color: #e67e22;
-  color: white;
 }
 
 @media only screen and (min-width: 768px) {

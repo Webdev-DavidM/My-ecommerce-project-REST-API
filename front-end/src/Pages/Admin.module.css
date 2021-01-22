@@ -9,6 +9,10 @@
   justify-content: space-between;
 }
 
+.title {
+  background-color: #ecf0f1;
+}
+
 .categorybtns {
   display: flex;
   justify-content: space-evenly;

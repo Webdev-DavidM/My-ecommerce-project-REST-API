@@ -42,7 +42,7 @@ export default class Account extends Component {
             </div>
           )}
         />
-        <div className={styles.orderscontainer}>
+        <div className={styles.adminorderscontainer}>
           <h3>Your Recent orders</h3>
         </div>
         <div

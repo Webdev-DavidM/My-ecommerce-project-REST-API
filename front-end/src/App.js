@@ -12,6 +12,7 @@ import { CircularProgress } from '@material-ui/core';
 
 const Account = lazy(() => import('./Pages/Account'));
 const AdminProducts = lazy(() => import('./Pages/AdminProducts'));
+const AdminOrders = lazy(() => import('./Pages/AdminOrders'));
 const SignIn = lazy(() => import('./Pages/SignIn'));
 const SignUp = lazy(() => import('./Pages/SignUp'));
 const Product = lazy(() => import('./Pages/Product'));
@@ -60,6 +61,7 @@ export default class App extends Component {
                 <Route exact path='/sign-up' component={SignUp} />
                 <Route exact path='/account' component={Account} />
                 <Route exact path='/admin' component={AdminProducts} />
+                <Route exact path='/admin-orders' component={AdminOrders} />
                 <Route exact path='/order/:id' component={OrderDetails} />
                 <Route exact path='/product/:id' component={Product} />
                 <Route
