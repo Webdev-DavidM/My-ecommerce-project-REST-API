@@ -35,25 +35,37 @@ app.post('/register', async (req, res) => {
 
   //Below I will bcrypt the password
   let { firstName, password, address, email, lastName } = req.body;
-  const passwordHashed = password;
   const saltRounds = 10;
-  bcrypt.genSalt(saltRounds, async (err, salt) => {
-    try {
-      bcrypt.hash(passwordHashed, salt, async (err, hash) => {
-        await User.create({
-          email,
-          password: hash,
-          firstName,
-          lastName,
-          address,
-        });
-      });
-      res.status(201).json('created');
-    } catch (err) {
-      console.log(err);
-    }
+  let bcryptPassword;
+
+  let user = new User({
+    password: req.body.password,
+    firstName,
+    lastName,
+    address,
+    email,
   });
+
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    bcrypt.hash(password, salt, function (err, hash) {
+      bcryptPassword = user.password;
+    });
+  });
+
+  let savedUser = await user.save();
+  let token = jwt(savedUser);
+
+  console.log(savedUser, token);
+  res.status(201).json({ email: user.email, id: user._id, token: token });
 });
+// bcrypt.genSalt(saltRounds, async (err, salt) => {
+//   try {
+//     bcrypt.hash(passwordHashed, salt, async (err, hash) => {
+//       await User.save({
+//         email,
+
+//       });
+//     });
 
 app.post('/login', async (req, res) => {
   try {
