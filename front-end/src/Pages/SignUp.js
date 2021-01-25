@@ -11,6 +11,7 @@ export default class SignUp extends Component {
     lastName: '',
     Marketing: false,
     errors: [],
+    address: '',
   };
 
   handleChange(e) {
@@ -33,10 +34,28 @@ export default class SignUp extends Component {
         <div className={styles.formcontainer}>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Name:
+              First name
               <input
                 type='text'
-                name='name'
+                name='firstName'
+                value={this.state.value}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </label>
+            <label>
+              Last name
+              <input
+                type='text'
+                name='lastName'
+                value={this.state.value}
+                onChange={(e) => this.handleChange(e)}
+              />
+            </label>
+            <label>
+              Address
+              <textarea
+                type='text'
+                name='lastName'
                 value={this.state.value}
                 onChange={(e) => this.handleChange(e)}
               />
@@ -68,24 +87,7 @@ export default class SignUp extends Component {
                 onChange={(e) => this.handleChange(e)}
               />
             </label>
-            <label>
-              First name
-              <input
-                type='text'
-                name='firstName'
-                value={this.state.value}
-                onChange={(e) => this.handleChange(e)}
-              />
-            </label>
-            <label>
-              Last name
-              <input
-                type='text'
-                name='lastName'
-                value={this.state.value}
-                onChange={(e) => this.handleChange(e)}
-              />
-            </label>
+
             <input type='submit' value='Submit' />
           </form>
         </div>

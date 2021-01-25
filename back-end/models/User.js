@@ -10,12 +10,20 @@ const usersSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a value for 'password'"],
     },
+    firstName: {
+      type: String,
+      required: [true, "Please provide a value for 'first name'"],
+    },
+    lastName: {
+      type: String,
+      required: [true, "Please provide a value for 'last name'"],
+    },
     address: {
       type: String,
       /* This only needed beofre checkout so isnt required when signing up */
     },
     reviews: [],
-    /* a user is not required to make reviews so again not required */
+    // /* a user is not required to make reviews so again not required */
   },
   { useUnifiedTopology: true }
 );

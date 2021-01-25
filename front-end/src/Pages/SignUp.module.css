@@ -32,6 +32,10 @@
   transition: all 0.3s;
 }
 
+.textarea {
+  height: 200px;
+}
+
 .signupcontainer a:hover {
   color: #f1c40f;
 }

@@ -6,32 +6,46 @@ import bcrypt from 'bcrypt';
 import User from '../models/User.js';
 // import AdminUser from "../models/AdminUser.js";
 
-app.get('/', async (req, res) => {
-  console.log('route hit');
-  try {
-    let users = await User.find({});
-    if (users) {
-      console.log(users);
-      res.status(200).json(users).end();
-    } else {
-      res.status(401).json('no bike found').end();
-    }
-  } catch (err) {
-    res.json(err);
-  }
-});
+import jwt from '../helpers/jwtCreate.js';
 
-app.post('/register', (req, res) => {
+// app.get('/', async (req, res) => {
+//   console.log('route hit');
+//   try {
+//     let users = await User.find({});
+//     if (users) {
+//       console.log(users);
+//       res.status(200).json(users).end();
+//     } else {
+//       res.status(401).json('no bike found').end();
+//     }
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
+
+app.post('/register', async (req, res) => {
+  // Firstly I will make sure the user doesnt exist on the database already
+  let existingUser = await User.find({ email: req.body.email });
+  console.log(existingUser);
+  if (existingUser.length !== 0) {
+    return res
+      .status(401)
+      .json('The email address is already on the system, please log in.');
+  }
+
   //Below I will bcrypt the password
-  const passwordHashed = req.body.password;
+  let { firstName, password, address, email, lastName } = req.body;
+  const passwordHashed = password;
   const saltRounds = 10;
   bcrypt.genSalt(saltRounds, async (err, salt) => {
     try {
       bcrypt.hash(passwordHashed, salt, async (err, hash) => {
         await User.create({
-          email: req.body.email,
+          email,
           password: hash,
-          name: req.body.name,
+          firstName,
+          lastName,
+          address,
         });
       });
       res.status(201).json('created');
