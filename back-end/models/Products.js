@@ -25,7 +25,7 @@ const productsSchema = new mongoose.Schema(
       required: [true, "Please provide a value for 'price'"],
     },
     size: {
-      type: Number,
+      type: String,
       required: [true, "Please provide a value for 'size'"],
     },
     reviews: {

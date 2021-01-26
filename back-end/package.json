@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "debug": "nodemon --inspect app.js"
+    "debug": "nodemon --inspect app.js",
+    "data:import": "node data/seeder",
+    "data:destroy": "node data/seeder -d"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

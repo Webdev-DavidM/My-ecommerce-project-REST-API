@@ -23,6 +23,10 @@ import jwt from '../helpers/jwtCreate.js';
 //   }
 // });
 
+// POST route- user register, this route, checks an email doesnt already exist and if
+// it doesnt then it bcrypts the password, save the user to the server and then
+// create JWT token and sends info back to the front-end
+
 app.post('/register', async (req, res) => {
   // Firstly I will make sure the user doesnt exist on the database already
   let existingUser = await User.find({ email: req.body.email });
@@ -38,6 +42,10 @@ app.post('/register', async (req, res) => {
   const saltRounds = 10;
   let bcryptPassword;
 
+  // below I create an instance of user so I can save it to the database below.
+  // I use save rather than create because save is async and returns the user
+  // which includes the user id which i need to create the jwt token
+
   let user = new User({
     password: req.body.password,
     firstName,
@@ -51,32 +59,33 @@ app.post('/register', async (req, res) => {
       bcryptPassword = user.password;
     });
   });
-
+  // Note I am using
   let savedUser = await user.save();
   let token = jwt(savedUser);
 
   console.log(savedUser, token);
   res.status(201).json({ email: user.email, id: user._id, token: token });
 });
-// bcrypt.genSalt(saltRounds, async (err, salt) => {
-//   try {
-//     bcrypt.hash(passwordHashed, salt, async (err, hash) => {
-//       await User.save({
-//         email,
 
-//       });
-//     });
+//POST route- login user, this route checks if the user exists on the database, compared the bcrypt
+// password and then create a JWT token and sends it back to the front-end
 
 app.post('/login', async (req, res) => {
   try {
-    console.log(req.body);
+    console.log('route hit');
     let user = await User.findOne({ email: req.body.email });
     if (user) {
-      console.log(user.password);
       // Here I am checking if the bcrypt password works
       bcrypt.compare(req.body.password, user.password, function (err, result) {
         if (result) {
-          res.status(202).json({ name: user.name });
+          let token = jwt(user._id);
+          res
+            .status(202)
+            .json({
+              firstName: user.firstName,
+              lastName: user.lastName,
+              token,
+            });
         } else {
           res.status(401).json('unauthorised');
         }
