@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 //please just the name of the model titles as required
 
-const productsSchema = new mongoose.Schema(
+const outdoorSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -22,7 +22,7 @@ const productsSchema = new mongoose.Schema(
     },
     stock: {
       type: Number,
-      required: [true, "Please provide a value for 'price'"],
+      required: [true, "Please provide a value for 'price '"],
     },
     size: {
       type: String,
@@ -45,6 +45,6 @@ const productsSchema = new mongoose.Schema(
   { useUnifiedTopology: true }
 );
 
-const Product = mongoose.model('Products', productsSchema);
+const Outdoor = mongoose.model('Outdoor', outdoorSchema);
 
-export default Product;
+export default Outdoor;

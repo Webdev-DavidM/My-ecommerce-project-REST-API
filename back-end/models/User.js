@@ -20,10 +20,15 @@ const usersSchema = new mongoose.Schema(
     },
     address: {
       type: String,
-      /* This only needed beofre checkout so isnt required when signing up */
+      required: [true, "Please provide a value for 'address'"],
     },
-    reviews: [],
     // /* a user is not required to make reviews so again not required */
+    reviews: [],
+    admin: {
+      type: Boolean,
+      required: [true, "Please provide a value for 'admin'"],
+      default: false,
+    },
   },
   { useUnifiedTopology: true }
 );

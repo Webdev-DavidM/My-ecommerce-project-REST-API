@@ -1,23 +1,39 @@
 import mongoose from 'mongoose';
-import products from './products.js';
-import Product from '../models/Products.js';
 import connectDB from '../config/db.js';
+import cycles from './cycles.js';
+import Cycle from '../models/Cycle.js';
+// import indoors from './indoors.js';
+// import Indoor from '../models/Indoors.js';
+import users from './users.js';
+import User from '../models/User.js';
+import bcrypt from 'bcrypt';
 
 connectDB();
 
 const importData = async () => {
   try {
-    await Product.deleteMany();
-
-    const sampleProducts = products.map((product) => {
-      return { ...product };
+    await Cycle.deleteMany();
+    const cyclesList = cycles.map((cycle) => {
+      return { ...cycle };
     });
+    await Cycle.insertMany(cyclesList);
 
-    await Product.insertMany(sampleProducts);
+    let usersList = Promise.all(
+      users.map(async (user) => {
+        const hashedPassword = await bcrypt.hash(user.password, 10);
+        user.password = hashedPassword;
+        return { ...user };
+      })
+    ).then;
+    console.log(usersList);
 
-    console.log('Data Imported!');
-    process.exit();
+    // await User.insertMany(usersList);
+
+    // console.log('Data Imported!');
+    // process.exit();
   } catch (error) {
+    // return { ...user };
+
     console.error(`${error}`);
     process.exit(1);
   }

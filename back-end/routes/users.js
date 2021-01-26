@@ -46,7 +46,7 @@ app.post('/register', async (req, res) => {
   // I use save rather than create because save is async and returns the user
   // which includes the user id which i need to create the jwt token
 
-  let user = new User({
+  let user = await new User({
     password: req.body.password,
     firstName,
     lastName,
@@ -54,11 +54,9 @@ app.post('/register', async (req, res) => {
     email,
   });
 
-  bcrypt.genSalt(saltRounds, function (err, salt) {
-    bcrypt.hash(password, salt, function (err, hash) {
-      bcryptPassword = user.password;
-    });
-  });
+  const hashedPassword = await bcrypt.hash(user.password, 10);
+  user.password = hashedPassword;
+
   // Note I am using
   let savedUser = await user.save();
   let token = jwt(savedUser);
@@ -79,13 +77,11 @@ app.post('/login', async (req, res) => {
       bcrypt.compare(req.body.password, user.password, function (err, result) {
         if (result) {
           let token = jwt(user._id);
-          res
-            .status(202)
-            .json({
-              firstName: user.firstName,
-              lastName: user.lastName,
-              token,
-            });
+          res.status(202).json({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            token,
+          });
         } else {
           res.status(401).json('unauthorised');
         }

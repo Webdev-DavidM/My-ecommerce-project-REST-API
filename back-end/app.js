@@ -46,9 +46,10 @@ app.use(express.urlencoded({ extended: false }));
 // import ordersRouter from './routes/orders.js';
 import productsRouter from './routes/products.js';
 import usersRouter from './routes/users.js';
+import adminuserRouter from './routes/adminuser.js';
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
-// app.use('/orders', ordersRouter);
+app.use('/adminuser', adminuserRouter);
 
 app.get('/', (req, res) => {
   res.json('welcome to the e-commerce api');

@@ -1,4 +1,4 @@
-const products = [
+const cycles = [
   {
     name: 'vitus',
     price: 1999,
@@ -7,7 +7,6 @@ const products = [
     stock: 2,
     size: 'small',
     reviews: [],
-    category: 'Bikes',
     subcategory: 'Road Bikes',
   },
   {
@@ -18,7 +17,6 @@ const products = [
     stock: 2,
     size: 'small',
     reviews: [],
-    category: 'Bikes',
     subcategory: 'Road Bikes',
   },
   {
@@ -29,7 +27,6 @@ const products = [
     stock: 2,
     size: 'small',
     reviews: [],
-    category: 'Bikes',
     subcategory: 'Road Bikes',
   },
   {
@@ -40,9 +37,8 @@ const products = [
     stock: 2,
     size: 'small',
     reviews: [],
-    category: 'Bikes',
     subcategory: 'Road Bikes',
   },
 ];
 
-export default products;
+export default cycles;

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "debug": "nodemon --inspect app.js",
-    "data:import": "node data/seeder",
+    "data:import": "node data/seeder.js",
     "data:destroy": "node data/seeder -d"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-validator": "^6.9.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.13",
