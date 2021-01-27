@@ -32,6 +32,10 @@ const cycleSchema = new mongoose.Schema(
       type: Array,
       required: [true, 'Please provide a value for array even if empty'],
     },
+    category: {
+      type: String,
+      required: [true, "Please provide a value for 'category'"],
+    },
     subcategory: {
       type: String,
       required: [true, "Please provide a value for 'subcategory'"],

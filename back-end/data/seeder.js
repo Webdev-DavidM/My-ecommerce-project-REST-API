@@ -10,6 +10,8 @@ import bcrypt from 'bcrypt';
 
 connectDB();
 
+let hashedUsers;
+
 const importData = async () => {
   try {
     await Cycle.deleteMany();
@@ -18,26 +20,31 @@ const importData = async () => {
     });
     await Cycle.insertMany(cyclesList);
 
-    let usersList = Promise.all(
-      users.map(async (user) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
-        user.password = hashedPassword;
-        return { ...user };
-      })
-    ).then;
-    console.log(usersList);
+    // as I need to hash the password on my admin users in my seeder file before I put them in the database,
+    // I have had to map over each user and hash the password and I have used promise all so this works with
 
-    // await User.insertMany(usersList);
+    // a map function
 
-    // console.log('Data Imported!');
-    // process.exit();
+    const hashUserPassword = async (user) => {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      user.password = hashedPassword;
+      return user;
+    };
+
+    hashedUsers = await Promise.all(
+      users.map((user) => hashUserPassword(user))
+    );
+    console.log(hashedUsers);
+    await User.insertMany(hashedUsers);
+    console.log('Import successful!');
+    process.exit();
   } catch (error) {
-    // return { ...user };
-
     console.error(`${error}`);
     process.exit(1);
   }
 };
+
+//   console.error(`${error}`);
 
 const destroyData = async () => {
   try {

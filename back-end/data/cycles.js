@@ -8,6 +8,7 @@ const cycles = [
     size: 'small',
     reviews: [],
     subcategory: 'Road Bikes',
+    category: 'cycle',
   },
   {
     name: 'vitus',
@@ -17,6 +18,7 @@ const cycles = [
     stock: 2,
     size: 'small',
     reviews: [],
+    category: 'cycle',
     subcategory: 'Road Bikes',
   },
   {
@@ -27,6 +29,7 @@ const cycles = [
     stock: 2,
     size: 'small',
     reviews: [],
+    category: 'cycle',
     subcategory: 'Road Bikes',
   },
   {
@@ -37,6 +40,7 @@ const cycles = [
     stock: 2,
     size: 'small',
     reviews: [],
+    category: 'cycle',
     subcategory: 'Road Bikes',
   },
 ];
