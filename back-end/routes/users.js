@@ -5,8 +5,19 @@ import bcrypt from 'bcrypt';
 // with es6 modules i haver to use the full filename with .js otherwise it wont find it unlike in react with babel.
 import User from '../models/User.js';
 // import AdminUser from "../models/AdminUser.js";
-
+import jwtVerify from '../middleware/jwtVerify.js';
 import jwt from '../helpers/jwtCreate.js';
+
+import expressValidator from 'express-validator';
+const { body, validationResult } = expressValidator;
+
+// with es6 modules i haver to use the full filename with .js otherwise it wont find it unlike in react with babel.
+import Cycle from '../models/Cycle.js';
+import Run from '../models/Run.js';
+import Indoors from '../models/Indoors.js';
+import Outdoors from '../models/Outdoors.js';
+import Swim from '../models/Swim.js';
+import Triathlon from '../models/Triathlon.js';
 
 // app.get('/', async (req, res) => {
 //   console.log('route hit');
@@ -80,6 +91,7 @@ app.post('/login', async (req, res) => {
           res.status(202).json({
             firstName: user.firstName,
             lastName: user.lastName,
+            id: user._id,
             token,
           });
         } else {
@@ -106,5 +118,88 @@ app.post('/admin-login', async (req, res) => {
     console.log(err);
   }
 });
+
+//Post route, add a review
+
+app.post(
+  '/review',
+  jwtVerify,
+  body('userId', 'Id is required').not().isEmpty(),
+  body('firstName', 'First Name is required').isString().not().isEmpty(),
+  body('rating', 'Rating is required').isInt().not().isEmpty(),
+  body('comment', 'Image path is required').isString().not().isEmpty(),
+  body('category', 'Category is required').isString().not().isEmpty(),
+  body('productId', 'Product Id is required').not().isEmpty(),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const {
+      userId,
+      firstName,
+      rating,
+      comment,
+      category,
+      productId,
+    } = req.body;
+
+    let product = null;
+    switch (category) {
+      case 'cycle':
+        console.log('hit');
+        try {
+          product = await Cycle.findById(productId);
+          console.log(product);
+          if (product) {
+            product.reviews.push(req.body);
+            await product.save();
+            res.status(201).json('Review added');
+          }
+        } catch (err) {
+          res.json(err);
+        }
+        break;
+      case 'run':
+        try {
+          product = await Run.find();
+        } catch (err) {
+          res.json(err);
+        }
+        break;
+      case 'cycle':
+        try {
+          product = await Cycle.find();
+        } catch (err) {
+          res.json(err);
+        }
+        break;
+      case 'swim':
+        try {
+          product = await Swim.find();
+        } catch (err) {
+          res.json(err);
+        }
+        break;
+      case 'outdoors':
+        try {
+          product = await Outdoor.find();
+        } catch (err) {
+          res.json(err);
+        }
+        break;
+      case 'triathlon':
+        try {
+          product = await Triathlon.find();
+        } catch (err) {
+          res.json(err);
+        }
+        break;
+      default:
+        res.status(401).json('No matching category').end();
+    }
+  }
+);
 
 export default app;

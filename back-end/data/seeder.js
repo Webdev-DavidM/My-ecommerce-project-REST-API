@@ -6,6 +6,8 @@ import Cycle from '../models/Cycle.js';
 // import Indoor from '../models/Indoors.js';
 import users from './users.js';
 import User from '../models/User.js';
+import orders from './orders.js';
+import Order from '../models/Orders.js';
 import bcrypt from 'bcrypt';
 
 connectDB();
@@ -19,6 +21,12 @@ const importData = async () => {
       return { ...cycle };
     });
     await Cycle.insertMany(cyclesList);
+
+    await Order.deleteMany();
+    const ordersList = orders.map((order) => {
+      return { ...order };
+    });
+    await Order.insertMany(ordersList);
 
     // as I need to hash the password on my admin users in my seeder file before I put them in the database,
     // I have had to map over each user and hash the password and I have used promise all so this works with

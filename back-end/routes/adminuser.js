@@ -107,14 +107,14 @@ app.post(
 app.put(
   '/update/:productId',
   jwtVerify,
-  body('name', 'Name is required').not().isEmpty(),
+  body('name', 'Name is required').isString().not().isEmpty(),
   body('price').isInt().not().isEmpty(),
-  body('description', 'Description is required').not().isEmpty(),
-  body('images', 'Image path is required').not().isEmpty(),
+  body('description', 'Description is required').isString().not().isEmpty(),
+  body('images', 'Image path is required').isString().not().isEmpty(),
   body('stock').isInt().not().isEmpty(),
   body('size', 'Size is required').not().isEmpty(),
   body('reviews').isArray(),
-  body('subcategory', 'Subcategory is required').not().isEmpty(),
+  body('subcategory', 'Subcategory is required').isString().not().isEmpty(),
   async (req, res) => {
     const { productId } = req.params;
     const { email } = req;

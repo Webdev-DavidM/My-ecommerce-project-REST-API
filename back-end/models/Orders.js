@@ -1,4 +1,3 @@
-import { ObjectId, ObjectID } from 'mongodb';
 import mongoose from 'mongoose';
 
 //please adjust the name of the model titles as required
@@ -6,21 +5,23 @@ import mongoose from 'mongoose';
 const ordersSchema = new mongoose.Schema(
   {
     userId: {
-      type: ObjectID,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: [true, "Please provide a value for 'ObjectId'"],
     },
     dateOfOrder: {
-      type: ObjectID,
+      type: Number,
       required: [true, "Please provide a value for 'date'"],
     },
-    product: {
-      type: ObjectId,
-      required: [true, "Please provide a value for 'product'"],
-    },
-    quantity: {
-      type: Number,
-      required: [true, "Please provide a value for 'number'"],
-    },
+    // There is a product array so each product can be put in as
+    // an object with a quantity.
+    orderItems: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cycle',
+        required: [true, 'please provide a product i.d'],
+      },
+    ],
     total: {
       type: Number,
       required: [true, "Please provide a value for 'total'"],
