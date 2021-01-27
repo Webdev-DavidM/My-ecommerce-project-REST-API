@@ -193,4 +193,80 @@ app.put(
   }
 );
 
+/* PUT route- this will update an existing product in the database, */
+// Below I am checking which category it is for so I know which model to update
+
+app.delete('/delete/:productId', jwtVerify, async (req, res) => {
+  const { productId } = req.params;
+  const { email } = req;
+  try {
+    let adminUser = await User.findOne({ email });
+
+    if (adminUser) {
+      if (adminUser.admin === false) {
+        res
+          .status(401)
+          .json('You dont have authority to make these changes')
+          .end();
+      } else if (adminUser.admin === true) {
+        switch (req.headers.category) {
+          case 'cycle':
+            console.log(req.params.productId);
+            try {
+              let updatedProduct = await Cycle.findByIdAndDelete(
+                { _id: productId },
+                req.body
+              );
+              if (updatedProduct) {
+                return res.status(204).json('Product deleted');
+              }
+            } catch (err) {
+              res.json(err);
+            }
+            break;
+          case 'run':
+            try {
+              products = await Run.find();
+            } catch (err) {
+              res.json(err);
+            }
+            break;
+          case 'cycle':
+            try {
+              products = await Cycle.find();
+            } catch (err) {
+              res.json(err);
+            }
+            break;
+          case 'swim':
+            try {
+              products = await Swim.find();
+            } catch (err) {
+              res.json(err);
+            }
+            break;
+          case 'outdoors':
+            try {
+              products = await Outdoor.find();
+            } catch (err) {
+              res.json(err);
+            }
+            break;
+          case 'triathlon':
+            try {
+              products = await Triathlon.find();
+            } catch (err) {
+              res.json(err);
+            }
+            break;
+          default:
+            res.status(401).json('No matching category').end();
+        }
+      }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export default app;
