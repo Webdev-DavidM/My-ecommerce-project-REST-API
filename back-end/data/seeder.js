@@ -24,6 +24,7 @@ const importData = async () => {
 
     await Order.deleteMany();
     const ordersList = orders.map((order) => {
+      console.log(order);
       return { ...order };
     });
     await Order.insertMany(ordersList);

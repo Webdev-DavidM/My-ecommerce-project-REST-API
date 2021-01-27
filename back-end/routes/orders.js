@@ -6,7 +6,10 @@ import Orders from '../models/Orders.js';
 
 app.get('/:userId', jwtVerify, async (req, res) => {
   const { userId } = req.params;
-  let orders = await Orders.find({ userId }).populate('orderItems');
+  let orders = await Orders.find({ user: userId })
+    .populate('orderItems')
+    .populate('user');
+
   res.json(orders);
 });
 

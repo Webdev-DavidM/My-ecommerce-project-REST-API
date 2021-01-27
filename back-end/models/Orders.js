@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 const ordersSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: [true, "Please provide a value for 'ObjectId'"],
