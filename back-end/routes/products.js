@@ -14,13 +14,13 @@ import Product from '../models/Products.js';
 // Products to display based on the category and subcategory properties
 
 app.get('/:category', async (req, res) => {
-  // Below i have used a switch statement to only return the products in a certain category
   let { category } = req.params;
   console.log(category);
 
   try {
     let products = await Product.find({ category });
     if (products) {
+      console.log(products);
       res.status(200).json(products).end();
     } else {
       res.status(401).json(`No ${category} found`).end();

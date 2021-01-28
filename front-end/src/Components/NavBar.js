@@ -1,22 +1,30 @@
+/* NPM packages */
+import Media from 'react-media';
 import React, { Component } from 'react';
-import styles from './NavBar.module.css';
-import Logo from './UIelements/Logo';
 import { Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
+
+/* CSS */
+import styles from './NavBar.module.css';
+import './NavBar.module.css';
+/* UI*/
+
+/* Components */
+import Logo from './UIelements/Logo';
 import Basket from './UIelements/Basket';
 import SearchBar from './UIelements/SearchBar';
 import DropDownMenu from './UIelements/DropDownMenu';
-import { CSSTransition } from 'react-transition-group';
-import './NavBar.module.css';
 import SideMenu from './UIelements/SideMenu';
-import Media from 'react-media';
 
 // As part of this navigation page I will have nested routing
 
-export default class NavBar extends Component {
+class NavBar extends Component {
   state = {
     showSideMenu: false,
     showDropDownMenu: false,
   };
+
+  // I have kept the following state local rather than use redux because no other components needs it
 
   showDropMenu = (e) => {
     // console.log(e.target.textContent.toLowerCase());
@@ -96,9 +104,7 @@ export default class NavBar extends Component {
           </Link>
           <Link to='/run'>RUN</Link>
           <Link to='/swim'>SWIM</Link>
-          <Link to='/indoors'>INDOORS</Link>
           <Link to='/outdoors'>OUTDOORS</Link>
-          <Link to='/triathlon'>TRIATHLON</Link>
         </div>
         <Media
           query='(min-width: 768px)'
@@ -135,3 +141,5 @@ export default class NavBar extends Component {
     );
   }
 }
+
+export default NavBar;

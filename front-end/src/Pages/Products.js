@@ -1,68 +1,44 @@
+/* NPM packages */
 import React, { Component } from 'react';
-import styles from './Products.module.css';
 import { Link } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
-import MobileProductFilterMenu from '../Components/UIelements/MobileProductFilterMenu';
 import Media from 'react-media';
+import { connect } from 'react-redux';
+import { CSSTransition } from 'react-transition-group';
 
+/* CSS */
+
+import styles from './Products.module.css';
+
+/* Components */
+
+import MobileProductFilterMenu from '../Components/UIelements/MobileProductFilterMenu';
 import ProductItem from '../Components/UIelements/ProductItem';
 import ProductFilters from '../Components/UIelements/ProductFilters';
 
-export default class Products extends Component {
+/* Action creators */
+import { getProducts } from '../Actions/products.js';
+
+class Products extends Component {
   state = {
-    products: [
-      {
-        image: 'cycle-slide2.png',
-        name: 'Vitus',
-        price: '£2999.00',
-        reviews: [],
-      },
-      {
-        image: 'cycle-slide2.png',
-        name: 'Vitus',
-        price: '£2999.00',
-        reviews: [],
-      },
-      {
-        image: 'cycle-slide2.png',
-        name: 'Vitus',
-        price: '£2999.00',
-        reviews: [],
-      },
-      {
-        image: 'cycle-slide2.png',
-        name: 'Vitus',
-        price: '£2999.00',
-        reviews: [],
-      },
-      {
-        image: 'cycle-slide2.png',
-        name: 'Vitus',
-        price: '£2999.00',
-        reviews: [],
-      },
-      {
-        image: 'cycle-slide2.png',
-        name: 'Vitus',
-        price: '£2999.00',
-        reviews: [],
-      },
-    ],
     showFilterMenu: false,
   };
 
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    let { category } = this.props.match.params;
+    console.log(category);
+    this.props.getUserProducts(category);
+  };
 
   render() {
-    const { category } = this.props.match.params;
-    const { type } = this.props.match.params;
-    let products = this.state.products.map((product, index) => (
-      <ProductItem details={product} key={index} />
-    ));
+    // const { category } = this.props.match.params;
+    // const { type } = this.props.match.params;
+    // let products = this.state.products.map((product, index) => (
+    //   <ProductItem details={product} key={index} />
+    // ));
     return (
       <>
         <div className={styles.products}>
-          <span>{<Link to={'/'}>home / &#32;</Link>}</span>
+          {/* <span>{<Link to={'/'}>home / &#32;</Link>}</span>
           <span>
             {<Link to={`/${category}`}>{category} &#32;/ &#32;</Link>}
           </span>
@@ -78,7 +54,7 @@ export default class Products extends Component {
             onMouseEnter={() => this.setState({ showFilterMenu: true })}
             className={styles.filtericon}>
             <i class='fas fa-sort-amount-down-alt'></i>
-          </span>
+          </span> */}
 
           <Media
             query='(max-width: 768px)'
@@ -94,8 +70,16 @@ export default class Products extends Component {
           />
         </div>
         <Media query='(min-width: 768px)' render={() => <ProductFilters />} />
-        <div className={styles.productitems}>{products}</div>
+        {/* <div className={styles.productitems}>{products}</div> */}
       </>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserProducts: (category) => dispatch(getProducts(category)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Products);

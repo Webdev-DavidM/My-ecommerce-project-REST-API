@@ -39,6 +39,9 @@ class App extends Component {
         this.setState({ showArrowToTop: false });
       }
     });
+
+    // in here I need to make a back-end call which gets all the categories and sub categories and puts them into
+    //redux so this can be used by the category menus
   };
 
   render() {

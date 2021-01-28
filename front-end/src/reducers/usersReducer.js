@@ -1,11 +1,10 @@
 const initialState = {
   user: { firstName: null, lastName: null, id: null, token: '' },
   error: null,
-  loading: true,
+  loading: false,
 };
 
 function usersReducer(state = initialState, action) {
-  console.log(action.user);
   switch (action.type) {
     case 'LOGIN_STARTED':
       return { ...state, loading: true };

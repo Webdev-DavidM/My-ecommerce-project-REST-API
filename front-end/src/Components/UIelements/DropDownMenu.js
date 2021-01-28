@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default class DropDownMenu extends Component {
   state = {
     categories: {
-      bikes: ['Road Bike', 'Mountain Bike', 'BMX Bike'],
+      cycle: ['Road Bike', 'Mountain Bike', 'BMX Bike'],
       helmets: ['Children helmets', "Men's helmets", "Women's helmets"],
     },
     showSubCat: false,

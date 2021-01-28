@@ -1,9 +1,26 @@
-import React, { Component } from 'react';
-import ImageCarousel from '../Components/UIelements/ImageCarousel';
-import styles from './MainCategory.module.css';
-import { Link } from 'react-router-dom';
+/* NPM packages */
 
-export default class MainCategory extends Component {
+import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+/* CSS */
+
+import styles from './MainCategory.module.css';
+
+/* Components */
+
+import ImageCarousel from '../Components/UIelements/ImageCarousel';
+
+/* Action creators */
+import { getProducts } from '../Actions/products.js';
+
+class MainCategory extends Component {
+  componentDidMount = () => {
+    let { category } = this.props.match.params;
+    this.props.getUserProducts(category);
+  };
+
   render() {
     return (
       <div className={styles.maincategory}>
@@ -71,3 +88,11 @@ export default class MainCategory extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUserProducts: (category) => dispatch(getProducts(category)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(MainCategory);
