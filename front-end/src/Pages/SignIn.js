@@ -1,13 +1,22 @@
+/* NPM package imports */
+
 import styles from './Signin.module.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+/* UI imports */
+
+import { CircularProgress } from '@material-ui/core';
+
+/* Action creators imports */
+
 import { userSignIn } from '../Actions/users.js';
 
 class SignIn extends Component {
   state = {
     email: '',
     password: '',
-    error: '',
+    localError: '',
   };
 
   onInputChange = (e) => {
@@ -47,8 +56,8 @@ class SignIn extends Component {
           <button onClick={() => this.fieldsCompleted()}>
             Sign in securely
           </button>
-          {this.state.error && (
-            <div className={styles.error}>{this.state.error}</div>
+          {this.props.reduxError && (
+            <div className={styles.error}>{this.props.reduxError}</div>
           )}
         </div>
 
@@ -74,4 +83,8 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(SignIn);
+const mapStateToProps = (state) => {
+  return { reduxError: state.user.error, loading: state.user.loading };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

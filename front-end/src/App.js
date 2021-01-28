@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import Navbar from './Components/NavBar';
 import { CSSTransition } from 'react-transition-group';
 import { CircularProgress } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 // Here I am using lazy loading which is code splitting which will only loads components when needed and
 // hopefully should speed up my application
@@ -25,7 +26,7 @@ const AdminEditProduct = lazy(() => import('./Pages/AdminEditProduct'));
 const AdminCreateProduct = lazy(() => import('./Pages/AdminCreateProduct'));
 const Checkout = lazy(() => import('./Pages/Checkout'));
 
-export default class App extends Component {
+class App extends Component {
   state = {
     showArrowToTop: false,
   };
@@ -44,6 +45,17 @@ export default class App extends Component {
     return (
       <div>
         <div className='App'>
+          {this.props.loadingUser ||
+          this.props.loadingProducts ||
+          this.props.loadingOrders ? (
+            <div className={'generic-loading-container'}>
+              <CircularProgress
+                style={{
+                  color: '#f1c40f',
+                  size: '4rem',
+                }}></CircularProgress>
+            </div>
+          ) : null}
           <Router>
             <Navbar />
             <Suspense
@@ -96,18 +108,29 @@ export default class App extends Component {
               </Switch>
             </Suspense>
           </Router>
-          <CSSTransition
-            in={this.state.showArrowToTop}
-            onClick={() => window.scrollTo(0, 0)}
-            timeout={500}
-            classNames='menuarrow'
-            unmountOnExit>
-            <div className='menuarrow'>
-              <i className='fas fa-arrow-circle-up'></i>
-            </div>
-          </CSSTransition>
         </div>
+        <CSSTransition
+          in={this.state.showArrowToTop}
+          onClick={() => window.scrollTo(0, 0)}
+          timeout={500}
+          classNames='menuarrow'
+          unmountOnExit>
+          <div className='menuarrow'>
+            <i className='fas fa-arrow-circle-up'></i>
+          </div>
+        </CSSTransition>
       </div>
+      // </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    loadingUser: state.user.loading,
+    loadingProducts: state.products.loading,
+    loadingOrders: state.orders.loading,
+  };
+};
+
+export default connect(mapStateToProps)(App);

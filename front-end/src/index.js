@@ -10,9 +10,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 
 let rootReducer = combineReducers({
-  usersReducer,
-  productsReducer,
-  ordersReducer,
+  user: usersReducer,
+  products: productsReducer,
+  orders: ordersReducer,
 });
 
 const store = createStore(
