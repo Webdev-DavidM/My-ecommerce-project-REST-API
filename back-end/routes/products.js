@@ -8,69 +8,25 @@ import multer from 'multer';
 export const upload = multer({ dest: 'uploads/' });
 
 // with es6 modules i haver to use the full filename with .js otherwise it wont find it unlike in react with babel.
-import Cycle from '../models/Cycle.js';
-import Run from '../models/Run.js';
-import Indoors from '../models/Indoors.js';
-import Outdoors from '../models/Outdoors.js';
-import Swim from '../models/Swim.js';
-import Triathlon from '../models/Triathlon.js';
+import Product from '../models/Products.js';
 
 // GET request- return all the products, I will let redux choose which
 // Products to display based on the category and subcategory properties
 
 app.get('/:category', async (req, res) => {
   // Below i have used a switch statement to only return the products in a certain category
-  let products;
-  switch (req.params.category) {
-    case 'cycle':
-      try {
-        products = await Cycle.find();
-      } catch (err) {
-        res.json(err);
-      }
-      break;
-    case 'run':
-      try {
-        products = await Run.find();
-      } catch (err) {
-        res.json(err);
-      }
-      break;
-    case 'cycle':
-      try {
-        products = await Cycle.find();
-      } catch (err) {
-        res.json(err);
-      }
-      break;
-    case 'swim':
-      try {
-        products = await Swim.find();
-      } catch (err) {
-        res.json(err);
-      }
-      break;
-    case 'outdoors':
-      try {
-        products = await Outdoor.find();
-      } catch (err) {
-        res.json(err);
-      }
-      break;
-    case 'triathlon':
-      try {
-        products = await Triathlon.find();
-      } catch (err) {
-        res.json(err);
-      }
-      break;
-    default:
-      res.status(401).json('No matching category').end();
-  }
-  if (products) {
-    res.status(200).json(products).end();
-  } else {
-    res.status(401).json('no bike found').end();
+  let { category } = req.params;
+  console.log(category);
+
+  try {
+    let products = await Product.find({ category });
+    if (products) {
+      res.status(200).json(products).end();
+    } else {
+      res.status(401).json(`No ${category} found`).end();
+    }
+  } catch (err) {
+    res.json(err);
   }
 });
 

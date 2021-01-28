@@ -1,5 +1,5 @@
 const initialState = {
-  users: [],
+  user: [],
 };
 
 function usersReducer(state = initialState, action) {

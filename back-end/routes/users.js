@@ -83,6 +83,9 @@ app.post('/login', async (req, res) => {
   try {
     console.log('route hit');
     let user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      res.status(401).json('No user found');
+    }
     if (user) {
       // Here I am checking if the bcrypt password works
       bcrypt.compare(req.body.password, user.password, function (err, result) {
@@ -95,7 +98,7 @@ app.post('/login', async (req, res) => {
             token,
           });
         } else {
-          res.status(401).json('unauthorised');
+          res.status(401).json('Unauthorised');
         }
       });
     }

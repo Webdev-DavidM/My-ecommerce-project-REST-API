@@ -4,6 +4,8 @@ import cycles from './cycles.js';
 import Cycle from '../models/Cycle.js';
 // import indoors from './indoors.js';
 // import Indoor from '../models/Indoors.js';
+import products from './products.js';
+import Products from '../models/Products.js';
 import users from './users.js';
 import User from '../models/User.js';
 import orders from './orders.js';
@@ -16,11 +18,11 @@ let hashedUsers;
 
 const importData = async () => {
   try {
-    await Cycle.deleteMany();
-    const cyclesList = cycles.map((cycle) => {
-      return { ...cycle };
+    await Products.deleteMany();
+    const productList = products.map((product) => {
+      return { ...product };
     });
-    await Cycle.insertMany(cyclesList);
+    await Products.insertMany(productList);
 
     await Order.deleteMany();
     const ordersList = orders.map((order) => {

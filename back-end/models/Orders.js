@@ -17,9 +17,12 @@ const ordersSchema = new mongoose.Schema(
     // an object with a quantity.
     orderItems: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cycle',
-        required: [true, 'please provide a product i.d'],
+        qty: { type: Number },
+        item: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Cycle',
+          required: [true, 'please provide a product i.d'],
+        },
       },
     ],
     total: {
