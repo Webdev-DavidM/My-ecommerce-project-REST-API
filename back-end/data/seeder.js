@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import connectDB from '../config/db.js';
-import cycles from './cycles.js';
-import Cycle from '../models/Cycle.js';
+
 // import indoors from './indoors.js';
 // import Indoor from '../models/Indoors.js';
 import products from './products.js';

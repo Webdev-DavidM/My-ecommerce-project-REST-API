@@ -5,9 +5,8 @@ export const getProducts = (category) => {
     dispatch({ type: 'PRODUCTS_REQUESTED' });
     console.log(category);
     try {
-      let response = await axios(`products/${category}`);
+      let response = await axios(`http://localhost:5000/products/${category}`);
       if (response.status === 200) {
-        console.log(response);
         dispatch({ type: 'PRODUCTS_SUCCESS', products: response.data });
       }
     } catch (err) {

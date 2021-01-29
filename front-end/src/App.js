@@ -104,7 +104,11 @@ class App extends Component {
                   path='/shopping-basket'
                   component={ShoppingBasket}
                 />
-                <Route exact path='/:category/:type' component={Products} />
+                <Route
+                  exact
+                  path='/:category/:type/:subcat'
+                  component={Products}
+                />
                 <Route exact path='/:category' component={MainCategory} />
 
                 <Route component={NotFound} />

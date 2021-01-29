@@ -47,7 +47,6 @@ function productsReducer(state = initialState, action) {
     case 'SHOW_SUB_CATEGORY':
       return { ...state, showSubCategory: action.bool };
     case 'SUB_CAT_SELECTED':
-      console.log(action.subcat);
       return { ...state, chosenSubCategory: action.subcat };
 
     default:

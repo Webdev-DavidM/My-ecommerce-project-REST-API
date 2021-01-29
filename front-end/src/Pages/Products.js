@@ -24,17 +24,24 @@ class Products extends Component {
   };
 
   componentDidMount = () => {
+    let { getUserProducts } = this.props;
     let { category } = this.props.match.params;
-    console.log(category);
-    this.props.getUserProducts(category);
+    getUserProducts(category);
   };
 
   render() {
-    // const { category } = this.props.match.params;
-    // const { type } = this.props.match.params;
-    // let products = this.state.products.map((product, index) => (
-    //   <ProductItem details={product} key={index} />
-    // ));
+    let { subcat, type, category } = this.props.match.params;
+    let { products } = this.props;
+    console.log(products);
+    console.log(subcat);
+    let productsToDisplay = products.filter(
+      (product, index) => product.subcategory === subcat
+    );
+    console.log(productsToDisplay);
+    productsToDisplay = productsToDisplay.map((product, index) => (
+      <ProductItem details={product} key={index} />
+    ));
+
     return (
       <>
         <div className={styles.products}>
@@ -70,7 +77,11 @@ class Products extends Component {
           />
         </div>
         <Media query='(min-width: 768px)' render={() => <ProductFilters />} />
-        {/* <div className={styles.productitems}>{products}</div> */}
+        <p className={styles.route}>
+          You are here : <a href={`/${category}`}>{category}</a>: {type} :{' '}
+          {subcat}
+        </p>
+        <div className={styles.productitems}>{productsToDisplay}</div>
       </>
     );
   }
@@ -82,4 +93,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Products);
+const mapStatetoProps = (state) => {
+  return {
+    products: state.products.products,
+  };
+};
+
+export default connect(mapStatetoProps, mapDispatchToProps)(Products);

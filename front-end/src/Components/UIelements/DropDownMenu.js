@@ -44,7 +44,6 @@ class DropDownMenu extends Component {
         onMouseLeave={() => showDropDown(false)}>
         <div className={styles.categories}>
           {categoryToShow.map((cat) => {
-            console.log(categories[chosenCategory], cat);
             let iconMove =
               chosenSubCategory === cat ? styles.categoryItemMove : '';
             return (
@@ -55,7 +54,8 @@ class DropDownMenu extends Component {
                   subCatToShow(e.target.textContent);
                   showSubCat(true);
                 }}>
-                <Link to={`/${cat}`}>{cat}</Link>
+                {/* <Link to={`/${cat}`}>{cat}</Link> */}
+                {cat}
                 <i className={`fas fa-arrow-right ${iconMove}`}></i>
               </div>
             );

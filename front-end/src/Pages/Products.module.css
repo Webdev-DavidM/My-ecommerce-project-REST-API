@@ -13,6 +13,11 @@
   position: relative;
 }
 
+.route {
+  color: #2c3e50;
+  margin-left: 1rem;
+}
+
 .filtericon {
   color: #202d3b;
   transition: color 1 s;

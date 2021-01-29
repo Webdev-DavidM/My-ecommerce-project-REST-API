@@ -7,7 +7,7 @@ const products = [
     stock: 2,
     size: 'small',
     reviews: [],
-    subcategory: 'Mountain Bikes',
+    subcategory: 'Mountain bikes',
     category: 'cycle',
   },
   {
@@ -19,7 +19,7 @@ const products = [
     size: 'small',
     reviews: [],
     category: 'cycle',
-    subcategory: 'Road Bikes',
+    subcategory: 'Road bikes',
   },
 ];
 

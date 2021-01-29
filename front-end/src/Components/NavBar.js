@@ -36,16 +36,6 @@ class NavBar extends Component {
       <>
         <div>
           <div className={styles.navbar}>
-            {/*This hamburger menu below will dispappear in desktop mode*/}
-
-            <div
-              className={styles.menu}
-              onMouseEnter={() => showSideMenu(true)}
-              style={{ width: '1.5rem', height: '1.5rem', color: '#ecf0f1' }}>
-              <i
-                className='fas fa-bars'
-                style={{ width: '100%', height: '100%' }}></i>
-            </div>
             <Logo size='2rem' />
             <div
               className={styles.user}
@@ -54,7 +44,7 @@ class NavBar extends Component {
                 width: '1.3rem',
                 height: '1.3rem',
                 color: '#ecf0f1',
-                marginLeft: 'auto',
+                margin: '0 auto 0 1rem',
               }}>
               <i
                 className='fas fa-store'
@@ -87,6 +77,7 @@ class NavBar extends Component {
             onMouseEnter={() => {
               showSubCat(false);
               showDropDown(true);
+              showSideMenu(true);
               chosenCategory('cycle');
             }}
             onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
@@ -98,6 +89,7 @@ class NavBar extends Component {
               showSubCat(false);
               chosenCategory('run');
               showDropDown(true);
+              showSideMenu(true);
             }}
             onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
             to='/run'>
@@ -107,6 +99,7 @@ class NavBar extends Component {
             onMouseEnter={() => {
               showSubCat(false);
               showDropDown(true);
+              showSideMenu(true);
               chosenCategory('swim');
             }}
             onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
@@ -117,6 +110,7 @@ class NavBar extends Component {
             onMouseEnter={() => {
               showSubCat(false);
               showDropDown(true);
+              showSideMenu(true);
               chosenCategory('outdoors');
             }}
             onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
