@@ -1,50 +1,73 @@
+/* NPM packages */
+
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+/* css */
+
+/* action creators */
+
+import {
+  showSide,
+  showSubCategory,
+  subCatToShow,
+} from '../../Actions/products';
+
 import styles from '../NavBar.module.css';
-import { Link } from 'react-router-dom';
 
-export default class SideMenu extends Component {
-  state = {
-    categories: {
-      bikes: ['Road Bike', 'Mountain Bike', 'BMX Bike'],
-      helmets: ['Children helmets', "Men's helmets", "Women's helmets"],
-    },
-    showSubCat: false,
-    selectedCat: '',
+class SideMenu extends Component {
+  goToCategory = (subCat) => {
+    this.props.showDropDown(false);
+    this.props.history.push(
+      `${this.props.chosenCategory}/${this.props.chosenSubCategory}/${subCat}`
+    );
   };
 
-  componentDidMount = () => {
-    // get the categories from redux
-  };
-
-  showSubCategory = (e) => {
-    setTimeout(() => {
-      this.setState({
-        showSubCat: true,
-        selectedCat: e.target.textContent.toLowerCase(),
-      });
-    }, 0);
-  };
+  // showSubCategory = (e) => {
+  //   setTimeout(() => {
+  //     this.setState({
+  //       showSubCat: true,
+  //       selectedCat: e.target.textContent.toLowerCase(),
+  //     });
+  //   }, 0);
+  // };
 
   render() {
-    let listOfCategories = Object.keys(this.state.categories);
+    // destructured dispatch action creators from mapDispatchToProps
+    let {
+      showSubCat,
+      subCatToShow,
+      // showSubCategory,
+      showSideMenu,
+    } = this.props;
 
+    // Destructured state from mapStateToProps
+    let {
+      categories,
+      chosenCategory,
+      chosenSubCategory,
+      showSubCategory,
+    } = this.props;
+    let categoryToShow = Object.keys(categories[chosenCategory]);
     return (
       <>
         <div
           className={styles.sidemenu}
-          //   onMouseEnter={() => this.props.mouseEnter()}
-          //   onMouseLeave={() => this.props.mouseLeave()}>
-        >
+          onMouseLeave={() => showSideMenu(false)}>
           <div className={styles.maincats}></div>
           <div className={styles.sidecategories}>
-            {listOfCategories.map((cat) => {
+            {categoryToShow.map((cat) => {
               let iconMove =
-                this.state.selectedCat === cat ? styles.categoryItemMove : '';
+                chosenSubCategory === cat ? styles.categoryItemMove : '';
               return (
                 <div
-                  onClick={() => this.props.closeSide()}
+                  // onClick={() => this.props.closeSide()}
                   className={`${styles.categoryItem} ${iconMove} `}
-                  onMouseEnter={(e) => this.showSubCategory(e)}>
+                  onMouseEnter={(e) => {
+                    subCatToShow(e.target.textContent);
+                    showSubCat(true);
+                  }}>
                   <Link to={`/${cat}`}>{cat}</Link>
                   <i className={`fas fa-arrow-right ${iconMove}`}></i>
                 </div>
@@ -52,21 +75,17 @@ export default class SideMenu extends Component {
             })}
           </div>
           <div className={styles.sidesubcategories}>
-            {this.state.showSubCat &&
-              this.state.categories[this.state.selectedCat].map((subCat) => (
-                <div onClick={() => this.props.closeSide()}>
-                  <Link
-                    to={`${
-                      this.state.selectedCat
-                    }/${subCat.trim().toLowerCase()}`}>
+            {showSubCategory
+              ? categories[chosenCategory][chosenSubCategory].map((subCat) => (
+                  <div onClick={() => this.goToCategory(subCat)} key={subCat}>
                     {subCat}
-                  </Link>
-                </div>
-              ))}
+                  </div>
+                ))
+              : null}
           </div>
           <div
             className={styles.closebutton}
-            onClick={() => this.props.closeSide()}
+            onClick={() => showSideMenu(false)}
             style={{ width: '1.6rem', height: '1.6rem' }}>
             <i
               className='fas fa-window-close'
@@ -81,3 +100,24 @@ export default class SideMenu extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    categories: state.products.categories,
+    chosenCategory: state.products.chosenCategory,
+    chosenSubCategory: state.products.chosenSubCategory,
+    showSubCategory: state.products.showSubCategory,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showSubCat: (bool) => dispatch(showSubCategory(bool)),
+    subCatToShow: (type) => dispatch(subCatToShow(type)),
+    showSideMenu: (bool) => dispatch(showSide(bool)),
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SideMenu)
+);

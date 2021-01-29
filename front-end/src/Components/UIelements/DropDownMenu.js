@@ -11,7 +11,6 @@ import styles from '../NavBar.module.css';
 /* action creators */
 
 import {
-  showSide,
   showDrop,
   showSubCategory,
   subCatToShow,
@@ -37,12 +36,9 @@ class DropDownMenu extends Component {
     // Destructured state from mapStateToProps
     let { categories, chosenCategory, chosenSubCategory } = this.props;
     let categoryToShow = Object.keys(categories[chosenCategory]);
-    console.log(chosenSubCategory);
-    console.log(categories[chosenCategory][chosenSubCategory]);
 
     return (
       <div
-        // onClick={() => this.props.closeMain()}
         className={styles.dropdown}
         onMouseEnter={() => this.props.mouseEnter()}
         onMouseLeave={() => showDropDown(false)}>
@@ -56,7 +52,6 @@ class DropDownMenu extends Component {
                 key={cat}
                 className={`${styles.categoryItem} ${iconMove} `}
                 onMouseEnter={(e) => {
-                  console.log(e.target.textContent);
                   subCatToShow(e.target.textContent);
                   showSubCat(true);
                 }}>
@@ -97,11 +92,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     showSubCat: (bool) => dispatch(showSubCategory(bool)),
-    subCatToShow: (type) => {
-      console.log(type);
-
-      dispatch(subCatToShow(type));
-    },
+    subCatToShow: (type) => dispatch(subCatToShow(type)),
     showDropDown: (bool) => dispatch(showDrop(bool)),
   };
 };

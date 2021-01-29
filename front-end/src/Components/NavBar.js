@@ -26,34 +26,12 @@ import {
 // As part of this navigation page I will have nested routing
 
 class NavBar extends Component {
-  // state = {
-  //   showSideMenu: false,
-  //   showDropDownMenu: false,
-  // };
-
-  // // I have kept the following state local rather than use redux because no other components needs it
-
-  // // showDropMenu = (e) => {
-  // //   // console.log(e.target.textContent.toLowerCase());
-  // //   this.setState({ showDropDownMenu: true });
-  // // };
-
-  // // closeDropMenu = (e) => {
-  // //   // console.log(e.target.textContent.toLowerCase());
-  // //   this.setState({ showDropDownMenu: false });
-  // // };
-
-  // // closeSideMenu = (e) => {
-  // //   // console.log(e.target.textContent.toLowerCase());
-  // //   this.setState({ showSideMenu: false });
-  // // };
-
   render() {
     // Destructuring for mapStateToProps
-    console.log(this.props.showDropDown);
-    let { showDrop, showSideMenu, showSubCat } = this.props;
+    let { showDrop, showSide, showSubCat } = this.props;
+
     //Destructuring for mapDispatchToProps
-    let { chosenCategory, showDropDown } = this.props;
+    let { chosenCategory, showDropDown, showSideMenu } = this.props;
     return (
       <>
         <div>
@@ -166,14 +144,11 @@ class NavBar extends Component {
           query='(max-width: 768px)'
           render={() => (
             <CSSTransition
-              in={() => showSideMenu(true)}
+              in={showSide}
               timeout={300}
               classNames='sidemenu'
               unmountOnExit>
-              <SideMenu
-                closeSide={() => showSideMenu}
-                closeMain={this.closeDropMenu}
-              />
+              <SideMenu />
             </CSSTransition>
           )}
         />
@@ -184,7 +159,7 @@ class NavBar extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    showSideMenu: state.products.showSideMenu,
+    showSide: state.products.showSideMenu,
     showDrop: state.products.showDropDownMenu,
   };
 };
