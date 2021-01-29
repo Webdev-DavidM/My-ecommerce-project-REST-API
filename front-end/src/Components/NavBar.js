@@ -3,6 +3,7 @@ import Media from 'react-media';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import { connect } from 'react-redux';
 
 /* CSS */
 import styles from './NavBar.module.css';
@@ -15,33 +16,44 @@ import Basket from './UIelements/Basket';
 import SearchBar from './UIelements/SearchBar';
 import DropDownMenu from './UIelements/DropDownMenu';
 import SideMenu from './UIelements/SideMenu';
+import {
+  selectedCategory,
+  showDrop,
+  showSide,
+  showSubCategory,
+} from '../Actions/products.js';
 
 // As part of this navigation page I will have nested routing
 
 class NavBar extends Component {
-  state = {
-    showSideMenu: false,
-    showDropDownMenu: false,
-  };
+  // state = {
+  //   showSideMenu: false,
+  //   showDropDownMenu: false,
+  // };
 
-  // I have kept the following state local rather than use redux because no other components needs it
+  // // I have kept the following state local rather than use redux because no other components needs it
 
-  showDropMenu = (e) => {
-    // console.log(e.target.textContent.toLowerCase());
-    this.setState({ showDropDownMenu: true });
-  };
+  // // showDropMenu = (e) => {
+  // //   // console.log(e.target.textContent.toLowerCase());
+  // //   this.setState({ showDropDownMenu: true });
+  // // };
 
-  closeDropMenu = (e) => {
-    // console.log(e.target.textContent.toLowerCase());
-    this.setState({ showDropDownMenu: false });
-  };
+  // // closeDropMenu = (e) => {
+  // //   // console.log(e.target.textContent.toLowerCase());
+  // //   this.setState({ showDropDownMenu: false });
+  // // };
 
-  closeSideMenu = (e) => {
-    // console.log(e.target.textContent.toLowerCase());
-    this.setState({ showSideMenu: false });
-  };
+  // // closeSideMenu = (e) => {
+  // //   // console.log(e.target.textContent.toLowerCase());
+  // //   this.setState({ showSideMenu: false });
+  // // };
 
   render() {
+    // Destructuring for mapStateToProps
+    console.log(this.props.showDropDown);
+    let { showDrop, showSideMenu, showSubCat } = this.props;
+    //Destructuring for mapDispatchToProps
+    let { chosenCategory, showDropDown } = this.props;
     return (
       <>
         <div>
@@ -50,7 +62,7 @@ class NavBar extends Component {
 
             <div
               className={styles.menu}
-              onMouseEnter={() => this.setState({ showSideMenu: true })}
+              onMouseEnter={() => showSideMenu(true)}
               style={{ width: '1.5rem', height: '1.5rem', color: '#ecf0f1' }}>
               <i
                 className='fas fa-bars'
@@ -59,7 +71,7 @@ class NavBar extends Component {
             <Logo size='2rem' />
             <div
               className={styles.user}
-              onMouseEnter={() => this.setState({ showSideMenu: true })}
+              onMouseEnter={() => showSideMenu(true)}
               style={{
                 width: '1.3rem',
                 height: '1.3rem',
@@ -72,7 +84,7 @@ class NavBar extends Component {
             </div>
             <div
               className={styles.store}
-              onMouseEnter={() => this.setState({ showSideMenu: true })}
+              onMouseEnter={() => showSide(true)}
               style={{
                 width: '1.3rem',
                 height: '1.3rem',
@@ -94,29 +106,57 @@ class NavBar extends Component {
         </div>
         <div className={styles.categorylinks}>
           <Link
-            onMouseEnter={() => this.setState({ showDropDownMenu: true })}
-            onMouseLeave={() =>
-              this.props.mouseEnter &&
-              this.setState({ showDropDownMenu: false })
-            }
+            onMouseEnter={() => {
+              showSubCat(false);
+              showDropDown(true);
+              chosenCategory('cycle');
+            }}
+            onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
             to='/cycle'>
             CYCLE
           </Link>
-          <Link to='/run'>RUN</Link>
-          <Link to='/swim'>SWIM</Link>
-          <Link to='/outdoors'>OUTDOORS</Link>
+          <Link
+            onMouseEnter={() => {
+              showSubCat(false);
+              chosenCategory('run');
+              showDropDown(true);
+            }}
+            onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
+            to='/run'>
+            RUN
+          </Link>
+          <Link
+            onMouseEnter={() => {
+              showSubCat(false);
+              showDropDown(true);
+              chosenCategory('swim');
+            }}
+            onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
+            to='/swim'>
+            SWIM
+          </Link>
+          <Link
+            onMouseEnter={() => {
+              showSubCat(false);
+              showDropDown(true);
+              chosenCategory('outdoors');
+            }}
+            onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
+            to='/outdoors'>
+            OUTDOORS
+          </Link>
         </div>
         <Media
           query='(min-width: 768px)'
           render={() => (
             <CSSTransition
-              in={this.state.showDropDownMenu}
+              in={showDrop}
               timeout={300}
               classNames='menufade'
               unmountOnExit>
               <DropDownMenu
-                mouseEnter={this.showDropMenu}
-                mouseLeave={this.closeDropMenu}
+                mouseEnter={() => showDropDown(true)}
+                mouseLeave={() => showDropDown(false)}
                 closeMain={this.closeDropMenu}
               />
             </CSSTransition>
@@ -126,12 +166,12 @@ class NavBar extends Component {
           query='(max-width: 768px)'
           render={() => (
             <CSSTransition
-              in={this.state.showSideMenu}
+              in={() => showSideMenu(true)}
               timeout={300}
               classNames='sidemenu'
               unmountOnExit>
               <SideMenu
-                closeSide={this.closeSideMenu}
+                closeSide={() => showSideMenu}
                 closeMain={this.closeDropMenu}
               />
             </CSSTransition>
@@ -142,4 +182,20 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+    showSideMenu: state.products.showSideMenu,
+    showDrop: state.products.showDropDownMenu,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showSubCat: (bool) => dispatch(showSubCategory(bool)),
+    chosenCategory: (category) => dispatch(selectedCategory(category)),
+    showDropDown: (bool) => dispatch(showDrop(bool)),
+    showSideMenu: (bool) => dispatch(showSide(bool)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

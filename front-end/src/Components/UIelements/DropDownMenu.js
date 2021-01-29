@@ -1,46 +1,65 @@
+/* NPM packages */
+
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+/* css */
+
 import styles from '../NavBar.module.css';
-import { Link } from 'react-router-dom';
 
-export default class DropDownMenu extends Component {
-  state = {
-    categories: {
-      cycle: ['Road Bike', 'Mountain Bike', 'BMX Bike'],
-      helmets: ['Children helmets', "Men's helmets", "Women's helmets"],
-    },
-    showSubCat: false,
-    selectedCat: '',
-  };
+/* action creators */
 
-  componentDidMount = () => {
-    // get the categories from redux
-  };
+import {
+  showSide,
+  showDrop,
+  showSubCategory,
+  subCatToShow,
+} from '../../Actions/products';
 
-  showSubCategory = (e) => {
-    this.setState({
-      showSubCat: true,
-      selectedCat: e.target.textContent.toLowerCase(),
-    });
+class DropDownMenu extends Component {
+  goToCategory = (subCat) => {
+    this.props.showDropDown(false);
+    this.props.history.push(
+      `${this.props.chosenCategory}/${this.props.chosenSubCategory}/${subCat}`
+    );
   };
 
   render() {
-    let listOfCategories = Object.keys(this.state.categories);
+    // destructured dispatch action creators from mapDispatchToProps
+    let {
+      showSubCat,
+      subCatToShow,
+      showSubCategory,
+      showDropDown,
+    } = this.props;
+
+    // Destructured state from mapStateToProps
+    let { categories, chosenCategory, chosenSubCategory } = this.props;
+    let categoryToShow = Object.keys(categories[chosenCategory]);
+    console.log(chosenSubCategory);
+    console.log(categories[chosenCategory][chosenSubCategory]);
 
     return (
       <div
-        onClick={() => this.props.closeMain()}
+        // onClick={() => this.props.closeMain()}
         className={styles.dropdown}
         onMouseEnter={() => this.props.mouseEnter()}
-        onMouseLeave={() => this.props.mouseLeave()}>
+        onMouseLeave={() => showDropDown(false)}>
         <div className={styles.categories}>
-          {listOfCategories.map((cat) => {
+          {categoryToShow.map((cat) => {
+            console.log(categories[chosenCategory], cat);
             let iconMove =
-              this.state.selectedCat === cat ? styles.categoryItemMove : '';
+              chosenSubCategory === cat ? styles.categoryItemMove : '';
             return (
               <div
                 key={cat}
                 className={`${styles.categoryItem} ${iconMove} `}
-                onMouseEnter={(e) => this.showSubCategory(e)}>
+                onMouseEnter={(e) => {
+                  console.log(e.target.textContent);
+                  subCatToShow(e.target.textContent);
+                  showSubCat(true);
+                }}>
                 <Link to={`/${cat}`}>{cat}</Link>
                 <i className={`fas fa-arrow-right ${iconMove}`}></i>
               </div>
@@ -48,17 +67,13 @@ export default class DropDownMenu extends Component {
           })}
         </div>
         <div className={styles.subcategories}>
-          {this.state.showSubCat &&
-            this.state.categories[this.state.selectedCat].map((subCat) => (
-              <div onClick={() => this.setState({})} key={subCat}>
-                <Link
-                  to={`${
-                    this.state.selectedCat
-                  }/${subCat.trim().toLowerCase()}`}>
+          {showSubCategory
+            ? categories[chosenCategory][chosenSubCategory].map((subCat) => (
+                <div onClick={() => this.goToCategory(subCat)} key={subCat}>
                   {subCat}
-                </Link>
-              </div>
-            ))}
+                </div>
+              ))
+            : null}
         </div>
         <div className={styles.categoryImage}>
           <img
@@ -69,3 +84,28 @@ export default class DropDownMenu extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    categories: state.products.categories,
+    chosenCategory: state.products.chosenCategory,
+    chosenSubCategory: state.products.chosenSubCategory,
+    showSubCategory: state.products.showSubCategory,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    showSubCat: (bool) => dispatch(showSubCategory(bool)),
+    subCatToShow: (type) => {
+      console.log(type);
+
+      dispatch(subCatToShow(type));
+    },
+    showDropDown: (bool) => dispatch(showDrop(bool)),
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(DropDownMenu)
+);
