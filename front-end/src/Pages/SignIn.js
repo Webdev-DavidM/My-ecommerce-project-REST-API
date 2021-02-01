@@ -16,6 +16,7 @@ class SignIn extends Component {
   state = {
     email: '',
     password: '',
+    existingUserPassword: '',
     localError: '',
   };
 
@@ -25,15 +26,22 @@ class SignIn extends Component {
     });
   };
 
-  fieldsCompleted = () => {
-    // if (this.state.email || this.state.password === '') {
-    //   return this.setState({ error: 'Please complete all fields' });
-    // }
-
-    this.props.submitSignIn(this.state.email, this.state.password);
+  fieldsCompleted = (userType) => {
+    if (this.state.email && this.state.password !== '') {
+      this.setState({ localError: null });
+      this.props.submitSignIn(this.state.email, this.state.password);
+    } else {
+      return this.setState({ localError: 'Please complete all fields' });
+    }
   };
 
   render() {
+    console.log(this.props.serverError);
+    let { localError, serverError, isSignedIn } = this.props;
+    if (isSignedIn) {
+      this.props.history.push('/');
+    }
+    let { password, email } = this.state;
     return (
       <div className={styles.signincontainer}>
         <div className={styles.signin}>
@@ -43,30 +51,34 @@ class SignIn extends Component {
             onChange={(e) => this.onInputChange(e)}
             name='email'
             type='text'
-            value={this.state.email}
+            value={email}
           />
           <br />
           <p>Password </p>
           <input
             onChange={(e) => this.onInputChange(e)}
             name='password'
-            value={this.state.password}
+            value={password}
           />
           <br />
-          <button onClick={() => this.fieldsCompleted()}>
+          <button onClick={() => this.fieldsCompleted('signin')}>
             Sign in securely
           </button>
-          {this.props.reduxError && (
-            <div className={styles.error}>{this.props.reduxError}</div>
-          )}
+          {localError && <div className={styles.error}>{localError}</div>}
+          {serverError && <div className={styles.error}>{serverError}</div>}
         </div>
 
         <div className={styles.signup}>
           <h1>New customer</h1>
           <p>Email address</p>
-          <input type='text' />
+          <input
+            type='text'
+            onChange={(e) => this.onInputChange(e)}
+            name='existingUserPassword'
+            value={this.state.existingUserPassword}
+          />
           <br />
-          <button onClick={() => this.props.submitSignIn}>
+          <button onClick={() => this.fieldsCompleted('signup')}>
             Sign in securely
           </button>
         </div>
@@ -84,7 +96,11 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
-  return { reduxError: state.user.error, loading: state.user.loading };
+  return {
+    serverError: state.user.error,
+    loading: state.user.loading,
+    isSignedIn: state.user.signedIn,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

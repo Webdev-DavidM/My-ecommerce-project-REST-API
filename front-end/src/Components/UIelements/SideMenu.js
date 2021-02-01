@@ -24,15 +24,6 @@ class SideMenu extends Component {
     );
   };
 
-  // showSubCategory = (e) => {
-  //   setTimeout(() => {
-  //     this.setState({
-  //       showSubCat: true,
-  //       selectedCat: e.target.textContent.toLowerCase(),
-  //     });
-  //   }, 0);
-  // };
-
   render() {
     // destructured dispatch action creators from mapDispatchToProps
     let {
@@ -62,9 +53,8 @@ class SideMenu extends Component {
                 chosenSubCategory === cat ? styles.categoryItemMove : '';
               return (
                 <div
-                  // onClick={() => this.props.closeSide()}
                   className={`${styles.categoryItem} ${iconMove} `}
-                  onMouseEnter={(e) => {
+                  onClick={(e) => {
                     subCatToShow(e.target.textContent);
                     showSubCat(true);
                   }}>

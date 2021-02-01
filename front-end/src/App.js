@@ -1,4 +1,4 @@
-import './App.css';
+/* NPM Packages */
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import LandingPage from './Pages/LandingPage';
@@ -7,6 +7,14 @@ import Navbar from './Components/NavBar';
 import { CSSTransition } from 'react-transition-group';
 import { CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
+
+/* Css */
+
+import './App.css';
+
+/* Action creators */
+
+import { isTokenValid } from './Actions/users.js';
 
 // Here I am using lazy loading which is code splitting which will only loads components when needed and
 // hopefully should speed up my application
@@ -31,6 +39,10 @@ class App extends Component {
     showArrowToTop: false,
   };
   componentDidMount = () => {
+    // This code below is used to check where the user is on the screen, is there have scrolled down
+    // and cant see the nav bar anymore, an arrow will appear in the bottom right hand corner
+    // which cant be clicked and take them back to the top
+
     window.addEventListener('scroll', () => {
       if (window.scrollY > 122) {
         this.setState({ showArrowToTop: true });
@@ -38,7 +50,13 @@ class App extends Component {
       if (window.innerHeight - 122 < window.innerHeight - window.scrollY) {
         this.setState({ showArrowToTop: false });
       }
+      //The function below checks if there is jwt token in local storage and if so it will check if it is still
+      // valid
     });
+    let authenticatedUser = isTokenValid();
+    if (authenticatedUser) {
+      this.props.addAuthenticateduserToRedux(authenticatedUser);
+    }
 
     // in here I need to make a back-end call which gets all the categories and sub categories and puts them into
     //redux so this can be used by the category menus
@@ -140,4 +158,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addAuthenticateduserToRedux: (user) =>
+      dispatch({ type: 'LOGIN_SUCCESS', user: user }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

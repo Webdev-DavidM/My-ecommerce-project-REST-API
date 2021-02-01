@@ -2,6 +2,7 @@ const initialState = {
   user: { firstName: null, lastName: null, id: null, token: '' },
   error: null,
   loading: false,
+  signedIn: false,
 };
 
 function usersReducer(state = initialState, action) {
@@ -9,10 +10,16 @@ function usersReducer(state = initialState, action) {
     case 'LOGIN_STARTED':
       return { ...state, loading: true };
     case 'LOGIN_SUCCESS':
-      return { ...state, user: action.user, loading: false };
+      return {
+        ...state,
+        user: action.user,
+        loading: false,
+        signedIn: true,
+        error: null,
+      };
     case 'LOGIN_FAIL':
       console.log(action);
-      return { ...state, error: action.error };
+      return { ...state, error: action.error, loading: false };
 
     default:
       return state;

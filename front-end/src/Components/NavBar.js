@@ -28,7 +28,7 @@ import {
 class NavBar extends Component {
   render() {
     // Destructuring for mapStateToProps
-    let { showDrop, showSide, showSubCat } = this.props;
+    let { showDrop, showSide, showSubCat, signedIn } = this.props;
 
     //Destructuring for mapDispatchToProps
     let { chosenCategory, showDropDown, showSideMenu } = this.props;
@@ -66,7 +66,12 @@ class NavBar extends Component {
             <Basket />
             <SearchBar />
             <div className={styles.links}>
-              <Link to='/account'>Your Account</Link>
+              {signedIn ? (
+                <Link to='/account'>Your Account</Link>
+              ) : (
+                <Link to='/sign-in'>Sign in</Link>
+              )}
+
               <Link to='/admin'>Admin</Link>
               <Link to='/stores'>Stores</Link>
             </div>
@@ -155,6 +160,7 @@ const mapStateToProps = (state) => {
   return {
     showSide: state.products.showSideMenu,
     showDrop: state.products.showDropDownMenu,
+    signedIn: state.user.signedIn,
   };
 };
 

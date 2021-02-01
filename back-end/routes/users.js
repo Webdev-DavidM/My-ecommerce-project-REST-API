@@ -19,21 +19,6 @@ import Outdoors from '../models/Outdoors.js';
 import Swim from '../models/Swim.js';
 import Triathlon from '../models/Triathlon.js';
 
-// app.get('/', async (req, res) => {
-//   console.log('route hit');
-//   try {
-//     let users = await User.find({});
-//     if (users) {
-//       console.log(users);
-//       res.status(200).json(users).end();
-//     } else {
-//       res.status(401).json('no bike found').end();
-//     }
-//   } catch (err) {
-//     res.json(err);
-//   }
-// });
-
 // POST route- user register, this route, checks an email doesnt already exist and if
 // it doesnt then it bcrypts the password, save the user to the server and then
 // create JWT token and sends info back to the front-end
@@ -91,11 +76,14 @@ app.post('/login', async (req, res) => {
       bcrypt.compare(req.body.password, user.password, function (err, result) {
         if (result) {
           let token = jwt(user._id);
+          let date = new Date();
+          let seconds = date.getTime();
           res.status(202).json({
             firstName: user.firstName,
             lastName: user.lastName,
             id: user._id,
             token,
+            seconds,
           });
         } else {
           res.status(401).json('Unauthorised');

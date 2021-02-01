@@ -78,7 +78,7 @@ class Products extends Component {
         </div>
         <Media query='(min-width: 768px)' render={() => <ProductFilters />} />
         <p className={styles.route}>
-          You are here : <a href={`/${category}`}>{category}</a>: {type} :{' '}
+          You are here: <Link to={`/${category}`}>{category}</Link>: {type} :{' '}
           {subcat}
         </p>
         <div className={styles.productitems}>{productsToDisplay}</div>

@@ -54,7 +54,6 @@ class DropDownMenu extends Component {
                   subCatToShow(e.target.textContent);
                   showSubCat(true);
                 }}>
-                {/* <Link to={`/${cat}`}>{cat}</Link> */}
                 {cat}
                 <i className={`fas fa-arrow-right ${iconMove}`}></i>
               </div>
@@ -64,8 +63,12 @@ class DropDownMenu extends Component {
         <div className={styles.subcategories}>
           {showSubCategory
             ? categories[chosenCategory][chosenSubCategory].map((subCat) => (
-                <div onClick={() => this.goToCategory(subCat)} key={subCat}>
-                  {subCat}
+                // <div onClick={() => this.goToCategory(subCat)} key={subCat}>
+                <div>
+                  <Link
+                    to={`/${chosenCategory}/${chosenSubCategory}/${subCat}`}>
+                    {subCat}
+                  </Link>
                 </div>
               ))
             : null}
