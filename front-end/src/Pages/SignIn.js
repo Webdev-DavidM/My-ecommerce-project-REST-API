@@ -4,10 +4,6 @@ import styles from './Signin.module.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-/* UI imports */
-
-import { CircularProgress } from '@material-ui/core';
-
 /* Action creators imports */
 
 import { userSignIn } from '../Actions/users.js';
@@ -17,7 +13,8 @@ class SignIn extends Component {
     email: '',
     password: '',
     existingUserPassword: '',
-    localError: '',
+    localErrorSignIn: null,
+    localErrorSignUp: null,
   };
 
   onInputChange = (e) => {
@@ -27,21 +24,41 @@ class SignIn extends Component {
   };
 
   fieldsCompleted = (userType) => {
-    if (this.state.email && this.state.password !== '') {
-      this.setState({ localError: null });
-      this.props.submitSignIn(this.state.email, this.state.password);
-    } else {
-      return this.setState({ localError: 'Please complete all fields' });
+    console.log(userType);
+    if (userType === 'signin') {
+      if (this.state.email && this.state.password !== '') {
+        this.setState({ localErrorSignIn: null });
+        this.props.submitSignIn(this.state.email, this.state.password);
+      } else {
+        return this.setState({
+          localErrorSignIn: 'Please complete all fields',
+        });
+      }
+    }
+    if (userType === 'signup') {
+      if (this.state.existingUserPassword !== '') {
+        this.props.history.push(`/sign-up/${this.state.existingUserPassword}`);
+      } else {
+        return this.setState({
+          localErrorSignUp: 'Please complete all fields',
+        });
+      }
     }
   };
 
   render() {
     console.log(this.props.serverError);
-    let { localError, serverError, isSignedIn } = this.props;
+    let { serverError, isSignedIn } = this.props;
     if (isSignedIn) {
       this.props.history.push('/');
     }
-    let { password, email } = this.state;
+    let {
+      password,
+      email,
+      existingUserPassword,
+      localErrorSignIn,
+      localErrorSignUp,
+    } = this.state;
     return (
       <div className={styles.signincontainer}>
         <div className={styles.signin}>
@@ -64,7 +81,9 @@ class SignIn extends Component {
           <button onClick={() => this.fieldsCompleted('signin')}>
             Sign in securely
           </button>
-          {localError && <div className={styles.error}>{localError}</div>}
+          {localErrorSignIn && (
+            <div className={styles.error}>{localErrorSignIn}</div>
+          )}
           {serverError && <div className={styles.error}>{serverError}</div>}
         </div>
 
@@ -75,12 +94,15 @@ class SignIn extends Component {
             type='text'
             onChange={(e) => this.onInputChange(e)}
             name='existingUserPassword'
-            value={this.state.existingUserPassword}
+            value={existingUserPassword}
           />
           <br />
           <button onClick={() => this.fieldsCompleted('signup')}>
             Sign in securely
           </button>
+          {localErrorSignUp && (
+            <div className={styles.error}>{localErrorSignUp}</div>
+          )}
         </div>
       </div>
     );

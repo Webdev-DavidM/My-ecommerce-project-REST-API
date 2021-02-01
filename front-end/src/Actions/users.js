@@ -18,6 +18,44 @@ export const userSignIn = (email, password) => {
         dispatch({ type: 'LOGIN_SUCCESS', user: response.data });
         storeTokeninLocalStorage(response.data);
       }
+      if (response.status === 401) {
+        dispatch({ type: 'LOGIN_FAIL', error: response.data });
+      }
+    } catch (err) {
+      dispatch({ type: 'LOGIN_FAIL', error: err.response.data });
+    }
+  };
+};
+
+export const userSignUp = ({
+  email,
+  address,
+  password,
+  lastName,
+  firstName,
+}) => {
+  return async (dispatch) => {
+    dispatch(loginStarted());
+
+    try {
+      let response = await axios({
+        method: 'post',
+        url: 'http://localhost:5000/users/register',
+        data: {
+          email,
+          password,
+          firstName,
+          lastName,
+          address,
+          reviews: [],
+        },
+      });
+
+      if (response.status === 201) {
+        console.log(response.data);
+        dispatch({ type: 'LOGIN_SUCCESS', user: response.data });
+        storeTokeninLocalStorage(response.data);
+      }
     } catch (err) {
       dispatch({ type: 'LOGIN_FAIL', error: err.response.data });
     }

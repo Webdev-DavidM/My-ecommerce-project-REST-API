@@ -35,30 +35,39 @@ app.post('/register', async (req, res) => {
 
   //Below I will bcrypt the password
   let { firstName, password, address, email, lastName } = req.body;
-  const saltRounds = 10;
-  let bcryptPassword;
-
+  console.log(req.body);
   // below I create an instance of user so I can save it to the database below.
   // I use save rather than create because save is async and returns the user
   // which includes the user id which i need to create the jwt token
 
   let user = await new User({
-    password: req.body.password,
+    password: password,
     firstName,
     lastName,
     address,
     email,
   });
 
-  const hashedPassword = await bcrypt.hash(user.password, 10);
-  user.password = hashedPassword;
+  try {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    user.password = hashedPassword;
 
-  // Note I am using
-  let savedUser = await user.save();
-  let token = jwt(savedUser);
-
-  console.log(savedUser, token);
-  res.status(201).json({ email: user.email, id: user._id, token: token });
+    // Note I am using
+    let savedUser = await user.save();
+    let token = jwt(savedUser);
+    let date = new Date();
+    let seconds = date.getTime();
+    res.status(201).json({
+      email: user.email,
+      id: user._id,
+      token,
+      seconds,
+      firstName,
+      lastName,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 //POST route- login user, this route checks if the user exists on the database, compared the bcrypt

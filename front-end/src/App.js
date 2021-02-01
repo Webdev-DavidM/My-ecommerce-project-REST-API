@@ -94,7 +94,7 @@ class App extends Component {
                 {/* {below will redirect the user to the sign in screen if they click on the 
                 account button and dont have one} */}
                 <Route exact path='/sign-in' component={SignIn} />
-                <Route exact path='/sign-up' component={SignUp} />
+                <Route exact path='/sign-up/:email' component={SignUp} />
                 <Route exact path='/account' component={Account} />
                 <Route exact path='/admin' component={AdminProducts} />
                 <Route exact path='/checkout' component={Checkout} />
