@@ -1,5 +1,11 @@
 const initialState = {
-  user: { firstName: null, lastName: null, id: null, token: '' },
+  user: {
+    firstName: null,
+    lastName: null,
+    id: null,
+    token: '',
+    isAdmin: false,
+  },
   error: null,
   loading: false,
   signedIn: false,

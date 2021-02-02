@@ -10,6 +10,21 @@
   margin: 0;
 }
 
+.error {
+  margin: 1rem auto;
+  width: 100%;
+  padding: 0;
+  height: 2.5rem;
+  background-color: rgba(231, 76, 60, 1);
+  border-radius: 3px;
+  transition: all 1s;
+  border: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 hr {
   background-color: #95a5a6;
   width: 95%;

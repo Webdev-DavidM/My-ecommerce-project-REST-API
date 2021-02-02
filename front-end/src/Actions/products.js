@@ -34,3 +34,11 @@ export const showSubCategory = (bool) => {
 export const subCatToShow = (subcat) => {
   return { type: 'SUB_CAT_SELECTED', subcat };
 };
+
+export const chosenProduct = (id) => {
+  return { type: 'CHOSEN_PRODUCT', id };
+};
+
+export const addToBasket = (itemInfo) => {
+  return { type: 'ADD_TO_BASKET', itemInfo };
+};

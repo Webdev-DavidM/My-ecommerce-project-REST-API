@@ -6,7 +6,6 @@ import expressValidator from 'express-validator';
 const { body, validationResult } = expressValidator;
 
 import User from '../models/User.js';
-import Cycle from '../models/Cycle.js';
 
 // Note all admin routes are protected routes so I have chosen to store in them in a separate route from the
 // users, I have added middleware to check there is a valid JWT token before adding the user. I will also check that the

@@ -1,5 +1,10 @@
 /* NPM Packages */
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import LandingPage from './Pages/LandingPage';
 import React, { Component } from 'react';
@@ -63,6 +68,8 @@ class App extends Component {
   };
 
   render() {
+    let { userSignedIn, adminUser } = this.props;
+    console.log(adminUser, userSignedIn);
     return (
       <div>
         <div className='App'>
@@ -95,8 +102,12 @@ class App extends Component {
                 account button and dont have one} */}
                 <Route exact path='/sign-in' component={SignIn} />
                 <Route exact path='/sign-up/:email' component={SignUp} />
-                <Route exact path='/account' component={Account} />
-                <Route exact path='/admin' component={AdminProducts} />
+                <Route exact path='/account'>
+                  {userSignedIn ? <Account /> : <Redirect to='/' />}
+                </Route>
+                <Route exact path='/admin'>
+                  {adminUser ? <AdminProducts /> : <Redirect to='/' />}
+                </Route>
                 <Route exact path='/checkout' component={Checkout} />
                 <Route
                   exact
@@ -115,7 +126,9 @@ class App extends Component {
                   path='/admin/product/id'
                   component={AdminEditProduct}
                 />
-                <Route exact path='/order/:id' component={OrderDetails} />
+                <Route exact path='/order/:id'>
+                  {userSignedIn ? <OrderDetails /> : <Redirect to='/' />}
+                </Route>
                 <Route exact path='/product/:id' component={Product} />
                 <Route
                   exact
@@ -155,6 +168,8 @@ const mapStateToProps = (state) => {
     loadingUser: state.user.loading,
     loadingProducts: state.products.loading,
     loadingOrders: state.orders.loading,
+    adminUser: state.user.user.admin,
+    userSignedIn: state.user.signedIn,
   };
 };
 

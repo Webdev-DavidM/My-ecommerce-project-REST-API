@@ -32,12 +32,9 @@ class Products extends Component {
   render() {
     let { subcat, type, category } = this.props.match.params;
     let { products } = this.props;
-    console.log(products);
-    console.log(subcat);
     let productsToDisplay = products.filter(
       (product, index) => product.subcategory === subcat
     );
-    console.log(productsToDisplay);
     productsToDisplay = productsToDisplay.map((product, index) => (
       <ProductItem details={product} key={index} />
     ));

@@ -41,6 +41,8 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+//below I am making my static public foldeer with images and uploads available
+
 // below runs the request through each use line of code, adjust as need be
 
 // import ordersRouter from './routes/orders.js';
@@ -57,6 +59,9 @@ app.use('/orders', ordersRouter);
 app.get('/', (req, res) => {
   res.json('welcome to the e-commerce api');
 });
+
+// Below will serve my images for the products and also uploaded images when new products are
+// created
 
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'public')));

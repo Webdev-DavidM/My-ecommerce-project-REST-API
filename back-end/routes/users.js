@@ -12,12 +12,6 @@ import expressValidator from 'express-validator';
 const { body, validationResult } = expressValidator;
 
 // with es6 modules i haver to use the full filename with .js otherwise it wont find it unlike in react with babel.
-import Cycle from '../models/Cycle.js';
-import Run from '../models/Run.js';
-import Indoors from '../models/Indoors.js';
-import Outdoors from '../models/Outdoors.js';
-import Swim from '../models/Swim.js';
-import Triathlon from '../models/Triathlon.js';
 
 // POST route- user register, this route, checks an email doesnt already exist and if
 // it doesnt then it bcrypts the password, save the user to the server and then
@@ -46,6 +40,7 @@ app.post('/register', async (req, res) => {
     lastName,
     address,
     email,
+    admin: false,
   });
 
   try {
@@ -64,6 +59,7 @@ app.post('/register', async (req, res) => {
       seconds,
       firstName,
       lastName,
+      admin: false,
     });
   } catch (err) {
     console.log(err);
@@ -93,6 +89,7 @@ app.post('/login', async (req, res) => {
             id: user._id,
             token,
             seconds,
+            admin: false,
           });
         } else {
           res.status(401).json('Unauthorised');

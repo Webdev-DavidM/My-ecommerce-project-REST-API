@@ -5,12 +5,12 @@ import Media from 'react-media';
 export default class ProductImageCarousel extends Component {
   state = {
     productId: '',
-    images: ['cycle-slide1.jpg', 'cycle-slide2.png', 'cycling-desktop2.jpg'],
+    images: [],
     selectedImage: 1,
   };
 
   componentDidMount = () => {
-    // Here i will put the images props into state, for now i am hard coding them.
+    this.setState({ images: this.props.images });
   };
 
   moveImageByArrow = (direction) => {
@@ -54,9 +54,7 @@ export default class ProductImageCarousel extends Component {
             ? { border: '3px solid #f1c40f' }
             : null
         }>
-        <img
-          src={`${process.env.PUBLIC_URL}/images/${image}`}
-          alt={'hello'}></img>
+        <img src={`http://localhost:5000${image}`} alt={'hello'}></img>
       </span>
     ));
 
@@ -71,7 +69,7 @@ export default class ProductImageCarousel extends Component {
               <i class='fas fa-angle-left'></i>
             </button>
             <img
-              src={`${process.env.PUBLIC_URL}/images/${
+              src={`http://localhost:5000/${
                 this.state.images[this.state.selectedImage]
               }`}
               alt={'hello'}></img>
@@ -85,8 +83,8 @@ export default class ProductImageCarousel extends Component {
         <br></br>
         <div style={{ textAlign: 'center' }}>
           {' '}
-          <i class='fas fa-angle-left'></i> &nbsp;{this.state.selectedImage}{' '}
-          &nbsp; / &nbsp; {this.state.images.length - 1} &nbsp;
+          <i class='fas fa-angle-left'></i> &nbsp;{this.state.selectedImage + 1}{' '}
+          &nbsp; / &nbsp; {this.state.images.length} &nbsp;
           <i class='fas fa-angle-right'></i>
         </div>
         <Media

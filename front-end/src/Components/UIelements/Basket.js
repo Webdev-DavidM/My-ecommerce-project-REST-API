@@ -1,9 +1,21 @@
+/* NPM packages */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+/* CSS */
+
 import styles from '../NavBar.module.css';
 
-export default class Basket extends Component {
+class Basket extends Component {
   render() {
+    let { basketValue, basketNumber } = this.props;
+    let basketDetails = basketNumber.length !== 0 && (
+      <span>
+        &#127;{basketValue}&#127;&#127;&#40;{basketNumber}&#41;
+      </span>
+    );
+
     return (
       <>
         <div
@@ -15,7 +27,7 @@ export default class Basket extends Component {
               style={{ width: '0.9rem', height: '0.9rem' }}>
               {' '}
             </i>
-            <span>&#127; £799 &#127;&#127;&#40;2&#41;</span>
+            {basketDetails}
           </Link>
         </div>
         <div
@@ -32,3 +44,12 @@ export default class Basket extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    basketNumber: state.products.basket.length,
+    basketValue: state.products.basketValue,
+  };
+};
+
+export default connect(mapStateToProps)(Basket);

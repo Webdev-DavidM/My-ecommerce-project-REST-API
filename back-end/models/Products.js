@@ -22,15 +22,23 @@ const productSchema = new mongoose.Schema(
     },
     stock: {
       type: Number,
-      required: [true, "Please provide a value for 'price '"],
+      required: [true, "Please provide a value for 'stock'"],
     },
     size: {
-      type: String,
+      type: Object,
       required: [true, "Please provide a value for 'size'"],
+    },
+    brand: {
+      type: String,
+      required: [true, "Please provide a value for 'brand'"],
+    },
+    colour: {
+      type: String,
+      required: [true, "Please provide a value for 'colour'"],
     },
     reviews: {
       type: Array,
-      required: [true, 'Please provide a value for array even if empty'],
+      required: [true, 'Please provide a value for reviews even if empty'],
     },
     category: {
       type: String,

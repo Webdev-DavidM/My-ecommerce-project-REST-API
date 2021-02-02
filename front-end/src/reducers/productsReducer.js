@@ -6,6 +6,9 @@ const initialState = {
   chosenCategory: 'cycle',
   showSubCategory: false,
   chosenSubCategory: 'bikes',
+  selectedProduct: null,
+  basket: [],
+  basketValue: 0,
 
   categories: {
     cycle: {
@@ -48,6 +51,24 @@ function productsReducer(state = initialState, action) {
       return { ...state, showSubCategory: action.bool };
     case 'SUB_CAT_SELECTED':
       return { ...state, chosenSubCategory: action.subcat };
+    case 'ADD_TO_BASKET':
+      let basketCopy = [...state.basket];
+      basketCopy.push(action.itemInfo);
+      //This calculation below gives the total value of the cart whic is
+      // by the basket UI to shown the amount
+      let totalBasketValue =
+        state.basket.length === 0
+          ? action.itemInfo.price
+          : action.itemInfo.price +
+            state.basket.reduce((total, basketItem) => {
+              return total + basketItem.price * basketItem.quantity;
+            }, action.itemInfo.price);
+      return { ...state, basket: basketCopy, basketValue: totalBasketValue };
+    case 'CHOSEN_PRODUCT':
+      let product = state.products.filter(
+        (product) => product._id === action.id
+      );
+      return { ...state, selectedProduct: product[0] };
 
     default:
       return state;
