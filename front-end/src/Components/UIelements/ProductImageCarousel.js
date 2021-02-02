@@ -6,7 +6,7 @@ export default class ProductImageCarousel extends Component {
   state = {
     productId: '',
     images: [],
-    selectedImage: 1,
+    selectedImage: 0,
   };
 
   componentDidMount = () => {

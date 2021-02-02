@@ -42,3 +42,11 @@ export const chosenProduct = (id) => {
 export const addToBasket = (itemInfo) => {
   return { type: 'ADD_TO_BASKET', itemInfo };
 };
+
+export const sortByBestReviews = () => {
+  return { type: 'FILTER_BEST_REVIEWS' };
+};
+
+export const sortViaPriceRange = (lower, higher) => {
+  return { type: 'FILTER_PRICE_RANGE', lower, higher };
+};

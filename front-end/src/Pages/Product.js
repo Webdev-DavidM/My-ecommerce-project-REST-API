@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 /* css */
 
@@ -19,6 +20,7 @@ import { chosenProduct, addToBasket } from '../Actions/products';
 class Product extends Component {
   state = {
     size: '',
+    showBasketModal: false,
     dropdownSelected: false,
     quantity: 0,
     error: '',
@@ -55,6 +57,7 @@ class Product extends Component {
 
   addToBasket = () => {
     let { addProductToBasket } = this.props;
+
     if (this.state.size !== '' && this.state.quantity !== 0) {
       let itemInfo = {
         size: this.state.size,
@@ -63,6 +66,7 @@ class Product extends Component {
         price: this.props.product.price,
       };
       addProductToBasket(itemInfo);
+      this.setState({ showBasketModal: true });
     } else {
       this.setState({ error: 'Please select a size and quantity' });
     }
@@ -76,11 +80,15 @@ class Product extends Component {
 
   render() {
     let { product } = this.props;
+    let { showBasketModal } = this.state;
     let sizeKeys = product ? Object.keys(product.size[0]) : null;
     let dropdown = product ? (
       <>
         {sizeKeys.map((key) => (
-          <option value={key} onClick={(e) => this.selectSize(e)}>
+          <option
+            value={key}
+            disabled={product.size[0][key] === 0}
+            onClick={(e) => this.selectSize(e)}>
             {key}
             &nbsp;&nbsp;&nbsp;&nbsp;
             {product.size[0][key]} in stock
@@ -93,6 +101,26 @@ class Product extends Component {
       <>
         {product ? (
           <div className={styles.product}>
+            {showBasketModal && (
+              <div className={styles.basketmodal}>
+                <div className={styles.basket}>
+                  <h2> Added to cart </h2>
+                  <button
+                    onClick={() => this.setState({ showBasketModal: false })}
+                    className={styles.continueshoppingbtn}>
+                    Continue shopping
+                  </button>
+                  <button className={styles.checkoutbtn}>
+                    {' '}
+                    <Link
+                      style={{ textDecoration: 'none', color: 'white' }}
+                      to={'/checkout'}>
+                      Checkout now
+                    </Link>
+                  </button>
+                </div>
+              </div>
+            )}
             <p className={styles.title}></p>
             <Reviews />
             <hr></hr>
@@ -161,7 +189,7 @@ class Product extends Component {
                 )}
               </div>
               <div className={styles.column2}>
-                <p>{product.description}</p>
+                <h3>{product.description}</h3>
               </div>
             </div>
           </div>

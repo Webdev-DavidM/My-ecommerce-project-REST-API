@@ -1,9 +1,18 @@
+/* NPM packages */
 import React, { Component } from 'react';
-import styles from './PriceRangeFilter.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
 
-export default class PriceRangeFilter extends Component {
+/* CSS */
+
+import styles from './PriceRangeFilter.module.css';
+
+/* Action creators */
+
+import { sortViaPriceRange } from '../../../Actions/products.js';
+
+class PriceRangeFilter extends Component {
   state = {
     menu: false,
     lowerPriceRange: 0,
@@ -18,16 +27,25 @@ export default class PriceRangeFilter extends Component {
   };
 
   inputLowerPriceRange = (value) => {
-    this.setState({ lowerPriceRange: value });
+    let number = parseInt(value);
+    if (Number.isInteger(number)) {
+      this.setState({ lowerPriceRange: number });
+    }
   };
 
   inputHigherPriceRange = (value) => {
-    this.setState({ higherPriceRange: value });
+    let number = parseInt(value);
+    if (Number.isInteger(number)) {
+      this.setState({ higherPriceRange: number });
+    }
   };
 
   submitValues = () => {
-    //here I will dispatch to refilter the products based on the price range, I will do this later once
-    // redux is set up
+    let { lowerPriceRange, higherPriceRange } = this.state;
+    let { submitRange } = this.props;
+    if (lowerPriceRange !== 0 && higherPriceRange !== 0) {
+      submitRange(lowerPriceRange, higherPriceRange);
+    }
   };
 
   resetValues = () => {
@@ -72,6 +90,11 @@ export default class PriceRangeFilter extends Component {
               <span>£</span>
               <input
                 type='text'
+                onFocus={() => this.setState({ lowerPriceRange: '' })}
+                onBlur={() =>
+                  this.state.lowerPriceRange === 0 &&
+                  this.setState({ lowerPriceRange: 0 })
+                }
                 value={this.state.lowerPriceRange}
                 onChange={(e) => this.inputLowerPriceRange(e.target.value)}
               />
@@ -80,16 +103,38 @@ export default class PriceRangeFilter extends Component {
             <div className={styles.inputvalues}>
               <span>£</span>
               <input
+                onFocus={() => this.setState({ higherPriceRange: '' })}
+                onBlur={() =>
+                  this.state.lowerPriceRange === 0 &&
+                  this.setState({ higherPriceRange: 0 })
+                }
                 type='text'
                 value={this.state.higherPriceRange}
                 onChange={(e) => this.inputHigherPriceRange(e.target.value)}
               />
             </div>
-            <button className={styles.applyprice}>Apply</button>
-            <button className={styles.resetprice}> Reset</button>
+            <button
+              onClick={() => this.submitValues()}
+              className={styles.applyprice}>
+              Apply
+            </button>
+            <button
+              onClick={() => this.resetValues()}
+              className={styles.resetprice}>
+              {' '}
+              Reset
+            </button>
           </div>
         </div>
       </>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitRange: (low, high) => dispatch(sortViaPriceRange(low, high)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(PriceRangeFilter);

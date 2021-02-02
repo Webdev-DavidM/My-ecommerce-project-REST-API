@@ -81,7 +81,7 @@ export default class Account extends Component {
                   <span>{order.Total}</span>
                   <span style={{ color: '#16a085' }}>{order.Status}</span>
                   <div className={styles.lstbtn}>
-                    <button className={styles.returnbtn}>Make a return</button>
+                    <button className={styles.returnbtn}>Leave a review</button>
                     <button className={styles.orderbtn}>View your order</button>
                   </div>
                 </div>

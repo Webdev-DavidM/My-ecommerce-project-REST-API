@@ -1,6 +1,6 @@
 import styles from './MobileProductFilterMenu.module.css';
 import React, { Component } from 'react';
-import BestSellingFilter from '../UIelements/Filters/BestSellingFilter';
+import CustomerReviewFilter from '../UIelements/Filters/CustomerReviewFilter';
 import PriceRangeFilter from '../UIelements/Filters/PriceRangeFilter';
 import StockFilter from '../UIelements/Filters/StockFilter';
 import BrandFilter from '../UIelements/Filters/BrandFilter';
@@ -20,7 +20,9 @@ export default class MobileProductFilterMenu extends Component {
 
     switch (this.state.chosenFilter) {
       case 'Best selling':
-        filterToShow = <BestSellingFilter mobile={true} showDropDown={true} />;
+        filterToShow = (
+          <CustomerReviewFilter mobile={true} showDropDown={true} />
+        );
         break;
       case 'Price range':
         filterToShow = <PriceRangeFilter mobile={true} showDropDown={true} />;

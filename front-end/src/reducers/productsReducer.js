@@ -49,6 +49,12 @@ function productsReducer(state = initialState, action) {
       return { ...state, showSideMenu: action.bool };
     case 'SHOW_SUB_CATEGORY':
       return { ...state, showSubCategory: action.bool };
+    case 'FILTER_PRICE_RANGE':
+      let productsCopy = state.products.filter((product) => {
+        return (product.price > action.lower) & (product.price < action.higher);
+      });
+      return { ...state, products: productsCopy };
+
     case 'SUB_CAT_SELECTED':
       return { ...state, chosenSubCategory: action.subcat };
     case 'ADD_TO_BASKET':

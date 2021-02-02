@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './ProductFilters.module.css';
 
-import BestSellingFilter from '../UIelements/Filters/BestSellingFilter';
+import CustomerReviewFilter from '../UIelements/Filters/CustomerReviewFilter';
 import PriceRangeFilter from '../UIelements/Filters/PriceRangeFilter';
 import StockFilter from '../UIelements/Filters/StockFilter';
 import BrandFilter from '../UIelements/Filters/BrandFilter';
@@ -12,7 +12,7 @@ export default class ProductFilters extends Component {
   render() {
     return (
       <div className={styles.filters}>
-        <BestSellingFilter />
+        <CustomerReviewFilter />
         <PriceRangeFilter />
         <StockFilter />
         <BrandFilter />
