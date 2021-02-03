@@ -9,6 +9,7 @@ const initialState = {
   selectedProduct: null,
   basket: [],
   basketValue: 0,
+  filteredBrands: [],
 
   categories: {
     cycle: {
@@ -35,12 +36,29 @@ const initialState = {
 
 function productsReducer(state = initialState, action) {
   switch (action.type) {
+    case 'FILTER_IN_STOCK':
+      let productsCopyInStock = state.products.filter((product) => {
+        return product.stock !== 0;
+      });
+      console.log(productsCopyInStock);
+      return { ...state, products: productsCopyInStock };
+
     case 'PRODUCTS_REQUESTED':
       return { ...state, loading: true };
+    case 'FILTERED_BRANDS':
+      console.log(action.brands);
+      return { ...state, filteredBrands: action.brands };
     case 'PRODUCTS_SUCCESS':
+      console.log(action.products);
       return { ...state, products: action.products, loading: false };
     case 'PRODUCTS_FAIL':
       return { ...state, error: action.error, loading: false };
+    case 'CHOSEN_BRAND':
+      let productsByBrand = [...state.products];
+      let products = productsByBrand.filter(
+        (product) => product.brand === action.brand
+      );
+      return { ...state, products };
     case 'CATEGORY_CHOSEN':
       return { ...state, chosenCategory: action.category };
     case 'SHOW_DROP_DOWN':

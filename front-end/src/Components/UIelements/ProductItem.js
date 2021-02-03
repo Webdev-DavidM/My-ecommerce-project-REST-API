@@ -1,12 +1,10 @@
 import React from 'react';
 import styles from './ProductItem.module.css';
 import { Link } from 'react-router-dom';
+
 const ProductItem = (props) => {
-  console.log(props);
-  let { images, _id, name, price } = props.details;
-  console.log(_id);
+  let { images, _id, name, price, stock } = props.details;
   let mainImage = images[0];
-  console.log(mainImage);
   return (
     <div className={styles.productitem}>
       <div>
@@ -22,6 +20,9 @@ const ProductItem = (props) => {
           </Link>
           <p className={styles.price}>£{price}</p>
           <p className={styles.reviews}>reviews will go here</p>
+          {stock === 0 && (
+            <h2 style={{ color: '#e74c3c' }}>Sorry out of stock</h2>
+          )}
         </div>
       </div>
     </div>

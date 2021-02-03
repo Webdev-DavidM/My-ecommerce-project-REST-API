@@ -16,7 +16,7 @@ import ProductItem from '../Components/UIelements/ProductItem';
 import ProductFilters from '../Components/UIelements/ProductFilters';
 
 /* Action creators */
-import { getProducts } from '../Actions/products.js';
+import { getProducts, productBrands } from '../Actions/products.js';
 
 class Products extends Component {
   state = {
@@ -24,16 +24,36 @@ class Products extends Component {
   };
 
   componentDidMount = () => {
-    let { getUserProducts } = this.props;
-    let { category } = this.props.match.params;
+    let { getUserProducts, filterBrands } = this.props;
+    let { category, subcat } = this.props.match.params;
+    let { products } = this.props;
     getUserProducts(category);
+    // This will filter the products via category and then create a list of brands which the brand filter can use to
+    // populate buttons names
+
+    // Below will create a list of the brands from the bikes available and make sure no
+    // brands is duplicated
+    let productToFilter = products.filter(
+      (product) => product.subcategory === subcat
+    );
+    let brands = productToFilter.reduce((brandArray, product) => {
+      if (brandArray.includes(product.brand) === false) {
+        brandArray.push(product.brand);
+      }
+      return brandArray;
+    }, []);
+    console.log(brands);
+    filterBrands(brands);
   };
 
   render() {
     let { subcat, type, category } = this.props.match.params;
     let { products } = this.props;
+
+    // In hindsight this should have been done in redux as it has caused products with the filters which need
+    // this information
     let productsToDisplay = products.filter(
-      (product, index) => product.subcategory === subcat
+      (product) => product.subcategory === subcat
     );
     productsToDisplay = productsToDisplay.map((product, index) => (
       <ProductItem details={product} key={index} />
@@ -87,6 +107,7 @@ class Products extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUserProducts: (category) => dispatch(getProducts(category)),
+    filterBrands: (brands) => dispatch(productBrands(brands)),
   };
 };
 

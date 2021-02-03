@@ -1,9 +1,19 @@
+/* NPM packages */
 import React, { Component } from 'react';
-import styles from './StockFilter.module.css';
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { withRouter } from 'react-router-dom';
 
-export default class StockFilter extends Component {
+/* css */
+
+import styles from './StockFilter.module.css';
+
+/* Action creators */
+
+import { showInStock, getProducts } from '../../../Actions/products.js';
+
+class StockFilter extends Component {
   state = {
     menu: false,
     inStockSelected: false,
@@ -16,13 +26,17 @@ export default class StockFilter extends Component {
   };
 
   reset = () => {
-    console.log('clicked');
+    let { resetProducts } = this.props;
+    let { category } = this.props.match.params;
     this.setState({ inStockSelected: false });
+    resetProducts(category);
   };
 
   returnOnlyInStock = () => {
+    let { inStock } = this.props;
+    console.log(inStock);
     this.setState({ inStockSelected: true });
-    //here I will despatch this tp state to chage the selection
+    inStock();
   };
 
   componentDidMount = () => {
@@ -51,7 +65,7 @@ export default class StockFilter extends Component {
 
     return (
       <>
-        <div class={styles.dropdown}>
+        <div className={styles.dropdown}>
           <div
             className={`${styles.dropbtn} ${dropbtnClicked}`}
             onClick={() => {
@@ -64,7 +78,7 @@ export default class StockFilter extends Component {
               <FontAwesomeIcon icon={faAngleDown} />
             )}
           </div>
-          <div class={`${styles.dropdowncontent} ${dropdownClicked}`}>
+          <div className={`${styles.dropdowncontent} ${dropdownClicked}`}>
             <div>
               {stockBtn}
               <span>&nbsp;&nbsp;&nbsp;In stock</span>
@@ -83,3 +97,18 @@ export default class StockFilter extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    inStock: () => dispatch(showInStock()),
+    resetProducts: (category) => dispatch(getProducts(category)),
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(StockFilter)
+);

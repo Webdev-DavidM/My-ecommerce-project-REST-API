@@ -69,7 +69,6 @@ class App extends Component {
 
   render() {
     let { userSignedIn, adminUser } = this.props;
-    console.log(adminUser, userSignedIn);
     return (
       <div>
         <div className='App'>

@@ -36,9 +36,9 @@ class CustomerReviewFilter extends Component {
         : null;
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
     let { bestReviews } = this.props;
-    let buttons = this.state.categories.map((category) => {
+    let buttons = this.state.categories.map((category, index) => {
       return (
-        <div>
+        <div key={index}>
           <button
             className={styles.inputbtn}
             name={category}
@@ -57,7 +57,7 @@ class CustomerReviewFilter extends Component {
 
     return (
       <>
-        <div class={styles.dropdown}>
+        <div className={styles.dropdown}>
           <div
             className={`${styles.dropbtn} ${dropbtnClicked}`}
             onClick={() => {
@@ -70,7 +70,7 @@ class CustomerReviewFilter extends Component {
               <FontAwesomeIcon icon={faAngleDown} />
             )}
           </div>
-          <div class={`${styles.dropdowncontent} ${dropdownClicked}`}>
+          <div className={`${styles.dropdowncontent} ${dropdownClicked}`}>
             {buttons}
             <button className={styles.resetbest}> Reset</button>
           </div>

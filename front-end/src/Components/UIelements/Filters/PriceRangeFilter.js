@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 /* CSS */
 
@@ -10,7 +11,7 @@ import styles from './PriceRangeFilter.module.css';
 
 /* Action creators */
 
-import { sortViaPriceRange } from '../../../Actions/products.js';
+import { sortViaPriceRange, getProducts } from '../../../Actions/products.js';
 
 class PriceRangeFilter extends Component {
   state = {
@@ -49,10 +50,12 @@ class PriceRangeFilter extends Component {
   };
 
   resetValues = () => {
+    let { category } = this.props.match.params;
     this.setState({
       lowerPriceRange: 0,
       higherPriceRange: 0,
     });
+    this.props.resetProducts(category);
   };
 
   componentDidMount = () => {
@@ -71,7 +74,7 @@ class PriceRangeFilter extends Component {
 
     return (
       <>
-        <div class={styles.dropdown}>
+        <div className={styles.dropdown}>
           <div
             className={`${styles.dropbtn} ${dropbtnClicked}`}
             onClick={() => {
@@ -84,7 +87,7 @@ class PriceRangeFilter extends Component {
               <FontAwesomeIcon icon={faAngleDown} />
             )}
           </div>
-          <div class={`${styles.dropdowncontent} ${dropdownClicked}`}>
+          <div className={`${styles.dropdowncontent} ${dropdownClicked}`}>
             <span>From</span>
             <div className={styles.inputvalues}>
               <span>£</span>
@@ -119,6 +122,10 @@ class PriceRangeFilter extends Component {
               Apply
             </button>
             <button
+              disabled={
+                this.state.higherPriceRange === 0 ||
+                this.state.lowerPriceRange === 0
+              }
               onClick={() => this.resetValues()}
               className={styles.resetprice}>
               {' '}
@@ -134,7 +141,8 @@ class PriceRangeFilter extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     submitRange: (low, high) => dispatch(sortViaPriceRange(low, high)),
+    resetProducts: (category) => dispatch(getProducts(category)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(PriceRangeFilter);
+export default withRouter(connect(null, mapDispatchToProps)(PriceRangeFilter));

@@ -3,10 +3,10 @@ import axios from 'axios';
 export const getProducts = (category) => {
   return async (dispatch) => {
     dispatch({ type: 'PRODUCTS_REQUESTED' });
-    console.log(category);
     try {
       let response = await axios(`http://localhost:5000/products/${category}`);
       if (response.status === 200) {
+        console.log(response.data);
         dispatch({ type: 'PRODUCTS_SUCCESS', products: response.data });
       }
     } catch (err) {
@@ -49,4 +49,17 @@ export const sortByBestReviews = () => {
 
 export const sortViaPriceRange = (lower, higher) => {
   return { type: 'FILTER_PRICE_RANGE', lower, higher };
+};
+
+export const showInStock = () => {
+  return { type: 'FILTER_IN_STOCK' };
+};
+
+export const productBrands = (brands) => {
+  return { type: 'FILTERED_BRANDS', brands };
+};
+
+export const chosenBrand = (brand) => {
+  getProducts();
+  return { type: 'CHOSEN_BRAND', brand };
 };
