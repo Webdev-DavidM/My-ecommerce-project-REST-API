@@ -6,6 +6,26 @@
   background-color: #ecf0f1;
 }
 
+.gobackbtn {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #2980b9;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  align-self: left;
+  transition: background-color 0.3s;
+}
+
+.gobackbtn:hover {
+  background-color: #3498db;
+  cursor: pointer;
+}
+
 .checkoutcontainer hr {
   background-color: #bdc3c7;
 }

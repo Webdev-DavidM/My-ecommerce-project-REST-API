@@ -62,6 +62,18 @@ class Products extends Component {
     return (
       <>
         <div className={styles.products}>
+          <div>
+            <span
+              className={styles.gobackbtn}
+              onClick={() => this.props.history.goBack()}>
+              Go back
+            </span>
+            <p className={styles.route}>
+              You are here: <Link to={`/${category}`}>{category}</Link>: {type}{' '}
+              : {subcat}
+            </p>
+          </div>
+
           {/* <span>{<Link to={'/'}>home / &#32;</Link>}</span>
           <span>
             {<Link to={`/${category}`}>{category} &#32;/ &#32;</Link>}
@@ -93,11 +105,9 @@ class Products extends Component {
             )}
           />
         </div>
+
         <Media query='(min-width: 768px)' render={() => <ProductFilters />} />
-        <p className={styles.route}>
-          You are here: <Link to={`/${category}`}>{category}</Link>: {type} :{' '}
-          {subcat}
-        </p>
+
         <div className={styles.productitems}>{productsToDisplay}</div>
       </>
     );

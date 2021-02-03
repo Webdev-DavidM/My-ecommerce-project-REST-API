@@ -7,11 +7,17 @@
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  margin: 0;
+  justify-content: space-evenly;
+  margin: 1rem 0 0 0;
   height: 7rem;
   width: 100%;
-
   padding: 1rem;
+}
+
+.error {
+  margin-right: auto;
+  font-size: 1rem;
+  color: #e74c3c;
 }
 
 .imagecontainer {
@@ -29,8 +35,8 @@
 }
 
 .imagecontainer img {
-  width: 60%;
-  height: 60%;
+  width: auto;
+  height: 80%;
   padding: 0.5rem;
 }
 
@@ -62,7 +68,7 @@
   color: white;
   transition: all 0.5s;
   border-radius: 3px;
-  margin: 0 auto 0 5%;
+  margin: 0 0 0 5%;
 }
 
 .priceandquanity {
@@ -105,5 +111,6 @@
   }
   .details {
     width: 50%;
+    justify-content: space-between;
   }
 }

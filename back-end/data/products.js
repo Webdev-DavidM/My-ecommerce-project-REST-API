@@ -270,6 +270,41 @@ const products = [
     category: 'cycle',
     colour: ' Red',
   },
+  // helmets //
+  {
+    name: 'Abus Macator Road Cycling Helmet',
+    price: 39,
+    description:
+      "An entry-level cycle helmet, the Macator Road Helmet offers superb levels of protection alongside a stylish design. Whether just getting into the sporting side of cycling or looking for a commuter lid, it's a great choice.",
+    images: [
+      '/images/cycle/helmets/Abus-Macator:image1.jpg',
+      '/images/cycle/helmets/Abus-Macator:image2.jpg',
+    ],
+    stock: 7,
+    size: [{ small: 1, medium: 2, large: 4 }],
+    reviews: [],
+    brand: 'Abus',
+    subcategory: 'Helmets',
+    category: 'cycle',
+    colour: 'Black',
+  },
+  {
+    name: 'Kask Protone Road Helmet',
+    price: 185,
+    description:
+      "First seen worn by WorldTour professional cyclists, the Kask Protone Road Cycle Helmet proves that a cycling helmet can be both breathable and aerodynamic. Offering incredible comfort, this is a bike helmet you'll want to use for training and racing.",
+    images: [
+      '/images/cycle/helmets/Kask-Protone:image1.jpg',
+      '/images/cycle/helmets/Kask-Protone:image1.jpg',
+    ],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: 'Kask',
+    subcategory: 'Helmets',
+    category: 'cycle',
+    colour: 'White',
+  },
 ];
 
 export default products;

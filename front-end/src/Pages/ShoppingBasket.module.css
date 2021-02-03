@@ -15,6 +15,26 @@
   color: white;
 }
 
+.gobackbtn {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #2980b9;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  align-self: left;
+  transition: background-color 0.3s;
+}
+
+.gobackbtn:hover {
+  background-color: #3498db;
+  cursor: pointer;
+}
+
 .buttonshopping {
   margin: 1rem auto;
   width: 100%;
@@ -30,11 +50,13 @@
 .buttoncheckout:hover {
   background-color: #e67e22;
   color: white;
+  cursor: pointer;
 }
 
 .buttonshopping:hover {
   background-color: #95a5a6;
   color: white;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 768px) {

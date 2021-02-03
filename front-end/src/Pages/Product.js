@@ -56,14 +56,21 @@ class Product extends Component {
   };
 
   addToBasket = () => {
+    /* Destructuring action creators */
     let { addProductToBasket } = this.props;
+    /* Destructuring state from redux */
+    let { images, price, _id, name } = this.props.product;
+    console.log(this.props);
 
     if (this.state.size !== '' && this.state.quantity !== 0) {
       let itemInfo = {
         size: this.state.size,
+        qtyOfSizeInStock: this.props.product.size[0][this.state.size],
         quantity: this.state.quantity,
-        id: this.props.product._id,
-        price: this.props.product.price,
+        name: name,
+        id: _id,
+        price: price,
+        images: images,
       };
       addProductToBasket(itemInfo);
       this.setState({ showBasketModal: true });
@@ -104,25 +111,35 @@ class Product extends Component {
             {showBasketModal && (
               <div className={styles.basketmodal}>
                 <div className={styles.basket}>
-                  <h2> Added to cart </h2>
+                  <h2>
+                    {' '}
+                    <i class='fas fa-check'></i>
+                    &nbsp;Added to cart{' '}
+                  </h2>
                   <button
                     onClick={() => this.setState({ showBasketModal: false })}
                     className={styles.continueshoppingbtn}>
                     Continue shopping
                   </button>
-                  <button className={styles.checkoutbtn}>
-                    {' '}
-                    <Link
-                      style={{ textDecoration: 'none', color: 'white' }}
-                      to={'/checkout'}>
-                      Checkout now
-                    </Link>
-                  </button>
+
+                  <Link
+                    className={styles.checkoutbtn}
+                    style={{ textDecoration: 'none', color: 'white' }}
+                    to={'/shopping-basket'}>
+                    Checkout now
+                  </Link>
                 </div>
               </div>
             )}
-            <p className={styles.title}></p>
+            <p className='{styles.title}'></p>
             <Reviews />
+            <h2>
+              <span
+                className={styles.gobackbtn}
+                onClick={() => this.props.history.goBack()}>
+                Go back
+              </span>
+            </h2>
             <hr></hr>
             <ProductImageCarousel images={product.images} />
 
@@ -168,10 +185,13 @@ class Product extends Component {
                   </button>
                   <br />
                   <br />
-
-                  <span style={{ color: 'red' }}>
-                    Hurry only {product.stock} left in stock
-                  </span>
+                  {product.stock !== 0 ? (
+                    <span style={{ color: 'red' }}>
+                      Hurry only {product.stock} left in stock
+                    </span>
+                  ) : (
+                    <span style={{ color: 'red' }}>Sorry out of stock</span>
+                  )}
                 </div>
                 <button
                   onClick={() => this.addToBasket()}

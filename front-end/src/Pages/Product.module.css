@@ -79,6 +79,7 @@ hr {
 
 .continueshoppingbtn:hover {
   background-color: rgba(149, 165, 166, 1);
+  cursor: pointer;
 }
 
 .checkoutbtn {
@@ -98,6 +99,7 @@ hr {
 
 .checkoutbtn:hover {
   background-color: rgba(230, 126, 34, 1);
+  cursor: pointer;
 }
 
 .sizecontainer {
@@ -143,6 +145,26 @@ option {
   color: white;
   transition: all 0.5s;
   border-radius: 0 5px 5px 0;
+}
+
+.gobackbtn {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #2980b9;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  align-self: left;
+  transition: background-color 0.3s;
+}
+
+.gobackbtn:hover {
+  background-color: #3498db;
+  cursor: pointer;
 }
 
 .qtybtn:hover {

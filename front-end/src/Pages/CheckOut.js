@@ -6,6 +6,13 @@ export default class Checkout extends Component {
   render() {
     return (
       <div className={styles.checkoutcontainer}>
+        <h2>
+          <span
+            className={styles.gobackbtn}
+            onClick={() => this.props.history.goBack()}>
+            Go back
+          </span>
+        </h2>
         <h2>Summary</h2>
         <hr></hr>
 
