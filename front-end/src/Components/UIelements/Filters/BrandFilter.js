@@ -47,31 +47,35 @@ class BrandFilter extends Component {
   };
 
   render() {
+    let brandsButtons;
+
     let dropdownClicked =
       this.state.menu || this.props.showDropDown
         ? styles.dropdownclicked
         : null;
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
     let { brands } = this.props;
-    let brandsButtons = brands.map((category, index) => {
-      return (
-        <div key={index}>
-          <button
-            disabled={this.state.selectedDropDown !== ''}
-            className={styles.inputbtn}
-            name={category}
-            style={
-              this.state.selectedDropDown === category
-                ? { backgroundColor: '#f1c40f' }
-                : null
-            }
-            onClick={() => this.dropdownSelected(category)}
-          />
-          <span>&nbsp;&nbsp;&nbsp;{category}</span>
-          <br />
-        </div>
-      );
-    });
+    if (this.props.brands.length !== 0) {
+      brandsButtons = brands.map((category, index) => {
+        return (
+          <div key={index}>
+            <button
+              disabled={this.state.selectedDropDown !== ''}
+              className={styles.inputbtn}
+              name={category}
+              style={
+                this.state.selectedDropDown === category
+                  ? { backgroundColor: '#f1c40f' }
+                  : null
+              }
+              onClick={() => this.dropdownSelected(category)}
+            />
+            <span>&nbsp;&nbsp;&nbsp;{category}</span>
+            <br />
+          </div>
+        );
+      });
+    }
 
     return (
       <>

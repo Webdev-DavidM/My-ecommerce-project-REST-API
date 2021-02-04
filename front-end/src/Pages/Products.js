@@ -27,6 +27,7 @@ class Products extends Component {
     let { getUserProducts, filterBrands } = this.props;
     let { category, subcat } = this.props.match.params;
     let { products } = this.props;
+    console.log(products);
     getUserProducts(category);
     // This will filter the products via category and then create a list of brands which the brand filter can use to
     // populate buttons names
@@ -42,7 +43,7 @@ class Products extends Component {
       }
       return brandArray;
     }, []);
-    console.log(brands);
+
     filterBrands(brands);
   };
 

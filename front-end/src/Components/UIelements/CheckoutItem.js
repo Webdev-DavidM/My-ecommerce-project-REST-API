@@ -95,14 +95,14 @@ class CheckoutItem extends Component {
           <button className={styles.bin} onClick={() => deleteItem(id)}>
             <i class='fa fa-trash' aria-hidden='true'></i>
           </button>
-          {this.state.error && (
-            <span className={styles.error}>{this.state.error}</span>
-          )}
 
           <h2 className={styles.itemcost} style={{ color: '#3498db' }}>
             Total: £{price * this.state.quantity}
           </h2>
         </div>
+        {this.state.error && (
+          <span className={styles.error}>{this.state.error}</span>
+        )}
       </div>
     );
   }
