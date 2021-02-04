@@ -220,12 +220,12 @@
     display: inline-flex;
     padding: 2rem;
     width: 70%;
-    height: 40%;
+    height: 20%;
     position: absolute;
     background-color: white;
-    margin: 0 13%;
     z-index: 1000;
     color: #2c3e50;
+    box-shadow: 2px 2px 2px 2px rgba(127, 140, 141, 0.7);
   }
 
   .dropdown div {

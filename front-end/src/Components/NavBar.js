@@ -79,7 +79,7 @@ class NavBar extends Component {
         </div>
         <div className={styles.categorylinks}>
           <Link
-            onMouseEnter={() => {
+            onClick={() => {
               showSubCat(false);
               showDropDown(true);
               showSideMenu(true);
@@ -90,7 +90,7 @@ class NavBar extends Component {
             CYCLE
           </Link>
           <Link
-            onMouseEnter={() => {
+            onClick={(e) => {
               showSubCat(false);
               chosenCategory('run');
               showDropDown(true);
@@ -101,7 +101,7 @@ class NavBar extends Component {
             RUN
           </Link>
           <Link
-            onMouseEnter={() => {
+            onClick={() => {
               showSubCat(false);
               showDropDown(true);
               showSideMenu(true);
@@ -112,7 +112,7 @@ class NavBar extends Component {
             SWIM
           </Link>
           <Link
-            onMouseEnter={() => {
+            onClick={() => {
               showSubCat(false);
               showDropDown(true);
               showSideMenu(true);
@@ -123,22 +123,24 @@ class NavBar extends Component {
             OUTDOORS
           </Link>
         </div>
-        <Media
-          query='(min-width: 768px)'
-          render={() => (
-            <CSSTransition
-              in={showDrop}
-              timeout={300}
-              classNames='menufade'
-              unmountOnExit>
-              <DropDownMenu
-                mouseEnter={() => showDropDown(true)}
-                mouseLeave={() => showDropDown(false)}
-                closeMain={this.closeDropMenu}
-              />
-            </CSSTransition>
-          )}
-        />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Media
+            query='(min-width: 768px)'
+            render={() => (
+              <CSSTransition
+                in={showDrop}
+                timeout={300}
+                classNames='menufade'
+                unmountOnExit>
+                <DropDownMenu
+                  mouseEnter={() => showDropDown(true)}
+                  mouseLeave={() => showDropDown(false)}
+                  closeMain={this.closeDropMenu}
+                />
+              </CSSTransition>
+            )}
+          />
+        </div>
         <Media
           query='(max-width: 768px)'
           render={() => (
