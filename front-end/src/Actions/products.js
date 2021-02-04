@@ -43,6 +43,11 @@ export const addToBasket = (itemInfo) => {
   return { type: 'ADD_TO_BASKET', itemInfo };
 };
 
+export const updateToBasket = (noPos, quantity) => {
+  console.log(noPos, quantity);
+  return { type: 'UPDATE_BASKET', noPos, quantity };
+};
+
 export const sortByBestReviews = () => {
   return { type: 'FILTER_BEST_REVIEWS' };
 };
@@ -62,4 +67,8 @@ export const productBrands = (brands) => {
 export const chosenBrand = (brand) => {
   getProducts();
   return { type: 'CHOSEN_BRAND', brand };
+};
+
+export const deleteItemFromBasket = (id) => {
+  return { type: 'DELETE_ITEM_FROM_BASKET', id };
 };

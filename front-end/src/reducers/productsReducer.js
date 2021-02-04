@@ -72,7 +72,18 @@ function productsReducer(state = initialState, action) {
         return (product.price > action.lower) & (product.price < action.higher);
       });
       return { ...state, products: productsCopy };
-
+    case 'UPDATE_BASKET':
+      let updateBasketCopy = [...state.basket];
+      updateBasketCopy[action.noPos].quantity = action.quantity;
+      return { ...state, basket: updateBasketCopy };
+    case 'DELETE_ITEM_FROM_BASKET':
+      let newBasketCopy = [...state.basket];
+      console.log(action.id);
+      let indexOfItem = newBasketCopy.findIndex(
+        (item) => item.id === action.id
+      );
+      newBasketCopy.splice(indexOfItem, 1);
+      return { ...state, basket: newBasketCopy };
     case 'SUB_CAT_SELECTED':
       return { ...state, chosenSubCategory: action.subcat };
     case 'ADD_TO_BASKET':

@@ -10,9 +10,10 @@ import styles from '../NavBar.module.css';
 class Basket extends Component {
   render() {
     let { basketValue, basketNumber } = this.props;
+    let total = basketValue().Total;
     let basketDetails = basketNumber.length !== 0 && (
       <span>
-        &#127;{basketValue}&#127;&#127;&#40;{basketNumber}&#41;
+        &#127;{total}&#127;&#127;&#40;{basketNumber}&#41;
       </span>
     );
 
@@ -48,7 +49,19 @@ class Basket extends Component {
 const mapStateToProps = (state) => {
   return {
     basketNumber: state.products.basket.length,
-    basketValue: state.products.basketValue,
+    basketValue: () => {
+      let Total = 0;
+      if (state.products.basket.length !== 0) {
+        Total = state.products.basket
+          .map((product) => {
+            return product.price * product.quantity;
+          })
+          .reduce((total, itemTotal) => {
+            return total + itemTotal;
+          });
+      }
+      return { Total };
+    },
   };
 };
 

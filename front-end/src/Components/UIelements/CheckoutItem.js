@@ -7,6 +7,11 @@ import styles from './CheckoutItem.module.css';
 
 /* Action creators */
 
+import {
+  updateToBasket,
+  deleteItemFromBasket,
+} from '../../Actions/products.js';
+
 class CheckoutItem extends Component {
   state = {
     quantity: null,
@@ -19,9 +24,11 @@ class CheckoutItem extends Component {
   };
 
   adjustQuantity = (operator) => {
-    let { size, qtyOfSizeInStock } = this.props.details;
-    console.log(this.state.quantity, qtyOfSizeInStock);
+    let { updateBasket } = this.props;
+    let { qtyOfSizeInStock } = this.props.details;
+    let { id } = this.props;
     if (operator === '-') {
+      updateBasket(id, this.state.quantity - 1);
       if (this.state.quantity !== 0) {
         this.setState((prevState) => ({
           quantity: prevState.quantity - 1,
@@ -31,6 +38,7 @@ class CheckoutItem extends Component {
     }
     if (operator === '+') {
       if (this.state.quantity < qtyOfSizeInStock) {
+        updateBasket(id, this.state.quantity + 1);
         this.setState((prevState) => ({
           quantity: prevState.quantity + 1,
         }));
@@ -43,7 +51,11 @@ class CheckoutItem extends Component {
   };
 
   render() {
-    let { name, images, price, quantity, size } = this.props.details;
+    console.log(this.props.details);
+    let { name, images, price, size, id } = this.props.details;
+
+    let { deleteItem } = this.props;
+
     return (
       <div className={styles.itemcontainer}>
         <div className={styles.details}>
@@ -77,9 +89,7 @@ class CheckoutItem extends Component {
               +
             </button>
           </div>
-          <button
-            className={styles.bin}
-            onClick={() => this.adjustQuantity('+')}>
+          <button className={styles.bin} onClick={() => deleteItem(id)}>
             <i class='fa fa-trash' aria-hidden='true'></i>
           </button>
           {this.state.error && (
@@ -87,7 +97,7 @@ class CheckoutItem extends Component {
           )}
 
           <h2 className={styles.itemcost} style={{ color: '#3498db' }}>
-            Total: £{price}
+            Total: £{price * this.state.quantity}
           </h2>
         </div>
       </div>
@@ -96,13 +106,13 @@ class CheckoutItem extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { product: state.products.selectedProduct };
+  return { basket: state.products.basket };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // selectProduct: (id) => dispatch(chosenProduct(id)),
-    // addProductToBasket: (itemInfo) => dispatch(addToBasket(itemInfo)),
+    updateBasket: (id, quantity) => dispatch(updateToBasket(id, quantity)),
+    deleteItem: (id) => dispatch(deleteItemFromBasket(id)),
   };
 };
 
