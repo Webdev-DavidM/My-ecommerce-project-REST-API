@@ -73,25 +73,6 @@ class Products extends Component {
               : {subcat}
             </p>
           </div>
-
-          {/* <span>{<Link to={'/'}>home / &#32;</Link>}</span>
-          <span>
-            {<Link to={`/${category}`}>{category} &#32;/ &#32;</Link>}
-          </span>
-          &#32;
-          <span>{<Link to={`${category}/${type}`}>{type}</Link>}</span>
-        </div>
-
-        <div className={styles.typeandfilter}>
-          <p className={styles.type}>
-            {type}s &#127;<span>(21)</span>
-          </p>
-          <span
-            onMouseEnter={() => this.setState({ showFilterMenu: true })}
-            className={styles.filtericon}>
-            <i class='fas fa-sort-amount-down-alt'></i>
-          </span> */}
-
           <Media
             query='(max-width: 768px)'
             render={() => (

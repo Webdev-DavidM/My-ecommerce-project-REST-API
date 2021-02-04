@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './ProductItem.module.css';
 import { Link } from 'react-router-dom';
+import { noAuto } from '@fortawesome/fontawesome-svg-core';
 
 const ProductItem = (props) => {
   let { images, _id, name, price, stock } = props.details;
@@ -21,7 +22,7 @@ const ProductItem = (props) => {
           <p className={styles.price}>£{price}</p>
           <p className={styles.reviews}>reviews will go here</p>
           {stock === 0 && (
-            <h2 style={{ color: '#e74c3c' }}>Sorry out of stock</h2>
+            <h2 className={styles.outofstock}>Sorry out of stock</h2>
           )}
         </div>
       </div>

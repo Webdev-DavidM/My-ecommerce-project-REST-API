@@ -18,7 +18,7 @@ import styles from '../NavBar.module.css';
 
 class SideMenu extends Component {
   goToCategory = (subCat) => {
-    this.props.showDropDown(false);
+    this.props.showSideMenu(false);
     this.props.history.push(
       `${this.props.chosenCategory}/${this.props.chosenSubCategory}/${subCat}`
     );
@@ -54,6 +54,7 @@ class SideMenu extends Component {
               return (
                 <div
                   className={`${styles.categoryItem} ${iconMove} `}
+                  // I have changed this from hover to click for the mobile side menu
                   onClick={(e) => {
                     subCatToShow(e.target.textContent);
                     showSubCat(true);
