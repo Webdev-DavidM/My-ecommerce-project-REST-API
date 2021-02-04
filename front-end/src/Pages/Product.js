@@ -24,6 +24,7 @@ class Product extends Component {
     dropdownSelected: false,
     quantity: 0,
     error: '',
+    selectedProduct: null,
   };
 
   selectSize = (e) => {
@@ -31,6 +32,7 @@ class Product extends Component {
   };
 
   selectQuantity = (operator) => {
+    let { selectedProduct } = this.state;
     if (this.state.size === '') {
       this.setState({ error: 'Please select a size first' });
     }
@@ -43,7 +45,7 @@ class Product extends Component {
       }
     }
     if (operator === '+') {
-      if (this.state.quantity < this.props.product.size[0][this.state.size]) {
+      if (this.state.quantity < selectedProduct.size[0][this.state.size]) {
         this.setState((prevState) => ({
           quantity: prevState.quantity + 1,
         }));
@@ -59,13 +61,13 @@ class Product extends Component {
     /* Destructuring action creators */
     let { addProductToBasket } = this.props;
     /* Destructuring state from redux */
-    let { images, price, _id, name } = this.props.product;
+    let { images, price, _id, name } = this.state.selectedProduct;
     console.log(this.props);
 
     if (this.state.size !== '' && this.state.quantity !== 0) {
       let itemInfo = {
         size: this.state.size,
-        qtyOfSizeInStock: this.props.product.size[0][this.state.size],
+        qtyOfSizeInStock: this.state.selectedProduct.size[0][this.state.size],
         quantity: this.state.quantity,
         name: name,
         id: _id,
@@ -80,33 +82,44 @@ class Product extends Component {
   };
 
   componentDidMount = () => {
-    let { selectProduct } = this.props;
+    let { products } = this.props;
+
     let { id } = this.props.match.params;
-    selectProduct(id);
+    console.log(products, id);
+    let chosenProduct = products.filter((product) => {
+      return product._id === id;
+    });
+    this.setState({ selectedProduct: chosenProduct[0] });
+    console.log(chosenProduct);
   };
 
   render() {
-    let { product } = this.props;
+    let { selectedProduct } = this.state;
     let { showBasketModal } = this.state;
-    let sizeKeys = product ? Object.keys(product.size[0]) : null;
-    let dropdown = product ? (
-      <>
-        {sizeKeys.map((key) => (
-          <option
-            value={key}
-            disabled={product.size[0][key] === 0}
-            onClick={(e) => this.selectSize(e)}>
-            {key}
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            {product.size[0][key]} in stock
-          </option>
-        ))}
-      </>
-    ) : null;
+    let dropdown = null;
+
+    if (selectedProduct !== null) {
+      let sizeKeys = Object.keys(selectedProduct.size[0]);
+      dropdown = (
+        <>
+          {sizeKeys.map((key, index) => (
+            <option
+              key={index}
+              value={key}
+              disabled={selectedProduct.size[0][key] === 0}
+              onClick={(e) => this.selectSize(e)}>
+              {key}
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              {selectedProduct.size[0][key]} in stock
+            </option>
+          ))}
+        </>
+      );
+    }
 
     return (
       <>
-        {product ? (
+        {selectedProduct !== null ? (
           <div className={styles.product}>
             {showBasketModal && (
               <div className={styles.basketmodal}>
@@ -141,14 +154,16 @@ class Product extends Component {
               </span>
             </h2>
             <hr></hr>
-            <ProductImageCarousel images={product.images} />
+            <ProductImageCarousel images={selectedProduct.images} />
 
             <div className={styles.productinfo}>
               <div className={styles.column1}>
                 {' '}
-                <p className={styles.price}>£{product.price}</p>
-                {product.colour && <p>colour: {product.colour}</p>}
-                <div>{product.name}</div>
+                <p className={styles.price}>£{selectedProduct.price}</p>
+                {selectedProduct.colour && (
+                  <p>colour: {selectedProduct.colour}</p>
+                )}
+                <div>{selectedProduct.name}</div>
                 <div className={styles.sizecontainer}>
                   <form
                     onClick={() =>
@@ -185,9 +200,9 @@ class Product extends Component {
                   </button>
                   <br />
                   <br />
-                  {product.stock !== 0 ? (
+                  {selectedProduct.stock !== 0 ? (
                     <span style={{ color: 'red' }}>
-                      Hurry only {product.stock} left in stock
+                      Hurry only {selectedProduct.stock} left in stock
                     </span>
                   ) : (
                     <span style={{ color: 'red' }}>Sorry out of stock</span>
@@ -209,7 +224,7 @@ class Product extends Component {
                 )}
               </div>
               <div className={styles.column2}>
-                <h3>{product.description}</h3>
+                <h3>{selectedProduct.description}</h3>
               </div>
             </div>
           </div>
@@ -220,12 +235,11 @@ class Product extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { product: state.products.selectedProduct };
+  return { products: state.products.products };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    selectProduct: (id) => dispatch(chosenProduct(id)),
     addProductToBasket: (itemInfo) => dispatch(addToBasket(itemInfo)),
   };
 };
