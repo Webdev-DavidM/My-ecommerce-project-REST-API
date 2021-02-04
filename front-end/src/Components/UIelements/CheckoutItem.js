@@ -28,12 +28,14 @@ class CheckoutItem extends Component {
     let { qtyOfSizeInStock } = this.props.details;
     let { id } = this.props;
     if (operator === '-') {
-      updateBasket(id, this.state.quantity - 1);
       if (this.state.quantity !== 0) {
+        updateBasket(id, this.state.quantity - 1);
         this.setState((prevState) => ({
           quantity: prevState.quantity - 1,
           error: '',
         }));
+      } else {
+        this.setState({ error: 'Nothing in basket' });
       }
     }
     if (operator === '+') {
@@ -41,6 +43,7 @@ class CheckoutItem extends Component {
         updateBasket(id, this.state.quantity + 1);
         this.setState((prevState) => ({
           quantity: prevState.quantity + 1,
+          error: '',
         }));
       } else {
         this.setState({

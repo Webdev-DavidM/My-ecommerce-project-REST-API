@@ -401,6 +401,279 @@ const products = [
     category: 'cycle',
     colour: 'Black',
   },
+  // Run category //
+  // Tops //
+  {
+    name: 'dhb Short Sleeve Run Top',
+    price: 20,
+    description:
+      "The dhb Short Sleeve Run Top is a lightweight running top with a fitted, but unrestrictive fit. It's perfect for both running and the gym.",
+
+    images: [
+      '/images/run/clothing/dhb-Short-Sleeve:image1.jpg',
+      '/images/run/clothing/dhb-Short-Sleeve:image2.jpg',
+    ],
+    stock: 20,
+    size: [{ small: 6, medium: 6, large: 8 }],
+    reviews: [],
+    brand: 'dhb',
+    subcategory: 'Tops',
+    category: 'run',
+    colour: 'Blue',
+  },
+  {
+    name: "dhb Aeron Women's Short Sleeve Run Top",
+    price: 25,
+    description:
+      "The dhb Aeron Women's Short Sleeve Run Top is a super light-weight running top with Microfresh for added breathability.",
+
+    images: [
+      '/images/run/clothing/dhb-Aeron-Women-s-Short-Sleeve:image1.jpg',
+      '/images/run/clothing/dhb-Aeron-Women-s-Short-Sleeve:image2.jpg',
+    ],
+    stock: 2,
+    size: [{ small: 1, medium: 0, large: 1 }],
+    reviews: [],
+    brand: 'dhb',
+    subcategory: 'Tops',
+    category: 'run',
+    colour: 'Peach',
+  },
+  {
+    name: 'Asics Womens FUJITRAIL TOP',
+
+    price: 65,
+    description:
+      'Envelop yourself in breathable protection with the Fujitrail T-Shirt from ASICS.',
+
+    images: [
+      '/images/run/clothing/Asics:image1.jpg',
+      '/images/run/clothing/Asics:image2.jpg',
+    ],
+    stock: 12,
+    size: [{ small: 3, medium: 7, large: 2 }],
+    reviews: [],
+    brand: 'Asics',
+    subcategory: 'Tops',
+    category: 'run',
+    colour: 'Blue/Grey',
+  },
+  {
+    name: '2XU GHST S/S Tee',
+
+    price: 22,
+    description:
+      'Delivering world class lightness and cooling, the 2XU GHST S/S Tee keeps you cooler and dryer for longer',
+
+    images: [
+      '/images/run/clothing/2XH-image1.jpg',
+      '/images/run/clothing/2XH-image2.jpg',
+    ],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: '2XU',
+    subcategory: 'Tops',
+    category: 'run',
+    colour: 'Blue',
+  },
+  {
+    name: 'Gore Wear R7 2in1 Shorts',
+    price: 88,
+    description:
+      'Comfortable, stylish and supporitve. The Gore Wear R7 2in1 Shorts will help you push your running distance even farther with its muscle supporting inner brief.',
+    images: ['/images/run/clothing/Gore-Wear-R7-2in1-Shorts:image1.jpg'],
+    stock: 21,
+    size: [{ small: 12, medium: 3, large: 6 }],
+    reviews: [],
+    brand: 'Gore',
+    subcategory: 'Legwear',
+    category: 'run',
+    colour: 'Multi',
+  },
+  {
+    name: "Asics Women's Road 3.5 Inch Shorts",
+    price: 18,
+    description:
+      "Sprint to the finish in these Asics Women's Road 3.5 Inch Shorts, offering a higher waist band and integrated drawcord for easy adjustability.",
+    images: [
+      '/images/run/clothing/Asics-women:image1.jpg',
+      '/images/run/clothing/Asics-women:image1.jpg',
+    ],
+    stock: 4,
+    size: [{ small: 1, medium: 2, large: 1 }],
+    reviews: [],
+    brand: 'Asics',
+    subcategory: 'Legwear',
+    category: 'run',
+    colour: 'Black',
+  },
+  {
+    name: "Shock Absorber Women's Capri",
+    price: 15,
+    description:
+      "The Shock Absorber Women's Capri is highly comfortable and stylish. The perfect addition to your gym training wardrobe.",
+    images: ['/images/run/clothing/Shock-Absorber-Women-s-Capri-image1.jpg'],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: 'Shock',
+    subcategory: 'Legwear',
+    category: 'run',
+    colour: 'Multi',
+  },
+  {
+    name: 'adidas Astro Pant',
+    price: 33,
+    description:
+      'Run like the wind! These Astro Pants from adidas are comfortable and highly breathable to keep airflow maximised.',
+    images: [
+      '/images/run/clothing/adidas:image1.jpg',
+      '/images/run/clothing/adidas:image2.jpg',
+    ],
+    stock: 21,
+    size: [{ small: 2, medium: 4, large: 15 }],
+    reviews: [],
+    brand: 'Adidas',
+    subcategory: 'Legwear',
+    category: 'run',
+    colour: 'Multi',
+  },
+  // Jackets
+  {
+    name: 'Montane Minimus Stretch Ultra Running Jacket',
+    price: 165,
+    description:
+      'The Minimus Stretch Ultra Running Jacket from Montane offers waterproof lightweight protection should the weather take a turn for the worst. Ideal for running, its stretch shell and high-end breathability make it a must for any trail runner.',
+    images: [
+      '/images/run/clothing/Montane-image1.jpg',
+      '/images/run/clothing/Montane-image2.jpg',
+    ],
+    stock: 13,
+    size: [{ small: 3, medium: 0, large: 10 }],
+    reviews: [],
+    brand: 'Montane',
+    subcategory: 'Jackets',
+    category: 'run',
+    colour: 'Multi',
+  },
+  {
+    name: 'dhb Flashlight Run Jacket',
+    price: 48,
+    description:
+      "dhb's Flashlight Jacket will keep you ticking off the miles when the weather takes a turn for the worse. Great protection from wind and rain, it's bright colour and reflective details will catch the eye and leave you to focus on the road ahead.",
+    images: [
+      '/images/run/clothing/dhb:image1.jpg',
+      '/images/run/clothing/dhb:image2.jpg',
+    ],
+    stock: 7,
+    size: [{ small: 3, medium: 0, large: 4 }],
+    reviews: [],
+    brand: 'dhb',
+    subcategory: 'Jackets',
+    category: 'run',
+    colour: 'Fluro Yellow',
+  },
+  {
+    name: 'OMM Halo Jacket',
+    price: 111,
+    description:
+      'The OMM Halo Jacket is an ultra-lightweight, waterproof mountain shell designed to protect you in harsh mountain weather conditions. Extremely packable it can also be stored for it the weather improves.',
+    images: [
+      '/images/run/clothing/OMM-Halo-Jacket-image1.jpg',
+      '/images/run/clothing/OMM-Halo-Jacket-image2.jpg',
+    ],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: 'OMM',
+    subcategory: 'Jackets',
+    category: 'run',
+    colour: 'Blue/Grey',
+  },
+  {
+    name: "Salomon Women's Lightning Waterproof Jacket",
+    price: 142,
+    description:
+      "You're into a demanding sport - be demanding with your gear. The Lightning Waterproof Jacket is the minimalist protective layer that ticks all your boxes for technical trails and more.",
+    images: [
+      '/images/run/clothing/Salomon-Women-s-Waterproof:image1.jpg',
+      '/images/run/clothing/Salomon-Women-s-Waterproof:image2.jpg',
+    ],
+    stock: 22,
+    size: [{ small: 5, medium: 3, large: 14 }],
+    reviews: [],
+    brand: 'Salomon',
+    subcategory: 'Jackets',
+    category: 'run',
+    colour: 'Meadowbrook',
+  },
+  // Running shoes
+  {
+    name: 'Hoka One One CARBON X 2 Running Shoe',
+    price: 157,
+    description:
+      'Equipped with a responsive carbon fibre plate and aggressive Meta-Rocker, the Carbon X 2 Running Shoes from Hoka One One is a high performance endurance racing shoe built for training and racing over long distances.',
+    images: [
+      '/images/run/footwear/Hoka:image1.jpg',
+      '/images/run/footwear/Hoka:image2.jpg',
+    ],
+    stock: 13,
+    size: [{ small: 2, medium: 7, large: 4 }],
+    reviews: [],
+    brand: 'Hoka',
+    subcategory: 'Running Shoes',
+    category: 'run',
+    colour: 'Peach',
+  },
+  {
+    name: 'Asics Gel-Nimbus 22 Running Shoes',
+    price: 108,
+    description:
+      'Comfortable and responsive over long distances, the Gel-Nimbus 22 Shoes from Asics are packed full of performance-enhancing features to deliver soft cushioning, excellent shock absorption and an energetic ride stride after stride.',
+    images: [
+      '/images/run/footwear/AsicsGel:image1.jpg',
+      '/images/run/footwear/AsicsGel:image2.jpg',
+    ],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: 'Hoka',
+    subcategory: 'Running Shoes',
+    category: 'run',
+    colour: 'LIGHT STEEL/MAGNETIC',
+  },
+  {
+    name: 'adidas Ultraboost 20 Running Shoes',
+    price: 95,
+    description:
+      'Take your performance into orbit with the Ultraboost 20 Running Shoes from adidas. Creating a partnership between adidas and the International Space Station (ISS) to take giant leaps in fit, comfort and responsiveness.',
+    images: ['/images/run/footwear/adidas-Ultraboost:image1.jpg'],
+    stock: 17,
+    size: [{ small: 3, medium: 4, large: 2 }],
+    reviews: [],
+    brand: 'Adidas',
+    subcategory: 'Running Shoes',
+    category: 'run',
+    colour: 'Black',
+  },
+  {
+    name: "Mizuno Women's Wave Inspire 17 Running Shoes",
+    price: 119,
+    description:
+      "Ideal for daily runs, the Women's Wave Inspire 17 Running Shoes from Mizuno are a lightweight, well cushioned and responsive road running shoe built for the runner in need of additional support and stability through the gait cycle.",
+    images: [
+      '/images/run/footwear/Mizuno:image1.jpg',
+      '/images/run/footwear/Mizuno:image2.jpg',
+    ],
+    stock: 5,
+    size: [{ small: 1, medium: 3, large: 1 }],
+    reviews: [],
+    brand: 'Mizuno',
+    subcategory: 'Running Shoes',
+    category: 'run',
+    colour: ' India Ink/Platinum G',
+  },
 ];
 
 export default products;
