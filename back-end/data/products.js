@@ -305,6 +305,102 @@ const products = [
     category: 'cycle',
     colour: 'White',
   },
+  {
+    name: 'Giro Cinder Road Helmet (MIPS)',
+    price: 67,
+    description:
+      'The Giro Cinder MIPS cycling helmet is heavy on features yet light in weight. With the innovative MIPS technology for added protection, the Cinder bike helmet provides high levels of protection to keep you safe on your bike.',
+    images: [
+      '/images/cycle/helmets/Giro-Cinder-MIPS-Helmet:image1.jpg',
+      '/images/cycle/helmets/Giro-Cinder-MIPS-Helmet:image2.jpg',
+    ],
+    stock: 23,
+    size: [{ small: 8, medium: 11, large: 2 }],
+    reviews: [],
+    brand: 'Giro',
+    subcategory: 'Helmets',
+    category: 'cycle',
+    colour: 'White',
+  },
+  {
+    name: 'Endura Hummvee Helmet',
+    price: 42,
+    description:
+      'The Endura Hummvee helmet is designed with MTB and urban cyclist in mind, offering up great value comfort and protection no matter what type of riding you do.',
+    images: ['/images/cycle/helmets/Endura-Hummvee-Helmet:image1.jpg'],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: 'Endura',
+    subcategory: 'Helmets',
+    category: 'cycle',
+    colour: 'Green',
+  },
+  // protection
+  {
+    name: 'POC Joint VPD Air Knee Pads',
+    price: 70,
+    description:
+      "The POC Joint VPD Air Knee Pads provide excellent protection without being too restrictive. If you're pushing yourself to the limit, these are the knee pads you can depend on.",
+    images: [
+      '/images/cycle/protection/POC-Joint-VPD-Air-Knee:image1.jpg',
+      '/images/cycle/protection/POC-Joint-VPD-Air-Knee:image2.jpg',
+    ],
+    stock: 7,
+    size: [{ small: 0, medium: 2, large: 5 }],
+    reviews: [],
+    brand: 'POC',
+    subcategory: 'Protection',
+    category: 'cycle',
+    colour: 'Black',
+  },
+  {
+    name: 'Respro Ultralight Anti Pollution Mask',
+    price: 40,
+    description:
+      'The Respro Ultralight Anti Pollution Mask is perfect for urban areas high in diesel particulates or hot, dusty conditions.',
+    images: [
+      '/images/cycle/protection/Respro-Ultralight-Anti-Pollution-Mask:image1.jpg',
+    ],
+    stock: 12,
+    size: [{ small: 2, medium: 10, large: 3 }],
+    reviews: [],
+    brand: 'Respro',
+    subcategory: 'Protection',
+    category: 'cycle',
+    colour: 'Black',
+  },
+  {
+    name: 'Dainese Trail Skins 2 Elbow Guards',
+    price: 40,
+    description:
+      "Dainese's Trail Skins 2 Elbow Guards are a great choice for enduro and downhill riders wanting protection when trails get rougher. The low profile design ensures arm movement is not restricted and the Pro Armour pads protect against injuries.",
+    images: ['/images/cycle/protection/Dainese:image1.jpg'],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: 'Dainese',
+    subcategory: 'Protection',
+    category: 'cycle',
+    colour: 'Black',
+  },
+  {
+    name: 'Fox Racing Titan Race Liner Shorts',
+    price: 58,
+    description:
+      'Add an extra layer of protection to your off-road ride with the Fox Racing Titan Race Liner. Ideal regardless of whether you compete or ride casually, these padded shorts are anatomically shaped and extremely comfortable.',
+    stock: 3,
+    images: [
+      '/images/cycle/protection/Fox-Racing-Titan-Race-Liner-Internal:image1.jpg',
+      '/images/cycle/protection/Fox-Racing-Titan-Race-Liner-Internal:image2.jpg',
+    ],
+    size: [{ small: 1, medium: 1, large: 1 }],
+    reviews: [],
+    brand: 'Fox',
+    subcategory: 'Protection',
+    category: 'cycle',
+    colour: 'Black',
+  },
 ];
 
 export default products;
