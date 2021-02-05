@@ -15,7 +15,11 @@ import Reviews from '../Components/UIelements/Reviews';
 
 /* Action creators */
 
-import { addToBasket, getProduct } from '../Actions/products';
+import {
+  addToBasket,
+  getProduct,
+  clearSelectedProduct,
+} from '../Actions/products';
 
 class Product extends Component {
   state = {
@@ -61,7 +65,6 @@ class Product extends Component {
     let { addProductToBasket } = this.props;
     /* Destructuring state from redux */
     let { images, price, _id, name } = this.props.product;
-    console.log(this.props);
 
     if (this.state.size !== '' && this.state.quantity !== 0) {
       let itemInfo = {
@@ -86,12 +89,17 @@ class Product extends Component {
     getProductFromServer(id);
   };
 
+  componentWillUnmount = () => {
+    this.props.clearProduct();
+  };
+
   render() {
     let { product } = this.props;
+    console.log(product.length);
     let { showBasketModal } = this.state;
     let dropdown = null;
 
-    if (product !== null) {
+    if (product.length !== 0) {
       let sizeKeys = Object.keys(product.size[0]);
       dropdown = (
         <>
@@ -109,10 +117,11 @@ class Product extends Component {
         </>
       );
     }
+    console.log(product);
 
     return (
       <>
-        {product !== null ? (
+        {product.length !== 0 ? (
           <div className={styles.product}>
             {showBasketModal && (
               <div className={styles.basketmodal}>
@@ -147,8 +156,9 @@ class Product extends Component {
               </span>
             </h2>
             <hr></hr>
-            <ProductImageCarousel images={product.images} />
-
+            {product.length !== 0 && (
+              <ProductImageCarousel images={product.images} />
+            )}
             <div className={styles.productinfo}>
               <div className={styles.column1}>
                 {' '}
@@ -233,6 +243,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addProductToBasket: (itemInfo) => dispatch(addToBasket(itemInfo)),
     getProductFromServer: (id) => dispatch(getProduct(id)),
+    clearProduct: () => dispatch(dispatch(clearSelectedProduct())),
   };
 };
 

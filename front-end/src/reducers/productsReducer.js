@@ -92,6 +92,8 @@ function productsReducer(state = initialState, action) {
       return { ...state, basket: newBasketCopy };
     case 'SUB_CAT_SELECTED':
       return { ...state, chosenSubCategory: action.subcat };
+    case 'CLEAR_SELECTED_PRODUCTS':
+      return { ...state, selectedProduct: [] };
     case 'ADD_TO_BASKET':
       let basketCopy = [...state.basket];
       basketCopy.push(action.itemInfo);

@@ -60,6 +60,10 @@ export const chosenProduct = (id) => {
   return { type: 'CHOSEN_PRODUCT', id };
 };
 
+export const clearSelectedProduct = () => {
+  return { type: 'CLEAR_SELECTED_PRODUCTS' };
+};
+
 export const addToBasket = (itemInfo) => {
   return { type: 'ADD_TO_BASKET', itemInfo };
 };

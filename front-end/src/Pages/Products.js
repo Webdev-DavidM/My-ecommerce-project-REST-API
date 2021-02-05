@@ -16,7 +16,11 @@ import ProductItem from '../Components/UIelements/ProductItem';
 import ProductFilters from '../Components/UIelements/ProductFilters';
 
 /* Action creators */
-import { getProducts, productBrands } from '../Actions/products.js';
+import {
+  getProducts,
+  productBrands,
+  clearSelectedProduct,
+} from '../Actions/products.js';
 
 class Products extends Component {
   state = {
@@ -24,10 +28,11 @@ class Products extends Component {
   };
 
   componentDidMount = () => {
-    let { getUserProducts, filterBrands } = this.props;
+    let { getUserProducts, filterBrands, clearSelected } = this.props;
     let { category, subcat } = this.props.match.params;
     let { products } = this.props;
     console.log(products);
+    clearSelected();
     getUserProducts(category);
     // This will filter the products via category and then create a list of brands which the brand filter can use to
     // populate buttons names
@@ -100,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserProducts: (category) => dispatch(getProducts(category)),
     filterBrands: (brands) => dispatch(productBrands(brands)),
+    clearSelected: () => dispatch(clearSelectedProduct()),
   };
 };
 

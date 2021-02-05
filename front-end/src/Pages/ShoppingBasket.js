@@ -22,6 +22,11 @@ class ShoppingBasket extends Component {
     // here we check if there is something in the basket which means the user has come
     // from the product screen, if so then add to local storage
     if (basket.length !== 0) {
+      let localStorageItems = Object.keys(localStorage);
+      console.log(localStorageItems);
+      localStorageItems.map((item) => {
+        return localStorage.removeItem(`${item}`);
+      });
       basket.map((item, index) => {
         return localStorage.setItem(`item${index}`, JSON.stringify(item));
       });
@@ -35,9 +40,9 @@ class ShoppingBasket extends Component {
     });
 
     if (basket.length === 0 && itemsFromLocalStorage)
-      // Here I will store the basket in local storage and reload if the user refreshes the page
+      // Here I will store the basket in local storage and reload if the user refreshes the page,
+      // I am mapping over the array and adding each item at a time which is what the reducer is expecting
       itemsFromLocalStorage.map((item) => addBasket(item));
-    console.log('items from storage', itemsFromLocalStorage);
   };
   render() {
     let { goBack, push } = this.props.history;
@@ -48,7 +53,9 @@ class ShoppingBasket extends Component {
         <h2>Your Shopping Basket</h2>
         <div className={styles.buttoncontainer}>
           {' '}
-          <button className={styles.buttonshopping} onClick={() => goBack()}>
+          <button
+            className={styles.buttonshopping}
+            onClick={() => this.props.history.push('/')}>
             Continue Shopping
           </button>
           <button
