@@ -674,6 +674,72 @@ const products = [
     category: 'run',
     colour: ' India Ink/Platinum G',
   },
+  // trail shoes
+  {
+    name: "Salomon Women's XA Pro 3D Running Shoes",
+    price: 84,
+    description:
+      "Providing stability to the overpronator on every type of terrain, the Women's XA Pro 3D Shoes from Salomon is an iconic running shoe that features expert grip, durability and fit for all of your outside adventures.",
+    images: ['/images/run/footwear/Salomon-Women-images1.jpg'],
+    stock: 19,
+    size: [{ small: 9, medium: 2, large: 8 }],
+    reviews: [],
+    brand: 'Salomon',
+    subcategory: 'Trail Shoes',
+    category: 'run',
+    colour: 'Black/Magnet/Aqua',
+  },
+  {
+    name: 'adidas Terrex Agravic Flow Gore-Tex Trail Shoes',
+    price: 125,
+    description:
+      'Combining premium waterproof protection with a snug sock-like fit, cushioned midsole and grippy Continental outsole, the adidas Terrex Agravic Flow Gore-Tex Trail Shoes let you take to the trail with confidence.',
+    images: [
+      '/images/run/footwear/adidas-Terrex-Agravic:image1.jpg',
+      '/images/run/footwear/adidas-Terrex-Agravic:image2.jpg',
+    ],
+    stock: 7,
+    size: [{ small: 2, medium: 2, large: 3 }],
+    reviews: [],
+    brand: 'Adidas',
+    subcategory: 'Trail Shoes',
+    category: 'run',
+    colour: 'Blue',
+  },
+  {
+    name: "Hoka One One Women's Speedgoat 4 Trail Running Shoe",
+    price: 80,
+    description:
+      "Paying tribute to Hoka athlete Karl 'Speedgoat' Meltzer, Hoka One One's Women's Speedgoat 4 Trail Running Shoes come from an award-winning collection for making quick work of technical, challenging terrain.",
+    images: [
+      '/images/run/footwear/hokawomen:image1.jpg',
+      '/images/run/footwear/hokawomen:image2.jpg',
+    ],
+    stock: 21,
+    size: [{ small: 7, medium: 7, large: 7 }],
+    reviews: [],
+    brand: 'Hoka',
+    subcategory: 'Trail Shoes',
+    category: 'run',
+    colour: 'Purple',
+  },
+  {
+    name: 'Asics GEL-Trabuco 9 Running Shoes',
+    price: 120,
+    description:
+      "Delivering protection, grip and durability, the Gel-Trabuco 9 Trail Running Shoes from Asics are perfect for the adventurous off-road runner. Even lighter than it's predecessor with a supportive fit, premium cushioning and advanced traction.",
+    images: [
+      '/images/run/footwear/Asicsimage1.jpg',
+      '/images/run/footwear/Asicsimage1.jpg',
+    ],
+    stock: 3,
+    size: [{ small: 1, medium: 0, large: 2 }],
+    reviews: [],
+    brand: 'Asics',
+    subcategory: 'Trail Shoes',
+    category: 'run',
+    colour: 'Black/yellow',
+  },
   // Swim
 
   // swimming shorts

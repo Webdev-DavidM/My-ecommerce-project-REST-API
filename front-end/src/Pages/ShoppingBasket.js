@@ -13,9 +13,31 @@ import CheckoutItem from '../Components/UIelements/CheckoutItem';
 
 /* Action creators */
 
+import { addToBasket } from '../Actions/products.js';
+
 class ShoppingBasket extends Component {
   componentDidMount = () => {
-    // I will get the items from redux here and put in state
+    let { basket, addBasket } = this.props;
+    console.log(basket);
+    // here we check if there is something in the basket which means the user has come
+    // from the product screen, if so then add to local storage
+    if (basket.length !== 0) {
+      basket.map((item, index) => {
+        return localStorage.setItem(`item${index}`, JSON.stringify(item));
+      });
+    }
+
+    // here we check if the page has been refreshed and there is nothing in the basket, if there
+    // is an item in local storage then dispatch it to be added to basket in redux so it can populate this screen
+    let localStorageItems = Object.keys(localStorage);
+    let itemsFromLocalStorage = localStorageItems.map((item) => {
+      return JSON.parse(localStorage.getItem(`${item}`));
+    });
+
+    if (basket.length === 0 && itemsFromLocalStorage)
+      // Here I will store the basket in local storage and reload if the user refreshes the page
+      itemsFromLocalStorage.map((item) => addBasket(item));
+    console.log('items from storage', itemsFromLocalStorage);
   };
   render() {
     let { goBack, push } = this.props.history;
@@ -83,4 +105,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ShoppingBasket);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addBasket: (item) => dispatch(addToBasket(item)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingBasket);

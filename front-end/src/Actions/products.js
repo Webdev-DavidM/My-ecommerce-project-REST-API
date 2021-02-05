@@ -15,6 +15,23 @@ export const getProducts = (category) => {
   };
 };
 
+export const getProduct = (id) => {
+  return async (dispatch) => {
+    dispatch({ type: 'PRODUCTS_REQUESTED' });
+    try {
+      let response = await axios(
+        `http://localhost:5000/products/product/${id}`
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+        dispatch({ type: 'PRODUCT_SUCCESS', product: response.data });
+      }
+    } catch (err) {
+      dispatch({ type: 'PRODUCTS_FAIL', error: err.response.data });
+    }
+  };
+};
+
 export const clearProducts = () => {
   return { type: 'CLEAR_PRODUCTS' };
 };

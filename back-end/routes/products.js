@@ -30,20 +30,20 @@ app.get('/:category', async (req, res) => {
   }
 });
 
-// Get one item from the document
+// Get one Product from the document
 
-// app.get('/bikes:id', async (req, res) => {
-//   try {
-//     let bike = await Bike.findOne({ _id: req.params._id });
-//     if (bike) {
-//       res.status(200).json(bikes).end();
-//     } else {
-//       res.status(401).json('no bike found').end();
-//     }
-//   } catch (err) {
-//     res.json(err);
-//   }
-// });
+app.get('/product/:id', async (req, res) => {
+  try {
+    let product = await Product.findOne({ _id: req.params.id });
+    if (product) {
+      res.status(200).json(product).end();
+    } else {
+      res.status(401).json('No product found').end();
+    }
+  } catch (err) {
+    res.json(err);
+  }
+});
 
 // // Post a new item to the document
 
