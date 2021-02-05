@@ -16,14 +16,15 @@ import Basket from './UIelements/Basket';
 import SearchBar from './UIelements/SearchBar';
 import DropDownMenu from './UIelements/DropDownMenu';
 import SideMenu from './UIelements/SideMenu';
+
+/*Action creators */
+
 import {
   selectedCategory,
   showDrop,
   showSide,
   showSubCategory,
 } from '../Actions/products.js';
-
-// As part of this navigation page I will have nested routing
 
 class NavBar extends Component {
   render() {
@@ -46,9 +47,9 @@ class NavBar extends Component {
                 color: '#ecf0f1',
                 margin: '0 auto 0 1rem',
               }}>
-              <i
+              {/* <i
                 className='fas fa-store'
-                style={{ width: '100%', height: '100%' }}></i>
+                style={{ width: '100%', height: '100%' }}></i> */}
             </div>
             <div
               className={styles.store}
@@ -71,9 +72,9 @@ class NavBar extends Component {
               ) : (
                 <Link to='/sign-in'>Sign in</Link>
               )}
-
-              <Link to='/admin'>Admin</Link>
-              <Link to='/stores'>Stores</Link>
+              {/* {Below are two features I will add later} */}
+              {/* <Link to='/admin'>Admin</Link>
+              <Link to='/stores'>Stores</Link> */}
             </div>
           </div>
         </div>
@@ -110,17 +111,6 @@ class NavBar extends Component {
             onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
             to='/swim'>
             SWIM
-          </Link>
-          <Link
-            onClick={() => {
-              showSubCat(false);
-              showDropDown(true);
-              showSideMenu(true);
-              chosenCategory('outdoors');
-            }}
-            onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
-            to='/outdoors'>
-            OUTDOORS
           </Link>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>

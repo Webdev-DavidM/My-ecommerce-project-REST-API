@@ -22,6 +22,11 @@ class MainCategory extends Component {
   };
 
   render() {
+    let { categories, products } = this.props;
+    let { category } = this.props.match.params;
+    let categoriesToShow = categories[category];
+    let categoryArray = Object.keys(categoriesToShow);
+
     return (
       <div className={styles.maincategory}>
         <ImageCarousel
@@ -32,51 +37,73 @@ class MainCategory extends Component {
             DM sports / <strong>Cycle</strong>
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor
-            doloribus fugiat ab nulla? Veniam expedita a perferendis optio, aut
-            assumenda saepe, eaque dicta atque sed minima officia beatae numquam
-            iste modi perspiciatis nemo sint nisi iusto quia voluptates
-            molestias ad? Iure labore nisi quas delectus tempora ipsa corrupti
+            {' '}
+            Welcome to one of the world’s best online bike shops. Offering sleek
+            road bikes, trail-taming MTBs, agile BMXs, and nimble commuter
+            bikes, our range of tuned and tested bikes is perfect for leisure or
+            professional competition. With the latest bike parts and components
+            from top brands, your bike will be in peak condition. Or choose from
+            incredible bike clothing from the likes of dhb, featuring this
+            season’s cycling shoes, jerseys, bib shorts and much more.
           </p>
         </div>
         <div className={styles.categorybody}>
           <aside>
-            <p>Bikes</p>
-            <hr></hr>
-            <ul>
-              <li>
-                <Link to=''>Road Bikes</Link>
-              </li>
-              <li>
-                <Link to=''>Mountain Bikes</Link>
-              </li>
-              <li>
-                <Link to=''>Hybrid bikes</Link>
-              </li>
-            </ul>
+            {categoryArray.map((section) => {
+              return (
+                <>
+                  <p className={styles.heading}>{section}</p>
+                  <hr></hr>
+                  <ul>
+                    {categoriesToShow[section].map((subcat) => {
+                      return (
+                        <li>
+                          <Link to={`/${category}/${section}/${subcat}`}>
+                            {subcat}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </>
+              );
+            })}
           </aside>
           <main>
+            {
+              // Here I will get the user products and map over them use the images for the interactive image gallery
+            }
             <div className={styles.category}>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
-                alt=''
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
-                alt=''
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
-                alt=''
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
-                alt=''
-              />
-              <img
-                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
-                alt=''
-              />
+              {categoryArray.map((section) => {
+                return (
+                  <>
+                    {categoriesToShow[section].map((subcat) => {
+                      let image = products.filter(
+                        (product) => product.subcategory === subcat
+                      );
+
+                      if (image.length !== 0) {
+                        image = image[0].images[0];
+                      }
+
+                      return (
+                        <div
+                          className={styles.imgcontainer}
+                          onClick={() =>
+                            this.props.history.push(
+                              `/${category}/${section}/${subcat}`
+                            )
+                          }>
+                          <img src={`http://localhost:5000/${image}`} alt='' />
+                          <div>
+                            <span>{subcat}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </>
+                );
+              })}
               <img
                 src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
                 alt=''
@@ -89,10 +116,18 @@ class MainCategory extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  // get the category names for the catgeoyr being dispayed
+  return {
+    categories: state.products.categories,
+    products: state.products.products,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getUserProducts: (category) => dispatch(getProducts(category)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(MainCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(MainCategory);

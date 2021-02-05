@@ -674,6 +674,246 @@ const products = [
     category: 'run',
     colour: ' India Ink/Platinum G',
   },
+  // Swim
+
+  // swimming shorts
+  {
+    name: 'Speedo Classic Aquashort',
+    price: 9,
+    description:
+      'Perfect for both fitness training or leisure swimming, the Classic Aquashort from Speedo offers a great fit and unrivalled comfort thanks to the adjustable drawcord waist and durable, chlorine-resistant fabric construction.',
+    images: [
+      '/images/swim/shorts/Speedo-Essentials-:image1.jpg',
+      '/images/swim/shorts/Speedo-Essentials-:image2.jpg',
+    ],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: 'Speedo',
+    subcategory: 'Swimming shorts',
+    category: 'swim',
+    colour: 'Red',
+  },
+  {
+    name: 'Speedo Essentials 16" Watershort',
+    price: 10,
+    description:
+      'Providing classic style and exceptional comfort, the Essentials 16 Watershort from Speedo are versatile swimming shorts ideal for a range of activities and perfect for anything from taking a dip in the pool or heading to the beach',
+    images: [
+      '/images/swim/shorts/Speedo-Classic-Aquashort:image1.jpg',
+      '/images/swim/shorts/Speedo-Classic-Aquashort:image2.jpg',
+    ],
+    stock: 7,
+    size: [{ small: 1, medium: 3, large: 3 }],
+    reviews: [],
+    brand: 'Speedo',
+    subcategory: 'Swimming shorts',
+    category: 'swim',
+    colour: 'Black',
+  },
+  {
+    name: 'Arena Daytrip Short',
+    price: 14,
+    description:
+      'Subtle style that lets your performance do the talking, the Daytrip Shorts from Arena are perfect for taking your swim to new places.',
+    images: [
+      '/images/swim/shorts/Arena:image1.jpeg',
+      '/images/swim/shorts/Arena:image2.jpeg',
+    ],
+    stock: 11,
+    size: [{ small: 2, medium: 7, large: 2 }],
+    reviews: [],
+    brand: 'Arena',
+    subcategory: 'Swimming shorts',
+    category: 'swim',
+    colour: 'Multi',
+  },
+  {
+    name: 'adidas Beach Women Short',
+    price: 12,
+    description:
+      "For active days at the beach, from a few sets of beach volleyball to summer walks with the dog or simply hanging out with friends, the adidas Women's Beach Shorts are the ideal choice.",
+    images: [
+      '/images/swim/shorts/adidas-Beach-Women-Short:image1.jpg',
+      '/images/swim/shorts/adidas-Beach-Women-Short:image2.jpg',
+    ],
+    stock: 31,
+    size: [{ small: 15, medium: 7, large: 9 }],
+    reviews: [],
+    brand: 'Adidas',
+    subcategory: 'Swimming shorts',
+    category: 'swim',
+    colour: 'Purple/Pink',
+  },
+  // swimming briefs
+  {
+    name: 'MP Rush Brief',
+    price: 10,
+    description:
+      "MP's Rush Brief ensures light, simple swimming with a 6cm length allowing for free moving, unrestricted movement.",
+    images: [
+      '/images/swim/shorts/TRAINING-SUIT_RUSH-MP_MEN:image1.jpg',
+      '/images/swim/shorts/TRAINING-SUIT_RUSH-MP_MEN:image2.jpg',
+    ],
+    stock: 3,
+    size: [{ small: 1, medium: 1, large: 1 }],
+    reviews: [],
+    brand: 'MP',
+    subcategory: 'Swimming briefs',
+    category: 'swim',
+    colour: 'Black',
+  },
+  {
+    name: 'Speedo Boom Splice Aquashort',
+    price: 7,
+    description:
+      "Whether heading to the pool or beach, the Speedo Boom Splice Aquashorts feature chlorine resistance and UPF 50+ sun protection so it's great indoors or out. An internal drawcord ensures the shorts stay put as you plunge into the water.",
+    images: [
+      '/images/swim/shorts/Speedo-Boom-Splice:image1.jpg',
+      '/images/swim/shorts/Speedo-Boom-Splice:image2.jpg',
+    ],
+    stock: 13,
+    size: [{ small: 3, medium: 3, large: 7 }],
+    reviews: [],
+    brand: 'Speedos',
+    subcategory: 'Swimming briefs',
+    category: 'swim',
+    colour: 'Black/red',
+  },
+
+  // swim suits- one piece
+  {
+    name: "Speedo Women's Electric Eclipse Placement Digital Rippleb",
+    price: 14,
+    description:
+      "Stand out on race day! This swimsuit's show-stopping print displays a powerful sky scene. The powerback style offers superb freedom of movement while competing, ensuring nothing holds you back in the pool.",
+    images: [
+      '/images/swim/swimsuits/Speedo-Women-s-Electric-Eclipse:image1.jpg',
+      '/images/swim/swimsuits/Speedo-Women-s-Electric-Eclipse:image2.jpg',
+    ],
+    stock: 14,
+    size: [{ small: 2, medium: 7, large: 5 }],
+    reviews: [],
+    brand: 'Speedos',
+    subcategory: 'One piece',
+    category: 'swim',
+    colour: 'Multi',
+  },
+  {
+    name: 'Zoggs Girls Cottesloe Sportsback Swimsuit',
+    price: 7,
+    description:
+      'A sporty looking swimsuit from Zoggs with a simple plain finish. Available in four colours, the Cottesloe is one of Zoggs core designs and offers a great fit, 100% chlorine proof fabric which has excellent colour and shape retention.',
+    images: [
+      '/images/swim/swimsuits/Zoggs-Girls-Cottesloe-Sportsback:image1.jpg',
+    ],
+    stock: 4,
+    size: [{ small: 1, medium: 2, large: 1 }],
+    reviews: [],
+    brand: 'Zoggs',
+    subcategory: 'One piece',
+    category: 'swim',
+    colour: 'Black',
+  },
+  {
+    name: "TYR Women's Vega Maxfit Swimsuit",
+    price: 18,
+    description:
+      'The Vega Maxfit is a top choice for swimmers wanting a supportive training suit. The thick straps, medium neckline and lined suit ensures excellent coverage and support during those grueling training drills',
+    images: [
+      '/images/swim/swimsuits/TYR-Women-s-Vega-Maxfit:image1.jpg',
+      '/images/swim/swimsuits/TYR-Women-s-Vega-Maxfit:image2.jpg',
+    ],
+    stock: 13,
+    size: [{ small: 2, medium: 2, large: 9 }],
+    reviews: [],
+    brand: 'TYR',
+    subcategory: 'One piece',
+    category: 'swim',
+    colour: 'Blue',
+  },
+  {
+    name: "Zoggs Women's Pop Block Scoopback",
+    price: 20,
+    description:
+      "A costume that looks just as great on a sun lounger as in the pool, the Women's Pop Block Scoopback offers vibrant style.",
+    images: [
+      '/images/swim/swimsuits/Zoggs-Women-s-Pop-Block-Scoopback:image1.jpg',
+      '/images/swim/swimsuits/Zoggs-Women-s-Pop-Block-Scoopback:image2.jpg',
+    ],
+    stock: 0,
+    size: [{ small: 0, medium: 0, large: 0 }],
+    reviews: [],
+    brand: 'Zoggs',
+    subcategory: 'One piece',
+    category: 'swim',
+    colour: 'Multi',
+  },
+  // swim suits- two piece
+  {
+    name: 'TYR Womens Wave Rider Trinity Top',
+    price: 12,
+    description:
+      "Up to 20 times stronger than standard swimwear, the Women's Wave Rider Trinity Top from TYR is the perfect addition to your competition or training swimming wardrobe.",
+    images: ['/images/swim/swimsuits/tyr:image1.jpeg'],
+    stock: 3,
+    size: [{ small: 1, medium: 1, large: 1 }],
+    reviews: [],
+    brand: 'TYR',
+    subcategory: 'Two piece',
+    category: 'swim',
+    colour: 'Multi',
+  },
+  {
+    name: "Speedo Women's Boomstar Allover Thinstrap 2 Piece",
+    price: 19,
+    description:
+      "Offering long-lasting durable wear with a stylish Boomstar print, the Women's Boomstar Allover Thinstrap Two-Piece Swimsuit from Speedo offers a great fit with light bust support and chlorine resistant fabric that holds shape over many sessions.",
+    images: [
+      '/images/swim/swimsuits/Speedo-Women-s-Boomstar:image1.jpg',
+      '/images/swim/swimsuits/Speedo-Women-s-Boomstar:image2.jpg',
+    ],
+    stock: 18,
+    size: [{ small: 2, medium: 5, large: 11 }],
+    reviews: [],
+    brand: 'Speedo',
+    subcategory: 'Two piece',
+    category: 'swim',
+    colour: 'Multi',
+  },
+  {
+    name: "Zone3 Women's Cosmic Two Piece Swimming Bikini",
+    price: 31,
+    description:
+      "The Zone3 Women's Cosmic Two Piece Swimming Bikini is a stylish swimming bikini with a bold cosmos design and bright green tailoring.",
+    images: [
+      '/images/swim/swimsuits/Zone3-Women-s-Cosmic-Two-Piece-Swimming-Bikini:image1.jpg',
+      '/images/swim/swimsuits/Zone3-Women-s-Cosmic-Two-Piece-Swimming-Bikini:image2.jpg',
+    ],
+    stock: 5,
+    size: [{ small: 2, medium: 1, large: 2 }],
+    reviews: [],
+    brand: 'Zone3',
+    subcategory: 'Two piece',
+    category: 'swim',
+    colour: 'Multi',
+  },
+  {
+    name: 'adidas Pro Collab Bikini',
+    price: 23,
+    description:
+      'Working closely with the Early Bird Swimmers to deliver in both the performance and style stakes, the Pro Collab Bikini from adidas proves what a difference working together can make.',
+    images: [
+      '/images/swim/swimsuits/DQ3298_APP_on-model_standard_white:image2.jpg',
+    ],
+    stock: 25,
+    size: [{ small: 2, medium: 1, large: 22 }],
+    reviews: [],
+    brand: 'Adidas',
+    subcategory: 'Two piece',
+    category: 'swim',
+    colour: 'Multi',
+  },
 ];
 
 export default products;

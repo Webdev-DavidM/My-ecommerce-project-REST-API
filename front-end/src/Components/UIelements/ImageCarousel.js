@@ -1,5 +1,11 @@
+/* NPM packages */
 import React, { Component } from 'react';
+
+/* css */
 import styles from './ImageCarousel.module.css';
+
+/* Components */
+
 import ShopButton from './ShopButton';
 
 export default class ImageCarousel extends Component {
@@ -9,16 +15,6 @@ export default class ImageCarousel extends Component {
     moveright: false,
     moveleft: false,
   };
-
-  moveRight() {
-    console.log('clicked');
-    this.setState({ moveright: true, moveleft: false });
-  }
-
-  moveLeft() {
-    console.log('clicked');
-    this.setState({ moveleft: true, moveright: false });
-  }
 
   componentDidMount = () => {
     this.setState({ moveleft: true });
@@ -52,7 +48,12 @@ export default class ImageCarousel extends Component {
                     <span>LATEST 2021 MODELS</span>
                   )}
 
-                  <ShopButton name='Shop Now' width='5rem' height='2rem' />
+                  <ShopButton
+                    url='/cycle/bikes/Road%20bikes'
+                    name='Shop Now'
+                    width='5rem'
+                    height='2rem'
+                  />
                 </span>
                 <img src={`${process.env.PUBLIC_URL}/images/${url}`} alt='' />
               </div>

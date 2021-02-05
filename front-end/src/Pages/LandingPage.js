@@ -1,5 +1,11 @@
+/* NPM packages */
 import React from 'react';
+
+/* CSS */
 import styles from './LandingPage.module.css';
+
+/* Components */
+
 import ShopButton from '../Components/UIelements/ShopButton';
 
 const LandingPage = () => {
@@ -28,13 +34,13 @@ const LandingPage = () => {
         NEXT DAY DELIVERY AND FREE RETURNS FOR ONLY &#127;{' '}
         <strong>£9.99</strong>
         <div>
-          <ShopButton url='/running' name='FIND OUT MORE' width='8rem' />
+          <ShopButton url='/running' name='SHOP NOW' width='8rem' />
         </div>
       </header>
       <div className={styles.running}>
         <img
           src={`${process.env.PUBLIC_URL}/images/running-montage.png`}
-          alt='man running and red running jacket'
+          alt='Man running and red running jacket'
         />
         <div className={styles.catdetailsrunning}>
           {' '}
@@ -63,17 +69,6 @@ const LandingPage = () => {
           {' '}
           <p>SWIM</p>
           <ShopButton url='/swimming' name='SHOP' />
-        </div>
-      </div>
-      <div className={styles.outdoor}>
-        <img
-          src={`${process.env.PUBLIC_URL}/images/outdoor-montage.png`}
-          alt='woman swimming and a swim suit'
-        />
-        <div className={styles.catdetailsoutdoor}>
-          {' '}
-          <p>OUTDOOR</p>
-          <ShopButton url='/outdoor' name='SHOP' />
         </div>
       </div>
     </div>

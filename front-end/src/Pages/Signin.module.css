@@ -40,6 +40,7 @@ input {
   margin: 1rem auto;
   border: 0;
   outline: none;
+  background-color: rgba(236, 240, 241, 1);
 }
 
 button {
