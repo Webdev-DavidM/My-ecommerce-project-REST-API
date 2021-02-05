@@ -100,9 +100,9 @@ class CheckoutItem extends Component {
             Total: £{price * this.state.quantity}
           </h2>
         </div>
-        {this.state.error && (
-          <span className={styles.error}>{this.state.error}</span>
-        )}
+        <div className={styles.error}>
+          {this.state.error && <span>{this.state.error}</span>}
+        </div>
       </div>
     );
   }

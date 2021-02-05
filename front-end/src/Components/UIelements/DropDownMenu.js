@@ -63,7 +63,6 @@ class DropDownMenu extends Component {
         <div className={styles.subcategories}>
           {showSubCategory
             ? categories[chosenCategory][chosenSubCategory].map((subCat) => (
-                // <div onClick={() => this.goToCategory(subCat)} key={subCat}>
                 <div>
                   <Link
                     to={`/${chosenCategory}/${chosenSubCategory}/${subCat}`}>
@@ -72,11 +71,6 @@ class DropDownMenu extends Component {
                 </div>
               ))
             : null}
-        </div>
-        <div className={styles.categoryImage}>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/fitness image.png`}
-            alt='fitness'></img>
         </div>
       </div>
     );

@@ -13,10 +13,11 @@ import styles from './MainCategory.module.css';
 import ImageCarousel from '../Components/UIelements/ImageCarousel';
 
 /* Action creators */
-import { getProducts } from '../Actions/products.js';
+import { getProducts, clearProducts } from '../Actions/products.js';
 
 class MainCategory extends Component {
   componentDidMount = () => {
+    this.props.clearOldProducts();
     let { category } = this.props.match.params;
     this.props.getUserProducts(category);
   };
@@ -26,26 +27,70 @@ class MainCategory extends Component {
     let { category } = this.props.match.params;
     let categoriesToShow = categories[category];
     let categoryArray = Object.keys(categoriesToShow);
+    let images = [];
+    if (category === 'cycle') {
+      images.push('cycle-slide1.jpg', 'cycle-slide2.png');
+    }
+    if (category === 'run') {
+      images.push('running-image1.jpg', 'AsicsGel:image1.jpg');
+    }
+    if (category === 'swim') {
+      images.push('swimming-image1.jpg', 'adidas-Beach-Women-Short:image1.jpg');
+    }
+
+    console.log(images);
 
     return (
       <div className={styles.maincategory}>
-        <ImageCarousel
-          url={`${process.env.PUBLIC_URL}/images/landing-page-main-image.jpg`}
-        />
+        <ImageCarousel url={images} cat={category} />
         <div className={styles.categoryheader}>
           <p>
-            DM sports / <strong>Cycle</strong>
+            DM sports / <strong>{category}</strong>
           </p>
-          <p>
-            {' '}
-            Welcome to one of the world’s best online bike shops. Offering sleek
-            road bikes, trail-taming MTBs, agile BMXs, and nimble commuter
-            bikes, our range of tuned and tested bikes is perfect for leisure or
-            professional competition. With the latest bike parts and components
-            from top brands, your bike will be in peak condition. Or choose from
-            incredible bike clothing from the likes of dhb, featuring this
-            season’s cycling shoes, jerseys, bib shorts and much more.
-          </p>
+
+          {category === 'cycle' && (
+            <p>
+              {' '}
+              Welcome to one of the worlds best online bike shops. Offering
+              sleek road bikes, trail-taming MTBs, agile BMXs, and nimble
+              commuter bikes, our range of tuned and tested bikes is perfect for
+              leisure or professional competition. With the latest bike parts
+              and components from top brands, your bike will be in peak
+              condition. Or choose from incredible bike clothing from the likes
+              of dhb, featuring this season’s cycling shoes, jerseys, bib shorts
+              and much more.'{' '}
+            </p>
+          )}
+          {category === 'run' && (
+            <p>
+              {' '}
+              DM sport’s online running shop has an incredible range of running
+              gear and accessories, featuring the best brands and latest
+              equipment for every kind of runner. Our running shoes span
+              pronation-specific running trainers, track shoes, trail shoes, and
+              more. For sports clothing, you’ll find this season’s latest
+              running clothes and compression wear from leading brands, all
+              replete with features and style. The range also sports the latest
+              GPS running watches and running tech such as top running lights.
+              Or browse our running accessories with running backpacks and
+              running bags, nutrition for runners, post run recovery ideas, and
+              a section dedicated to finding the perfect gift for runners.
+            </p>
+          )}
+          {category === 'swim' && (
+            <p>
+              {' '}
+              Immerse yourself in the most comprehensive range of swimwear and
+              swimming accessories you’ll find anywhere with DM sport's
+              dedicated swimshop. Dive into the vast range of mens and womens
+              swimming costumes, wetsuits, swimming shorts, and jammers, from
+              performance grade to club level, and including attractive leisure
+              options. From the latest swimming goggles - ranging from budget to
+              professional - to quality swim bags perfect for quick dips or
+              elite triathlon stages, DM sport’s choice of top brands and
+              exceptional prices makes it an essential stop for all things swim.
+            </p>
+          )}
         </div>
         <div className={styles.categorybody}>
           <aside>
@@ -84,6 +129,7 @@ class MainCategory extends Component {
 
                       if (image.length !== 0) {
                         image = image[0].images[0];
+                        console.log(image);
                       }
 
                       return (
@@ -104,10 +150,6 @@ class MainCategory extends Component {
                   </>
                 );
               })}
-              <img
-                src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
-                alt=''
-              />
             </div>
           </main>
         </div>
@@ -127,6 +169,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getUserProducts: (category) => dispatch(getProducts(category)),
+    clearOldProducts: () => dispatch(clearProducts()),
   };
 };
 

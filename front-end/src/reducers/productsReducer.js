@@ -43,8 +43,12 @@ function productsReducer(state = initialState, action) {
       console.log(productsCopyInStock);
       return { ...state, products: productsCopyInStock };
 
+    case 'CLEAR_PRODUCTS':
+      return { ...state, products: [] };
+
     case 'PRODUCTS_REQUESTED':
       return { ...state, loading: true };
+
     case 'FILTERED_BRANDS':
       console.log(action.brands);
       return { ...state, filteredBrands: action.brands };

@@ -24,6 +24,8 @@ import {
   showDrop,
   showSide,
   showSubCategory,
+  clearProducts,
+  getProducts,
 } from '../Actions/products.js';
 
 class NavBar extends Component {
@@ -32,7 +34,13 @@ class NavBar extends Component {
     let { showDrop, showSide, showSubCat, signedIn } = this.props;
 
     //Destructuring for mapDispatchToProps
-    let { chosenCategory, showDropDown, showSideMenu } = this.props;
+    let {
+      chosenCategory,
+      showDropDown,
+      showSideMenu,
+      clearProds,
+      getNewProducts,
+    } = this.props;
     return (
       <>
         <div>
@@ -85,6 +93,8 @@ class NavBar extends Component {
               showDropDown(true);
               showSideMenu(true);
               chosenCategory('cycle');
+              clearProds();
+              getNewProducts('cycle');
             }}
             onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
             to='/cycle'>
@@ -96,6 +106,8 @@ class NavBar extends Component {
               chosenCategory('run');
               showDropDown(true);
               showSideMenu(true);
+              clearProds();
+              getNewProducts('run');
             }}
             onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
             to='/run'>
@@ -107,6 +119,8 @@ class NavBar extends Component {
               showDropDown(true);
               showSideMenu(true);
               chosenCategory('swim');
+              clearProds();
+              getNewProducts('swim');
             }}
             onMouseLeave={() => this.props.mouseEnter && showDropDown(false)}
             to='/swim'>
@@ -162,6 +176,8 @@ const mapDispatchToProps = (dispatch) => {
     chosenCategory: (category) => dispatch(selectedCategory(category)),
     showDropDown: (bool) => dispatch(showDrop(bool)),
     showSideMenu: (bool) => dispatch(showSide(bool)),
+    clearProds: () => dispatch(clearProducts),
+    getNewProducts: (category) => dispatch(getProducts(category)),
   };
 };
 

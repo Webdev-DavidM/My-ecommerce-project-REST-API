@@ -15,6 +15,10 @@ export const getProducts = (category) => {
   };
 };
 
+export const clearProducts = () => {
+  return { type: 'CLEAR_PRODUCTS' };
+};
+
 export const selectedCategory = (category) => {
   return { type: 'CATEGORY_CHOSEN', category };
 };

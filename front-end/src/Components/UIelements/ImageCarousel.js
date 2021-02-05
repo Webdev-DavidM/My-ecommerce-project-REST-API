@@ -11,7 +11,6 @@ import ShopButton from './ShopButton';
 export default class ImageCarousel extends Component {
   state = {
     currentImageIndex: 0,
-    images: ['cycle-slide1.jpg', 'cycle-slide2.png'],
     moveright: false,
     moveleft: false,
   };
@@ -38,24 +37,17 @@ export default class ImageCarousel extends Component {
     return (
       <>
         <div className={`${styles.carousel} ${style}`}>
-          {this.state.images.map((url, index) => {
+          {this.props.url.map((image, index) => {
             return (
               <div key={index}>
                 <span>
                   {index === 0 ? (
-                    <span>BIKES</span>
+                    <span>{this.props.cat.toUpperCase()}</span>
                   ) : (
-                    <span>LATEST 2021 MODELS</span>
+                    <span>2021 RANGE IN STOCK</span>
                   )}
-
-                  <ShopButton
-                    url='/cycle/bikes/Road%20bikes'
-                    name='Shop Now'
-                    width='5rem'
-                    height='2rem'
-                  />
                 </span>
-                <img src={`${process.env.PUBLIC_URL}/images/${url}`} alt='' />
+                <img src={`${process.env.PUBLIC_URL}/images/${image}`} alt='' />
               </div>
             );
           })}
