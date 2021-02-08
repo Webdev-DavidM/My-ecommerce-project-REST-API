@@ -34,7 +34,6 @@
   flex-direction: column;
 }
 
-.ordersbtn,
 .orderbtn {
   margin: 0.5rem 0;
   width: 100%;
@@ -47,16 +46,9 @@
   color: white;
 }
 
-.returnbtn {
-  margin: 0.5rem 0;
-  width: 100%;
-  padding: 0;
-  height: 2.5rem;
-  background-color: #f39c12;
-  border-radius: 3px;
-  transition: all 1s;
-  border: none;
-  color: white;
+.orderbtn:hover {
+  cursor: pointer;
+  background-color: #e67e22;
 }
 
 @media only screen and (min-width: 768px) {
@@ -66,8 +58,9 @@
     justify-content: space-between;
   }
 
-  .ordersbtn {
-    width: 20%;
+  .orderbtn {
+    width: 10%;
+    margin: 0;
   }
 
   .logoutbtn {
@@ -92,7 +85,20 @@
 
   .ordersdetails span,
   .headingscontainer span {
-    width: 15%;
+    width: 20%;
+    padding: 1rem 0;
+    flex-direction: row;
+  }
+
+  .ordersdetails span:first-child,
+  .headingscontainer span:first-child {
+    width: 10%;
+    padding: 1rem 0;
+    flex-direction: row;
+  }
+  .ordersdetails span:nth-child(2),
+  .headingscontainer span:nth-child(2) {
+    width: 25%;
     padding: 1rem 0;
     flex-direction: row;
   }
@@ -100,14 +106,12 @@
   .lstbtn {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+
     align-items: center;
-    width: 40%;
+    width: 20%;
   }
 
-  .orderbtn,
-  .returnbtn {
+  .orderbtn {
     width: 48%;
-    margin: 0 0.5rem;
   }
 }

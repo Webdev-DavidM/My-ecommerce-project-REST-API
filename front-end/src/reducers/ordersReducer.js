@@ -11,6 +11,8 @@ function ordersReducer(state = initialState, action) {
       return { loading: true };
     case 'ORDER_SUCCESS':
       return { loading: false, showOrdersModal: true };
+    case 'ORDER_LIST_RECEIVED':
+      return { ...state, loading: false, orders: action.orders };
     case 'ORDER_FAIL':
       return { loading: false, showOrdersModal: true };
     case 'CLOSE_MODAL':

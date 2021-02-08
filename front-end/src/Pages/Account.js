@@ -1,47 +1,44 @@
+/*Npm packages */
 import React, { Component } from 'react';
-import styles from './Account.module.css';
 import Media from 'react-media';
+import { connect } from 'react-redux';
 
-export default class Account extends Component {
-  state = {
-    orders: [
-      {
-        Date: '24 august 2020',
-        Number: 253644444,
-        Total: 24.0,
-        Status: 'Delivered',
-      },
-      {
-        Date: '24 august 2020',
-        Number: 253644444,
-        Total: 24.0,
-        Status: 'Delivered',
-      },
-      {
-        Date: '24 august 2020',
-        Number: 253644444,
-        Total: 24.0,
-        Status: 'Delivered',
-      },
-    ],
-  };
+/* CSS */
+import styles from './Account.module.css';
 
+/* Action creators */
+
+import { getOrdersForUser } from '../Actions/orders.js';
+
+class Account extends Component {
   componentDidMount = () => {
-    // when the component mounts I will get the orders from redux or the server and then render them
+    let { getOrders } = this.props;
+    let user = JSON.parse(localStorage.getItem('userInfo'));
+    getOrders({ user: user.id, token: user.token });
   };
 
   render() {
+    let { orders, user } = this.props;
+
+    console.log(orders, user);
+
     return (
       <div className={styles.account}>
         <Media
           query='(min-width: 768px)'
           render={() => (
             <div className={styles.largerscreenbanner}>
-              <p>Welcome David | Your Account</p>
+              {user && (
+                <p>
+                  Welcome {user.firstName} {user.lastName} | Your Account
+                </p>
+              )}
+
               <button className={styles.logoutbtn}>Log out</button>
             </div>
           )}
         />
+
         <div className={styles.adminorderscontainer}>
           <h3>Your Recent orders</h3>
         </div>
@@ -72,30 +69,45 @@ export default class Account extends Component {
               </>
             )}
           />
-          {this.state.orders.map((order) => {
-            return (
-              <>
-                <div className={styles.ordersdetails}>
-                  <span>{order.Date}</span>
-                  <span style={{ color: '#2980b9' }}>{order.Number}</span>
-                  <span>{order.Total}</span>
-                  <span style={{ color: '#16a085' }}>{order.Status}</span>
-                  <div className={styles.lstbtn}>
-                    <button className={styles.returnbtn}>Leave a review</button>
-                    <button className={styles.orderbtn}>View your order</button>
+          {orders !== undefined &&
+            orders.length !== 0 &&
+            orders.map((order) => {
+              return (
+                <>
+                  <div className={styles.ordersdetails}>
+                    <span>{order.dateOfOrder.split(' ')[0]}</span>
+                    <span style={{ color: '#2980b9' }}>{order._id}</span>
+                    <span>Total cost: £{order.total}</span>
+                    <span style={{ color: '#16a085' }}>{order.status}</span>
+                    <div className={styles.lstbtn}>
+                      <button className={styles.orderbtn}>
+                        View your order
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div
-                  style={{
-                    borderTop: '1px solid #bdc3c7 ',
-                    marginLeft: 5,
-                    marginRight: 5,
-                  }}></div>
-              </>
-            );
-          })}
+                  <div
+                    style={{
+                      borderTop: '1px solid #bdc3c7 ',
+                      marginLeft: 5,
+                      marginRight: 5,
+                    }}></div>
+                </>
+              );
+            })}
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return { orders: state.orders.orders, user: state.user.user };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getOrders: (userInfo) => dispatch(getOrdersForUser(userInfo)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account);

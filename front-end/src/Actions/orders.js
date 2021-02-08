@@ -25,6 +25,29 @@ export const sendOrderToServer = (orderInfo) => {
   };
 };
 
+export const getOrdersForUser = ({ token, user }) => {
+  console.log(token, user);
+  return async (dispatch) => {
+    dispatch({ type: 'ORDER_SENT' });
+    try {
+      let response = await axios({
+        method: 'get',
+        url: `http://localhost:5000/orders/${user}`,
+        headers: {
+          token: token,
+        },
+      });
+      if (response.status === 200) {
+        console.log(response.data);
+        dispatch({ type: 'ORDER_LIST_RECEIVED', orders: response.data });
+      }
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: 'ORDER_FAIL', error: err });
+    }
+  };
+};
+
 export const closeModal = () => {
   return { type: 'CLOSE_MODAL' };
 };
