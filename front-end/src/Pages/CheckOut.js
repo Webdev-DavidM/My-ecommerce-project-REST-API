@@ -1,6 +1,7 @@
 /* NPM packages */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 /* CSS */
 import styles from './Checkout.module.css';
@@ -45,8 +46,8 @@ class Checkout extends Component {
 
   render() {
     let { firstName, lastName, address } = this.props.userDetails;
-    let { basket } = this.props;
-    console.log(basket);
+    let { basket, basketTotal } = this.props;
+    let total = basketTotal();
 
     return (
       <div className={styles.checkoutcontainer}>
@@ -78,25 +79,37 @@ class Checkout extends Component {
             {basket.map((item) => (
               <div className={styles.details}>
                 <div className={styles.imagecontainer}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/cycle-slide1.jpg`}
-                    alt=''
-                  />
+                  <img src={`http://localhost:5000/${item.images[0]}`} alt='' />
                 </div>
 
                 <div className={styles.itemdetails}>
-                  <span>{item.name}</span>
-                  <br />
-                  <span>Size:{item.size}</span>
-                  <br />
-                  <span>Price: £{item.price}</span>
-                  <br />
+                  <div style={{ width: '40%' }}>
+                    {' '}
+                    <span>{item.name}</span>
+                  </div>
+                  <div style={{ width: '20%' }}>
+                    {' '}
+                    <span>Size:&nbsp;{item.size}</span>
+                  </div>
+                  <div style={{ width: '15%' }}>
+                    {' '}
+                    <span>Quantity:&nbsp;{item.quantity}</span>
+                  </div>
+                  <div style={{ width: '15%' }}>
+                    {' '}
+                    <span>Price: £{item.price}</span>
+                  </div>
                 </div>
               </div>
             ))}
 
             <div className={styles.priceandquanity}></div>
-            <h3 className={styles.itemcost}>Total: £1999</h3>
+            <h3 className={styles.itemcost}>Total: £{total.Total}</h3>
+            <span
+              className={styles.orderbtn}
+              onClick={() => this.props.history.goBack()}>
+              Place order
+            </span>
           </div>
         </div>
       </div>
@@ -130,4 +143,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Checkout)
+);
