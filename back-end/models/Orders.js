@@ -10,18 +10,29 @@ const ordersSchema = new mongoose.Schema(
       required: [true, "Please provide a value for 'ObjectId'"],
     },
     dateOfOrder: {
-      type: Number,
+      type: String,
       required: [true, "Please provide a value for 'date'"],
     },
     // There is a product array so each product can be put in as
     // an object with a quantity.
     orderItems: [
       {
-        qty: { type: Number },
+        qty: {
+          type: Number,
+          required: [true, "Please provide a value for 'qty'"],
+        },
+        size: {
+          type: String,
+          required: [true, "Please provide a value for 'size'"],
+        },
         item: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Cycle',
+          ref: 'Product',
           required: [true, 'please provide a product i.d'],
+        },
+        price: {
+          type: Number,
+          required: [true, "Please provide a value for 'price'"],
         },
       },
     ],

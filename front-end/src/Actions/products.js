@@ -97,3 +97,7 @@ export const chosenBrand = (brand) => {
 export const deleteItemFromBasket = (id) => {
   return { type: 'DELETE_ITEM_FROM_BASKET', id };
 };
+
+export const emptyBasket = (id) => {
+  return { type: 'EMPTY_BASKET' };
+};

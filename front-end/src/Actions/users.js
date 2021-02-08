@@ -89,7 +89,7 @@ export const isTokenValid = () => {
       // has expired and other user info
       localStorage.removeItem('userInfo');
     } else {
-      user = true;
+      user = userInfo;
     }
     return user;
   }

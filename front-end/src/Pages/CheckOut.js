@@ -1,18 +1,23 @@
 /* NPM packages */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import date from 'date-and-time';
 
 /* CSS */
 import styles from './Checkout.module.css';
 
 /* Action creators */
 
-import { addToBasket } from '../Actions/products.js';
+import { addToBasket, emptyBasket } from '../Actions/products.js';
+import { sendOrderToServer, closeModal } from '../Actions/orders';
 
 class Checkout extends Component {
   componentDidMount = () => {
-    let { basket, addBasket } = this.props;
+    let { basket, addBasket, basketTotal } = this.props;
+
+    let total = basketTotal().Total;
+    console.log(total);
     // here we check if there is something in the basket which means the user has come
     // from the product screen, if so then add to local storage
     if (basket.length !== 0) {
@@ -44,13 +49,72 @@ class Checkout extends Component {
       });
   };
 
+  placeOrder = () => {
+    let { userDetails, basket, basketTotal, sendOrder } = this.props;
+    let total = basketTotal();
+    console.log(basket);
+    total = total.Total;
+    const now = new Date();
+    let formattedDate = date.format(now, 'YYYY/MM/DD HH:mm:ss');
+    // //Below I am getting the items from the basket and removing properties the server doesnt need before sending it
+    // let itemDetails = [...basket];
+    // console.log(itemDetails);
+
+    let order = {
+      date: formattedDate,
+      userId: userDetails.id,
+      orderItems: basket,
+      total: total,
+      status: 'ordered',
+      token: userDetails.token,
+    };
+    sendOrder(order);
+  };
+
+  closeModal = () => {
+    // This method will clear the basket and local storage, close the modal and then send the user back to the homepage
+    let { clearBasket, clearModal } = this.props;
+    clearBasket();
+    let localStorageItems = Object.keys(localStorage);
+    localStorageItems.map((key) => {
+      if (key !== 'userInfo') {
+        localStorage.removeItem(`${key}`);
+      }
+    });
+    clearModal();
+    this.props.history.push('/');
+  };
+
   render() {
     let { firstName, lastName, address } = this.props.userDetails;
-    let { basket, basketTotal } = this.props;
+    let { basket, basketTotal, showModal } = this.props;
     let total = basketTotal();
-
+    console.log(showModal);
     return (
       <div className={styles.checkoutcontainer}>
+        {this.props.showModal && (
+          <div className={styles.ordermodal}>
+            <div className={styles.basket}>
+              <h2>
+                {' '}
+                <i class='fas fa-check'></i>
+                &nbsp;Order confirmed!{' '}
+              </h2>
+              <button
+                onClick={() => this.closeModal()}
+                className={styles.continueshoppingbtn}>
+                Continue shopping
+              </button>
+
+              <Link
+                className={styles.checkoutbtn}
+                style={{ textDecoration: 'none', color: 'white' }}
+                to={'/orders'}>
+                View orders
+              </Link>
+            </div>
+          </div>
+        )}
         <h2>
           <span
             className={styles.gobackbtn}
@@ -105,9 +169,7 @@ class Checkout extends Component {
 
             <div className={styles.priceandquanity}></div>
             <h3 className={styles.itemcost}>Total: £{total.Total}</h3>
-            <span
-              className={styles.orderbtn}
-              onClick={() => this.props.history.goBack()}>
+            <span className={styles.orderbtn} onClick={() => this.placeOrder()}>
               Place order
             </span>
           </div>
@@ -120,6 +182,7 @@ class Checkout extends Component {
 const mapStateToProps = (state) => {
   return {
     userDetails: state.user.user,
+    showModal: state.orders.showOrdersModal,
     basket: state.products.basket,
     basketTotal: () => {
       let Total = 0;
@@ -140,6 +203,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addBasket: (item) => dispatch(addToBasket(item)),
+    sendOrder: (orderInfo) => dispatch(sendOrderToServer(orderInfo)),
+    clearBasket: () => dispatch(emptyBasket()),
+    clearModal: () => dispatch(closeModal()),
   };
 };
 

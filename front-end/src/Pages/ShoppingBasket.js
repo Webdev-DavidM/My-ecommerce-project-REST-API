@@ -69,6 +69,9 @@ class ShoppingBasket extends Component {
     return (
       <div className={styles.shoppingbasket}>
         <h2>Your Shopping Basket</h2>
+        {this.state.error !== '' && (
+          <div className={styles.error}>{this.state.error}</div>
+        )}
         <div className={styles.buttoncontainer}>
           {' '}
           <button
@@ -82,9 +85,7 @@ class ShoppingBasket extends Component {
             className={styles.buttoncheckout}>
             Proceed to checkout
           </button>
-          {this.state.error !== '' && (
-            <div className={styles.error}>{this.state.error}</div>
-          )}
+          <br />
         </div>
 
         {basket.map((item, index) => {

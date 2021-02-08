@@ -82,6 +82,8 @@ function productsReducer(state = initialState, action) {
       let updateBasketCopy = [...state.basket];
       updateBasketCopy[action.noPos].quantity = action.quantity;
       return { ...state, basket: updateBasketCopy };
+    case 'EMPTY_BASKET':
+      return { ...state, basket: [] };
     case 'DELETE_ITEM_FROM_BASKET':
       let newBasketCopy = [...state.basket];
       console.log(action.id);
