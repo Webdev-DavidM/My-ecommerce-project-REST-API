@@ -19,7 +19,7 @@ import './App.css';
 
 /* Action creators */
 
-import { isTokenValid } from './Actions/users.js';
+import { isTokenValid, userSignIn } from './Actions/users.js';
 
 // Here I am using lazy loading which is code splitting which will only loads components when needed and
 // hopefully should speed up my application
@@ -59,7 +59,9 @@ class App extends Component {
       // valid
     });
     let authenticatedUser = isTokenValid();
+
     if (authenticatedUser) {
+      this.setState({ signedIn: true });
       this.props.addAuthenticateduserToRedux(authenticatedUser);
     }
 
@@ -101,13 +103,31 @@ class App extends Component {
                 account button and dont have one} */}
                 <Route exact path='/sign-in' component={SignIn} />
                 <Route exact path='/sign-up/:email' component={SignUp} />
-                <Route exact path='/account'>
-                  {userSignedIn ? <Account /> : <Redirect to='/' />}
-                </Route>
+                <Route
+                  exact
+                  path='/account'
+                  render={() => {
+                    let authenticatedUser = isTokenValid();
+                    return authenticatedUser ? (
+                      <Account />
+                    ) : (
+                      <Redirect to='/' />
+                    );
+                  }}></Route>
                 <Route exact path='/admin'>
                   {adminUser ? <AdminProducts /> : <Redirect to='/' />}
                 </Route>
-                <Route exact path='/checkout' component={Checkout} />
+                <Route
+                  exact
+                  path='/check-out'
+                  render={() => {
+                    let authenticatedUser = isTokenValid();
+                    return authenticatedUser ? (
+                      <Checkout />
+                    ) : (
+                      <Redirect to='/' />
+                    );
+                  }}></Route>
                 <Route
                   exact
                   path='/admin/create-product'
@@ -126,7 +146,7 @@ class App extends Component {
                   component={AdminEditProduct}
                 />
                 <Route exact path='/order/:id'>
-                  {userSignedIn ? <OrderDetails /> : <Redirect to='/' />}
+                  {this.state.SignedIn ? <OrderDetails /> : <Redirect to='/' />}
                 </Route>
                 <Route exact path='/product/:id' component={Product} />
                 <Route

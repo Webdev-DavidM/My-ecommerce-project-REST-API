@@ -50,7 +50,7 @@ class SignIn extends Component {
     console.log(this.props.serverError);
     let { serverError, isSignedIn } = this.props;
     if (isSignedIn) {
-      this.props.history.push('/');
+      this.props.history.goBack();
     }
     let {
       password,

@@ -55,6 +55,7 @@ app.post('/register', async (req, res) => {
     res.status(201).json({
       email: user.email,
       id: user._id,
+      address,
       token,
       seconds,
       firstName,
@@ -73,6 +74,7 @@ app.post('/login', async (req, res) => {
   try {
     console.log('route hit');
     let user = await User.findOne({ email: req.body.email });
+    console.log(user);
     if (!user) {
       res.status(401).json('No user found');
     }
@@ -89,6 +91,7 @@ app.post('/login', async (req, res) => {
             id: user._id,
             token,
             seconds,
+            address: user.address,
             admin: false,
           });
         } else {

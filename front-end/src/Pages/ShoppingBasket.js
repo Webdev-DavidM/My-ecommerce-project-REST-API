@@ -16,6 +16,10 @@ import CheckoutItem from '../Components/UIelements/CheckoutItem';
 import { addToBasket } from '../Actions/products.js';
 
 class ShoppingBasket extends Component {
+  state = {
+    error: '',
+  };
+
   componentDidMount = () => {
     let { basket, addBasket } = this.props;
     // here we check if there is something in the basket which means the user has come
@@ -43,7 +47,20 @@ class ShoppingBasket extends Component {
     if (basket.length === 0 && itemsFromLocalStorage)
       // Here I will store the basket in local storage and reload if the user refreshes the page,
       // I am mapping over the array and adding each item at a time which is what the reducer is expecting
-      itemsFromLocalStorage.map((item) => addBasket(item));
+      itemsFromLocalStorage.map((item) => {
+        if (item['firstName'] === undefined) {
+          addBasket(item);
+        }
+      });
+  };
+
+  isUserSignedIn = () => {
+    let token = JSON.parse(localStorage.getItem('userInfo'));
+    if (!token) {
+      this.setState({ error: 'Please sign in or create an account to buy' });
+    } else {
+      this.props.history.push('check-out');
+    }
   };
   render() {
     let { goBack, push } = this.props.history;
@@ -61,10 +78,13 @@ class ShoppingBasket extends Component {
           </button>
           <button
             disabled={basket.length === 0}
-            onClick={() => push('/check-out')}
+            onClick={() => this.isUserSignedIn()}
             className={styles.buttoncheckout}>
             Proceed to checkout
           </button>
+          {this.state.error !== '' && (
+            <div className={styles.error}>{this.state.error}</div>
+          )}
         </div>
 
         {basket.map((item, index) => {
@@ -92,9 +112,12 @@ class ShoppingBasket extends Component {
         <button
           disabled={basket.length === 0}
           className={styles.buttoncheckout}
-          onClick={() => push('/check-out')}>
+          onClick={() => this.isUserSignedIn()}>
           Proceed to checkout
         </button>
+        {this.state.error !== '' && (
+          <div className={styles.error}>{this.state.error}</div>
+        )}
       </div>
     );
   }

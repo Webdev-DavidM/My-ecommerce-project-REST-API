@@ -4,7 +4,7 @@ const initialState = {
     lastName: null,
     id: null,
     token: '',
-    isAdmin: false,
+    isAdmin: null,
   },
   error: null,
   loading: false,

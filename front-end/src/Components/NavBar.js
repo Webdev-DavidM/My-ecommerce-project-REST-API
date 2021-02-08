@@ -1,7 +1,7 @@
 /* NPM packages */
 import Media from 'react-media';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 
@@ -60,8 +60,8 @@ class NavBar extends Component {
                 style={{ width: '100%', height: '100%' }}></i> */}
             </div>
             <div
-              className={styles.store}
-              onMouseEnter={() => showSide(true)}
+              className={styles.user}
+              onClick={() => this.props.history.push('sign-in')}
               style={{
                 width: '1.3rem',
                 height: '1.3rem',
@@ -181,4 +181,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));
