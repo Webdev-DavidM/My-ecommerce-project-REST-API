@@ -23,10 +23,16 @@ class CheckoutItem extends Component {
     this.setState({ quantity });
   };
 
+  removeItem = (id, localStorageKey) => {
+    this.props.deleteItem(id);
+    localStorage.removeItem(`${localStorageKey}`);
+  };
+
   adjustQuantity = (operator) => {
     let { updateBasket } = this.props;
     let { qtyOfSizeInStock } = this.props.details;
-    let { id } = this.props;
+    let { id, localStorageKey } = this.props;
+    console.log(localStorageKey);
     if (operator === '-') {
       if (this.state.quantity !== 0) {
         updateBasket(id, this.state.quantity - 1);
@@ -34,6 +40,14 @@ class CheckoutItem extends Component {
           quantity: prevState.quantity - 1,
           error: '',
         }));
+        let localStorageItem = JSON.parse(
+          localStorage.getItem(`${localStorageKey}`)
+        );
+        localStorageItem['quantity'] = this.state.quantity - 1;
+        localStorage.setItem(
+          `${localStorageKey}`,
+          JSON.stringify(localStorageItem)
+        );
       } else {
         this.setState({ error: 'Nothing in basket' });
       }
@@ -45,6 +59,14 @@ class CheckoutItem extends Component {
           quantity: prevState.quantity + 1,
           error: '',
         }));
+        let localStorageItem = JSON.parse(
+          localStorage.getItem(`${localStorageKey}`)
+        );
+        localStorageItem['quantity'] = this.state.quantity + 1;
+        localStorage.setItem(
+          `${localStorageKey}`,
+          JSON.stringify(localStorageItem)
+        );
       } else {
         this.setState({
           error: `Maximum quantity available`,
@@ -57,7 +79,7 @@ class CheckoutItem extends Component {
     console.log(this.props.details);
     let { name, images, price, size, id } = this.props.details;
 
-    let { deleteItem } = this.props;
+    let { localStorageKey } = this.props;
 
     return (
       <div className={styles.itemcontainer}>
@@ -92,7 +114,9 @@ class CheckoutItem extends Component {
               +
             </button>
           </div>
-          <button className={styles.bin} onClick={() => deleteItem(id)}>
+          <button
+            className={styles.bin}
+            onClick={() => this.removeItem(id, localStorageKey)}>
             <i class='fa fa-trash' aria-hidden='true'></i>
           </button>
 

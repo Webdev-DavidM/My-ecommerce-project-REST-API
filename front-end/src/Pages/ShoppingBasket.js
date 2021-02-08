@@ -18,14 +18,15 @@ import { addToBasket } from '../Actions/products.js';
 class ShoppingBasket extends Component {
   componentDidMount = () => {
     let { basket, addBasket } = this.props;
-    console.log(basket);
     // here we check if there is something in the basket which means the user has come
     // from the product screen, if so then add to local storage
     if (basket.length !== 0) {
       let localStorageItems = Object.keys(localStorage);
       console.log(localStorageItems);
       localStorageItems.map((item) => {
-        return localStorage.removeItem(`${item}`);
+        if (item !== 'userInfo') {
+          return localStorage.removeItem(`${item}`);
+        }
       });
       basket.map((item, index) => {
         return localStorage.setItem(`item${index}`, JSON.stringify(item));
@@ -67,12 +68,19 @@ class ShoppingBasket extends Component {
         </div>
 
         {basket.map((item, index) => {
-          return (
-            <>
-              <CheckoutItem details={item} key={index} id={index} />
-              <hr></hr>
-            </>
-          );
+          if (!item.token) {
+            return (
+              <>
+                <CheckoutItem
+                  details={item}
+                  key={index}
+                  id={index}
+                  localStorageKey={`item${index}`}
+                />
+                <hr></hr>
+              </>
+            );
+          }
         })}
         {basket.length === 0 && (
           <h2 style={{ color: '#e74c3c' }}>Basket empty </h2>
