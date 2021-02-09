@@ -21,6 +21,10 @@ const ordersSchema = new mongoose.Schema(
           type: Number,
           required: [true, "Please provide a value for 'qty'"],
         },
+        name: {
+          type: String,
+          required: [true, "Please provide a value for 'name'"],
+        },
         size: {
           type: String,
           required: [true, "Please provide a value for 'size'"],
