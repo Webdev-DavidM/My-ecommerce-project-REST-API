@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Media from 'react-media';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 /* CSS */
 import styles from './Account.module.css';
@@ -19,8 +20,6 @@ class Account extends Component {
 
   render() {
     let { orders, user } = this.props;
-
-    console.log(orders, user);
 
     return (
       <div className={styles.account}>
@@ -80,7 +79,11 @@ class Account extends Component {
                     <span>Total cost: £{order.total}</span>
                     <span style={{ color: '#16a085' }}>{order.status}</span>
                     <div className={styles.lstbtn}>
-                      <button className={styles.orderbtn}>
+                      <button
+                        onClick={() =>
+                          this.props.history.push(`/order/${order._id}`)
+                        }
+                        className={styles.orderbtn}>
                         View your order
                       </button>
                     </div>
@@ -110,4 +113,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Account);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Account)
+);

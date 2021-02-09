@@ -12,13 +12,13 @@ import User from '../models/User.js';
 // ID of the order
 
 app.get('/order/:orderId', jwtVerify, async (req, res) => {
+  console.log('route hit');
   let { userid } = req.headers;
   const { orderId } = req.params;
 
   try {
-    let order = await Orders.find({ _id: orderId });
-    let user = order[0].user;
-    if (userid != user) {
+    let order = await Orders.find({ _id: orderId }).populate('user');
+    if (userid != order[0].user._id) {
       return res.status(401).json('unauthorised to view order');
     }
     if (order) {
@@ -61,7 +61,6 @@ app.post('/new-order', jwtVerify, async (req, res) => {
     delete item.quantity;
     return item;
   });
-  console.log(orders);
 
   let order = new Orders({
     user: idConverted,

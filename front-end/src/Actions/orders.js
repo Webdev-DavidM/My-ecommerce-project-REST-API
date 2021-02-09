@@ -25,8 +25,32 @@ export const sendOrderToServer = (orderInfo) => {
   };
 };
 
+export const getIndividualOrder = (orderId) => {
+  return async (dispatch) => {
+    let userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+    dispatch({ type: 'ORDER_SENT' });
+    try {
+      let response = await axios({
+        method: 'get',
+        url: `http://localhost:5000/orders/order/${orderId}`,
+
+        headers: {
+          token: userInfo.token,
+          userId: userInfo.id,
+        },
+      });
+      if (response.status === 200) {
+        console.log(response.data);
+        dispatch({ type: 'INDIVDUAL_ORDER_SUCCESS', order: response.data });
+      }
+    } catch (err) {
+      dispatch({ type: 'ORDER_FAIL', error: err.response.data });
+    }
+  };
+};
+
 export const getOrdersForUser = ({ token, user }) => {
-  console.log(token, user);
   return async (dispatch) => {
     dispatch({ type: 'ORDER_SENT' });
     try {
@@ -38,7 +62,6 @@ export const getOrdersForUser = ({ token, user }) => {
         },
       });
       if (response.status === 200) {
-        console.log(response.data);
         dispatch({ type: 'ORDER_LIST_RECEIVED', orders: response.data });
       }
     } catch (err) {

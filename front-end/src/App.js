@@ -113,7 +113,8 @@ class App extends Component {
                     ) : (
                       <Redirect to='/' />
                     );
-                  }}></Route>
+                  }}
+                />
                 <Route exact path='/admin'>
                   {adminUser ? <AdminProducts /> : <Redirect to='/' />}
                 </Route>
@@ -145,9 +146,18 @@ class App extends Component {
                   path='/admin/product/id'
                   component={AdminEditProduct}
                 />
-                <Route exact path='/order/:id'>
-                  {this.state.SignedIn ? <OrderDetails /> : <Redirect to='/' />}
-                </Route>
+                <Route
+                  exact
+                  path='/order/:id'
+                  render={() => {
+                    let authenticatedUser = isTokenValid();
+                    return authenticatedUser ? (
+                      <OrderDetails />
+                    ) : (
+                      <Redirect to='/' />
+                    );
+                  }}
+                />
                 <Route exact path='/product/:id' component={Product} />
                 <Route
                   exact
