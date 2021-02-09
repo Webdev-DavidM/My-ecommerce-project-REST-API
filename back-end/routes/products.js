@@ -45,6 +45,37 @@ app.get('/product/:id', async (req, res) => {
   }
 });
 
+// POST route- this will post a review to a product, this route doesnt require
+// JWT verification as the user must have been verified on the front end to be accessing
+// their
+
+app.post('/review/:productId', async (req, res) => {
+  let review = req.body;
+  let { productId } = req.params;
+  console.log(review.userId);
+
+  try {
+    let product = await Product.findOne({ _id: productId });
+    let duplicateReview = product.reviews.filter(
+      (reviewInDatabase) => reviewInDatabase.userId === review.userId
+    );
+
+    if (product) {
+      if (duplicateReview.length === 0) {
+        product.reviews.push(review);
+        await product.save();
+        return res.status(200).json(product).end();
+      } else {
+        res.status(406).json('You have reviewed this product already').end();
+      }
+    } else {
+      res.status(401).json('No product found').end();
+    }
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 // // Post a new item to the document
 
 // app.post('/bikes:id', async (req, res) => {
