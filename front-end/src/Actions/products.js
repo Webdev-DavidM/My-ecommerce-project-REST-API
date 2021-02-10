@@ -104,8 +104,35 @@ export const updateToBasket = (noPos, quantity) => {
   return { type: 'UPDATE_BASKET', noPos, quantity };
 };
 
-export const sortByBestReviews = () => {
-  return { type: 'FILTER_BEST_REVIEWS' };
+export const clearReviewsFilter = (products) => {
+  return { type: 'CLEAR_REVIEW_FILTER', products };
+};
+
+export const sortByBestReviews = (products) => {
+  // Here I will check each products for reviews and give them an average review rating, products with no review
+  // will receive a rating of 0, this will allow me to filter the best products if the user wants this to happen
+  // via the bets reviews filter on the products screen
+  let addRatingToProducts = products.map((product) => {
+    if (product.reviews.length === 0) {
+      return { ...product, rating: 0 };
+    }
+    if (product.reviews.length === 1) {
+      return { ...product, rating: 1 };
+    } else {
+      let length = product.reviews.length;
+      let average = product.reviews.reduce((a, b) => {
+        return a.rating + b.rating;
+      });
+      return { ...product, rating: average / length };
+    }
+  });
+
+  //This will sort the products which now having rating into order from top to bottom
+  let sortedProductsByRating = addRatingToProducts.sort((a, b) => {
+    return a.rating < b.rating ? 1 : -1;
+  });
+
+  return { type: 'SORT_BY_BEST_REVIEWS', products: sortedProductsByRating };
 };
 
 export const sortViaPriceRange = (lower, higher) => {

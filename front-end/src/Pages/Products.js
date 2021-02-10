@@ -93,7 +93,10 @@ class Products extends Component {
           />
         </div>
 
-        <Media query='(min-width: 768px)' render={() => <ProductFilters />} />
+        <Media
+          query='(min-width: 768px)'
+          render={() => <ProductFilters products={products} />}
+        />
 
         <div className={styles.productitems}>{productsToDisplay}</div>
       </>

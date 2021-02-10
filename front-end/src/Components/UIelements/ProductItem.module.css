@@ -31,6 +31,13 @@
   font-size: 1rem;
 }
 
+.reviews {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin: auto;
+}
+
 .outofstockdiv {
   width: 100%;
   height: 30px;
@@ -50,6 +57,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 }
 
 .productdetails p {
@@ -75,10 +83,11 @@
     display: block;
   }
 
-  .productitem div {
-    width: 50%;
+  .productitem > div {
+    width: 40%;
     display: flex;
     overflow: hidden;
+    margin: auto;
   }
 }
 

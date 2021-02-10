@@ -3,8 +3,10 @@ import styles from './ProductItem.module.css';
 import { Link } from 'react-router-dom';
 import { noAuto } from '@fortawesome/fontawesome-svg-core';
 
+import Reviews from '../UIelements/Reviews.js';
+
 const ProductItem = (props) => {
-  let { images, _id, name, price, stock } = props.details;
+  let { images, _id, name, price, stock, reviews } = props.details;
   let mainImage = images[0];
   return (
     <div className={styles.productitem}>
@@ -20,7 +22,7 @@ const ProductItem = (props) => {
             <p className={styles.name}>{name}</p>
           </Link>
           <p className={styles.price}>£{price}</p>
-          <p className={styles.reviews}>reviews will go here</p>
+
           {stock === 0 && (
             <h2 className={styles.outofstock}>Sorry out of stock</h2>
           )}

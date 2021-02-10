@@ -69,10 +69,15 @@ function productsReducer(state = initialState, action) {
       console.log(action.brands);
       return { ...state, filteredBrands: action.brands };
     case 'PRODUCTS_SUCCESS':
-      console.log(action.products);
       return { ...state, products: action.products, loading: false };
     case 'PRODUCT_SUCCESS':
       return { ...state, selectedProduct: action.product, loading: false };
+
+    case 'SORT_BY_BEST_REVIEWS':
+      return { ...state, products: action.products };
+    case 'CLEAR_REVIEW_FILTER':
+      return { ...state, products: action.products };
+
     case 'PRODUCTS_FAIL':
       return { ...state, error: action.error, loading: false };
     case 'CHOSEN_BRAND':

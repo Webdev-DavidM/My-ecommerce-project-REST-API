@@ -6,7 +6,8 @@ import PriceRangeFilter from '../UIelements/Filters/PriceRangeFilter';
 import StockFilter from '../UIelements/Filters/StockFilter';
 import BrandFilter from '../UIelements/Filters/BrandFilter';
 
-const ProductFilters = () => {
+const ProductFilters = (props) => {
+  let { products } = props;
   return (
     <div className={styles.filters}>
       <CustomerReviewFilter />

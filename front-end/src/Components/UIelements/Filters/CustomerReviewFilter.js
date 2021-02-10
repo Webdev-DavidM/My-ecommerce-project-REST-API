@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { withRouter } from 'react-router-dom';
 
 /* CSS */
 
@@ -10,7 +11,7 @@ import styles from './CustomerReview.module.css';
 
 /* Action creators */
 
-import { sortByBestReviews } from '../../../Actions/products';
+import { sortByBestReviews, getProducts } from '../../../Actions/products';
 
 class CustomerReviewFilter extends Component {
   state = {
@@ -47,7 +48,7 @@ class CustomerReviewFilter extends Component {
                 ? { backgroundColor: '#f1c40f' }
                 : null
             }
-            onClick={() => bestReviews()}
+            onClick={() => bestReviews(this.props.products)}
           />
           <span>&nbsp;&nbsp;&nbsp;{category}</span>
           <br />
@@ -72,7 +73,14 @@ class CustomerReviewFilter extends Component {
           </div>
           <div className={`${styles.dropdowncontent} ${dropdownClicked}`}>
             {buttons}
-            <button className={styles.resetbest}> Reset</button>
+            <button
+              onClick={() =>
+                this.props.clearFilter(this.props.match.params.category)
+              }
+              className={styles.resetbest}>
+              {' '}
+              Reset
+            </button>
           </div>
         </div>
       </>
@@ -82,8 +90,15 @@ class CustomerReviewFilter extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    bestReviews: () => dispatch(sortByBestReviews()),
+    bestReviews: (products) => dispatch(sortByBestReviews(products)),
+    clearFilter: (category) => dispatch(getProducts(category)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(CustomerReviewFilter);
+const mapStateToProps = (state) => {
+  return { products: state.products.products };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CustomerReviewFilter)
+);
