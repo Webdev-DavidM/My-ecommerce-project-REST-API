@@ -86,6 +86,7 @@ class Product extends Component {
   componentDidMount = () => {
     let { getProductFromServer } = this.props;
     let { id } = this.props.match.params;
+    console.log(id);
     getProductFromServer(id);
   };
 
@@ -95,9 +96,10 @@ class Product extends Component {
 
   render() {
     let { product } = this.props;
-    console.log(product.length);
+
     let { showBasketModal } = this.state;
     let dropdown = null;
+    console.log(product);
 
     if (product.length !== 0) {
       let sizeKeys = Object.keys(product.size[0]);
@@ -121,7 +123,7 @@ class Product extends Component {
 
     return (
       <>
-        {product.length !== 0 ? (
+        {product ? (
           <div className={styles.product}>
             {showBasketModal && (
               <div className={styles.basketmodal}>
@@ -147,7 +149,11 @@ class Product extends Component {
               </div>
             )}
             <p className='{styles.title}'></p>
-            <Reviews />
+
+            {product.length !== 0 && product.reviews.length !== 0 && (
+              <Reviews reviews={product.reviews} />
+            )}
+
             <h2>
               <span
                 className={styles.gobackbtn}

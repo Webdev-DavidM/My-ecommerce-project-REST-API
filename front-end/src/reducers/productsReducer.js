@@ -6,7 +6,7 @@ const initialState = {
   chosenCategory: 'cycle',
   showSubCategory: false,
   chosenSubCategory: 'bikes',
-  selectedProduct: null,
+  selectedProduct: [],
   basket: [],
   basketValue: 0,
   filteredBrands: [],

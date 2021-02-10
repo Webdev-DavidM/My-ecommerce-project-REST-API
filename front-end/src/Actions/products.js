@@ -27,7 +27,8 @@ export const getProduct = (id) => {
         dispatch({ type: 'PRODUCT_SUCCESS', product: response.data });
       }
     } catch (err) {
-      dispatch({ type: 'PRODUCTS_FAIL', error: err.response.data });
+      console.log(err);
+      // dispatch({ type: 'PRODUCTS_FAIL', error: err.response.data });
     }
   };
 };
