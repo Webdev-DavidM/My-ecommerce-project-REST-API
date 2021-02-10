@@ -104,10 +104,6 @@ export const updateToBasket = (noPos, quantity) => {
   return { type: 'UPDATE_BASKET', noPos, quantity };
 };
 
-export const clearReviewsFilter = (products) => {
-  return { type: 'CLEAR_REVIEW_FILTER', products };
-};
-
 export const sortByBestReviews = (products) => {
   // Here I will check each products for reviews and give them an average review rating, products with no review
   // will receive a rating of 0, this will allow me to filter the best products if the user wants this to happen
