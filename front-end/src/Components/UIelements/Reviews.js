@@ -22,6 +22,7 @@ class Reviews extends Component {
 
   render() {
     let { reviews } = this.props;
+
     return (
       <div
         className={styles.reviewcontainer}

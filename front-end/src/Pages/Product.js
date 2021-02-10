@@ -149,9 +149,9 @@ class Product extends Component {
               </div>
             )}
             <p className='{styles.title}'></p>
-
-            {product.length !== 0 && <Reviews reviews={product.reviews} />}
-
+            {product.length !== 0 && product.reviews.length !== 0 ? (
+              <Reviews reviews={product.reviews} />
+            ) : null}
             <h2>
               <span
                 className={styles.gobackbtn}
