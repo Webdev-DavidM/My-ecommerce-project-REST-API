@@ -16,6 +16,7 @@ import { sortByBestReviews, getProducts } from '../../../Actions/products';
 class CustomerReviewFilter extends Component {
   state = {
     menu: false,
+    categories: ['Best Customer reviews'],
     selectedDropDown: '',
   };
 
@@ -29,16 +30,6 @@ class CustomerReviewFilter extends Component {
     this.props.mobile && this.setState({ menu: true });
   };
 
-  filterSelected = () => {
-    this.setState({ selectedDropDown: true });
-    this.props.bestReviews(this.props.products);
-  };
-
-  reset = () => {
-    this.setState({ selectedDropDown: false });
-    this.props.clearFilter(this.props.match.params.category);
-  };
-
   render() {
     let dropdownClicked =
       this.state.menu || this.props.showDropDown
@@ -46,6 +37,24 @@ class CustomerReviewFilter extends Component {
         : null;
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
     let { bestReviews } = this.props;
+    let buttons = this.state.categories.map((category, index) => {
+      return (
+        <div key={index}>
+          <button
+            className={styles.inputbtn}
+            name={category}
+            style={
+              this.state.selectedDropDown === category
+                ? { backgroundColor: '#f1c40f' }
+                : null
+            }
+            onClick={() => bestReviews(this.props.products)}
+          />
+          <span>&nbsp;&nbsp;&nbsp;{category}</span>
+          <br />
+        </div>
+      );
+    });
 
     return (
       <>
@@ -63,20 +72,12 @@ class CustomerReviewFilter extends Component {
             )}
           </div>
           <div className={`${styles.dropdowncontent} ${dropdownClicked}`}>
-            <div>
-              <button
-                className={styles.inputbtn}
-                style={
-                  this.state.selectedDropDown
-                    ? { backgroundColor: '#f1c40f' }
-                    : null
-                }
-                onClick={() => this.filterSelected()}
-              />
-              <span>&nbsp;&nbsp;&nbsp;Customer reviews</span>
-              <br />
-            </div>
-            <button onClick={() => this.reset()} className={styles.resetbest}>
+            {buttons}
+            <button
+              onClick={() =>
+                this.props.clearFilter(this.props.match.params.category)
+              }
+              className={styles.resetbest}>
               {' '}
               Reset
             </button>
