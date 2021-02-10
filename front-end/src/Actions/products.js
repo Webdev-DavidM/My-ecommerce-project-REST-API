@@ -32,8 +32,38 @@ export const getProduct = (id) => {
   };
 };
 
+// I have used the rest operator below so I can separate the productId and the rest of the
+// data which needs to be sent in the body //
+
+export const submitReview = ({ productId, ...data }) => {
+  return async (dispatch) => {
+    dispatch({ type: 'REVIEW_SENT' });
+    try {
+      let response = await axios({
+        method: 'post',
+        url: `http://localhost:5000/products/review/${productId}`,
+        data: {
+          data,
+        },
+      });
+      if (response.status === 200) {
+        console.log(response.data);
+        dispatch({ type: 'REVIEW_SUCCESS', product: response.data });
+      }
+    } catch (err) {
+      console.log(err.response.data);
+
+      dispatch({ type: 'REVIEW_FAIL', error: err.response.data.error });
+    }
+  };
+};
+
 export const clearProducts = () => {
   return { type: 'CLEAR_PRODUCTS' };
+};
+
+export const clearReviewStatus = () => {
+  return { type: 'CLEAR_REVIEW_STATUS' };
 };
 
 export const selectedCategory = (category) => {

@@ -62,6 +62,7 @@ export const getOrdersForUser = ({ token, user }) => {
         },
       });
       if (response.status === 200) {
+        console.log(response.data);
         dispatch({ type: 'ORDER_LIST_RECEIVED', orders: response.data });
       }
     } catch (err) {

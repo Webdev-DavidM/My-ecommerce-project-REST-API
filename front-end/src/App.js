@@ -61,7 +61,6 @@ class App extends Component {
     let authenticatedUser = isTokenValid();
 
     if (authenticatedUser) {
-      this.setState({ signedIn: true });
       this.props.addAuthenticateduserToRedux(authenticatedUser);
     }
 

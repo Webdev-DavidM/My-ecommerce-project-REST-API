@@ -50,23 +50,27 @@ app.get('/product/:id', async (req, res) => {
 // their
 
 app.post('/review/:productId', async (req, res) => {
-  let review = req.body;
+  let review = req.body.data;
   let { productId } = req.params;
-  console.log(review.userId);
+  console.log(productId, review);
 
   try {
     let product = await Product.findOne({ _id: productId });
-    let duplicateReview = product.reviews.filter(
-      (reviewInDatabase) => reviewInDatabase.userId === review.userId
-    );
 
     if (product) {
+      let duplicateReview = product.reviews.filter(
+        (reviewInDatabase) => reviewInDatabase.userId === review.userId
+      );
+      console.log(product);
       if (duplicateReview.length === 0) {
         product.reviews.push(review);
         await product.save();
         return res.status(200).json(product).end();
       } else {
-        res.status(406).json('You have reviewed this product already').end();
+        res
+          .status(406)
+          .json({ error: 'You have reviewed this product already' })
+          .end();
       }
     } else {
       res.status(401).json('No product found').end();

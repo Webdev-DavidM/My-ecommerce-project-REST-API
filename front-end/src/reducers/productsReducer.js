@@ -10,6 +10,8 @@ const initialState = {
   basket: [],
   basketValue: 0,
   filteredBrands: [],
+  reviewError: null,
+  reviewSuccess: null,
 
   categories: {
     cycle: {
@@ -46,8 +48,22 @@ function productsReducer(state = initialState, action) {
     case 'CLEAR_PRODUCTS':
       return { ...state, products: [] };
 
+    case 'CLEAR_REVIEW_STATUS':
+      return { ...state, reviewError: null, reviewSuccess: null };
+
     case 'PRODUCTS_REQUESTED':
       return { ...state, loading: true };
+    case 'REVIEW_SENT':
+      return { ...state, loading: true, reviewError: null };
+    case 'REVIEW_SUCCESS':
+      return { ...state, loading: false, reviewSuccess: true };
+    case 'REVIEW_FAIL':
+      return {
+        ...state,
+        loading: false,
+        reviewError: action.error,
+        reviewSuccess: false,
+      };
 
     case 'FILTERED_BRANDS':
       console.log(action.brands);
