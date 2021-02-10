@@ -12,6 +12,7 @@ const initialState = {
   filteredBrands: [],
   reviewError: null,
   reviewSuccess: null,
+  searchProducts: null,
 
   categories: {
     cycle: {
@@ -47,6 +48,9 @@ function productsReducer(state = initialState, action) {
 
     case 'CLEAR_PRODUCTS':
       return { ...state, products: [] };
+
+    case 'ALLPRODUCTS_SUCCESS':
+      return { ...state, searchProducts: action.products };
 
     case 'CLEAR_REVIEW_STATUS':
       return { ...state, reviewError: null, reviewSuccess: null };

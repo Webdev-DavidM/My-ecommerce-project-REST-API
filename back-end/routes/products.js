@@ -10,6 +10,22 @@ export const upload = multer({ dest: 'uploads/' });
 // with es6 modules i haver to use the full filename with .js otherwise it wont find it unlike in react with babel.
 import Product from '../models/Products.js';
 
+// This will return all the products for the search bar //
+
+app.get('/all', async (req, res) => {
+  try {
+    let products = await Product.find({});
+    if (products) {
+      console.log(products);
+      res.status(200).json(products).end();
+    } else {
+      res.status(401).json('no products found');
+    }
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 // GET request- return all the products, I will let redux choose which
 // Products to display based on the category and subcategory properties
 

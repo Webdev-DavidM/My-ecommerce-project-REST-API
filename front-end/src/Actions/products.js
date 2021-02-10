@@ -15,6 +15,21 @@ export const getProducts = (category) => {
   };
 };
 
+export const returnAllProducts = () => {
+  return async (dispatch) => {
+    dispatch({ type: 'ALLPRODUCTS_STARTED' });
+    try {
+      let response = await axios(`http://localhost:5000/products/all`);
+      if (response.status === 200) {
+        console.log(response.data);
+        dispatch({ type: 'ALLPRODUCTS_SUCCESS', products: response.data });
+      }
+    } catch (err) {
+      dispatch({ type: 'ALLPRODUCTS_FAIL', error: err.response.data });
+    }
+  };
+};
+
 export const getProduct = (id) => {
   return async (dispatch) => {
     dispatch({ type: 'PRODUCTS_REQUESTED' });

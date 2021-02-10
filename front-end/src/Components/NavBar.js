@@ -53,12 +53,12 @@ class NavBar extends Component {
                 width: '1.3rem',
                 height: '1.3rem',
                 color: '#ecf0f1',
-                margin: '0 auto 0 1rem',
               }}>
               {/* <i
                 className='fas fa-store'
                 style={{ width: '100%', height: '100%' }}></i> */}
             </div>
+            <SearchBar />
             <div
               className={styles.user}
               onClick={() => this.props.history.push('sign-in')}
@@ -73,7 +73,7 @@ class NavBar extends Component {
                 style={{ width: '100%', height: '100%' }}></i>
             </div>
             <Basket />
-            <SearchBar />
+
             <div className={styles.links}>
               {signedIn ? (
                 <Link to='/account'>Your Account</Link>
