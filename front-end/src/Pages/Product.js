@@ -150,9 +150,7 @@ class Product extends Component {
             )}
             <p className='{styles.title}'></p>
 
-            {product.length !== 0 && product.reviews.length !== 0 && (
-              <Reviews reviews={product.reviews} />
-            )}
+            {product.length !== 0 && <Reviews reviews={product.reviews} />}
 
             <h2>
               <span

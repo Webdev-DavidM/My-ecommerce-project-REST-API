@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import styles from './Reviews.module.css';
+import { CSSTransition } from 'react-transition-group';
+
 class Reviews extends Component {
   state = {
     showReviews: false,
@@ -20,16 +23,46 @@ class Reviews extends Component {
   render() {
     let { reviews } = this.props;
     return (
-      <div>
+      <div
+        className={styles.reviewcontainer}
+        onClick={() =>
+          this.setState((prevState) => ({
+            showReviews: !prevState.showReviews,
+          }))
+        }>
         {this.state.stars.map((star) => {
           let colour =
             star <= this.state.averageReviewRating ? '#f1c40f' : null;
           return <i class='fas fa-star' style={{ color: `${colour}` }}></i>;
         })}
-        &nbsp; ({reviews.length})
+        &nbsp; ({reviews.length})<span>&nbsp;Click for review details</span>
         {reviews.length === 0 && (
           <span>(0) Be the first to review this product</span>
         )}
+        <CSSTransition
+          in={this.state.showReviews}
+          timeout={400}
+          classNames='reviews'
+          unmountOnExit>
+          <div>
+            {reviews.map((review) => {
+              let stars = this.state.stars.map((star) => {
+                let colour = star <= review.rating ? '#f1c40f' : null;
+                return (
+                  <i class='fas fa-star' style={{ color: `${colour}` }}></i>
+                );
+              });
+              return (
+                <div>
+                  <hr className={styles.reviewdivider} />
+                  {stars} by {review.firstName}
+                  <br />
+                  {review.comment}
+                </div>
+              );
+            })}
+          </div>
+        </CSSTransition>
       </div>
     );
   }

@@ -126,3 +126,21 @@
   transform: scale(0.9);
   transition: opacity 0.3s, transform 0.3s;
 }
+
+.reviews-enter {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+.reviews-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 400ms, transform 200ms;
+}
+.reviews-exit {
+  opacity: 1;
+}
+.reviews-exit-active {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 200ms, transform 400ms;
+}
