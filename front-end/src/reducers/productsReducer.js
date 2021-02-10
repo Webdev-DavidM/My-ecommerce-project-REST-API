@@ -75,6 +75,8 @@ function productsReducer(state = initialState, action) {
 
     case 'SORT_BY_BEST_REVIEWS':
       return { ...state, products: action.products };
+    case 'CLEAR_REVIEW_FILTER':
+      return { ...state, products: action.products };
 
     case 'PRODUCTS_FAIL':
       return { ...state, error: action.error, loading: false };
