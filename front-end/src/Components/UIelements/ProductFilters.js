@@ -1,5 +1,12 @@
+/* NPM packages */
+
 import React from 'react';
+
+/* CSS */
+
 import styles from './ProductFilters.module.css';
+
+/* Components */
 
 import CustomerReviewFilter from '../UIelements/Filters/CustomerReviewFilter';
 import PriceRangeFilter from '../UIelements/Filters/PriceRangeFilter';

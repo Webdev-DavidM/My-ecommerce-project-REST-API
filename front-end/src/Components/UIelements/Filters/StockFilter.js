@@ -34,16 +34,12 @@ class StockFilter extends Component {
 
   returnOnlyInStock = () => {
     let { inStock } = this.props;
-    console.log(inStock);
     this.setState({ inStockSelected: true });
     inStock();
   };
 
   componentDidMount = () => {
     this.props.mobile && this.setState({ menu: true });
-
-    // here i will need to iterate over all the products to see what brands
-    // there are then display, for now I will hard code in state
   };
 
   render() {
@@ -51,6 +47,7 @@ class StockFilter extends Component {
       this.state.menu || this.props.showDropDown
         ? styles.dropdownclicked
         : null;
+
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
 
     let stockBtn = (
@@ -105,10 +102,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(StockFilter)
-);
+export default withRouter(connect(null, mapDispatchToProps)(StockFilter));

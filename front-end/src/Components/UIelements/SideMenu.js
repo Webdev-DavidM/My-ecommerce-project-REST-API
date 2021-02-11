@@ -26,12 +26,7 @@ class SideMenu extends Component {
 
   render() {
     // destructured dispatch action creators from mapDispatchToProps
-    let {
-      showSubCat,
-      subCatToShow,
-      // showSubCategory,
-      showSideMenu,
-    } = this.props;
+    let { showSubCat, subCatToShow, showSideMenu } = this.props;
 
     // Destructured state from mapStateToProps
     let {

@@ -26,7 +26,6 @@ export const sendOrderToServer = (orderInfo) => {
 export const getIndividualOrder = (orderId) => {
   return async (dispatch) => {
     let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
     dispatch({ type: 'ORDER_SENT' });
     try {
       let response = await axios({
@@ -39,7 +38,6 @@ export const getIndividualOrder = (orderId) => {
         },
       });
       if (response.status === 200) {
-        console.log(response.data);
         dispatch({ type: 'INDIVDUAL_ORDER_SUCCESS', order: response.data });
       }
     } catch (err) {

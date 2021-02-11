@@ -26,7 +26,6 @@ function usersReducer(state = initialState, action) {
     case 'LOGIN_FAIL':
       console.log(action);
       return { ...state, error: action.error, loading: false };
-
     default:
       return state;
   }

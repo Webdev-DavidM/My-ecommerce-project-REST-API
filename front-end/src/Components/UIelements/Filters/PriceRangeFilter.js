@@ -60,9 +60,6 @@ class PriceRangeFilter extends Component {
 
   componentDidMount = () => {
     this.props.mobile && this.setState({ menu: true });
-
-    // here i will need to iterate over all the products to see what brands
-    // there are then display, for now I will hard code in state
   };
 
   render() {

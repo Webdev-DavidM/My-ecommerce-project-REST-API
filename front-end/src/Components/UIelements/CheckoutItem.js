@@ -76,6 +76,7 @@ class CheckoutItem extends Component {
 
   render() {
     let { name, images, price, size, id } = this.props.details;
+
     let { localStorageKey } = this.props;
 
     return (

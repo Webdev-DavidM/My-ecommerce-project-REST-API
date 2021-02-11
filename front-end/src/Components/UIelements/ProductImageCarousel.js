@@ -1,8 +1,12 @@
-import styles from './ProductImageCarousel.module.css';
+/* NPM packages */
 import React, { Component } from 'react';
 import Media from 'react-media';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+
+/* CSS */
+
+import styles from './ProductImageCarousel.module.css';
 
 class ProductImageCarousel extends Component {
   state = {

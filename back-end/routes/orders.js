@@ -1,8 +1,14 @@
+/* NPM packages */
+
 import express from 'express';
 const app = express();
 import mongoose from 'mongoose';
 
+/* Middleware */
+
 import jwtVerify from '../middleware/jwtVerify.js';
+
+/* Models */
 
 import Orders from '../models/Orders.js';
 import User from '../models/User.js';
@@ -12,10 +18,8 @@ import User from '../models/User.js';
 // ID of the order
 
 app.get('/order/:orderId', jwtVerify, async (req, res) => {
-  console.log('route hit');
   let { userid } = req.headers;
   const { orderId } = req.params;
-
   try {
     let order = await Orders.find({ _id: orderId }).populate('user');
     if (userid != order[0].user._id) {
@@ -37,7 +41,6 @@ app.get('/:userId', jwtVerify, async (req, res) => {
   const { userId } = req.params;
   try {
     let orders = await Orders.find({ user: userId });
-    console.log(orders);
     if (orders) {
       res.status(200).json(orders);
     } else {
@@ -47,6 +50,8 @@ app.get('/:userId', jwtVerify, async (req, res) => {
     res.status(401).json(err);
   }
 });
+
+// This creates a new order from the user
 
 app.post('/new-order', jwtVerify, async (req, res) => {
   let { userId, date, orderItems, total, status } = req.body.orderInfo;
@@ -77,7 +82,6 @@ app.post('/new-order', jwtVerify, async (req, res) => {
     }
   } catch (err) {
     res.status(401).json(err.message);
-    console.log(err);
   }
 });
 

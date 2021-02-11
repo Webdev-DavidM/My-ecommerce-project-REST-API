@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 
-//please adjust the name of the model titles as required
-
 const ordersSchema = new mongoose.Schema(
   {
     user: {
@@ -13,8 +11,6 @@ const ordersSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a value for 'date'"],
     },
-    // There is a product array so each product can be put in as
-    // an object with a quantity.
     orderItems: [
       {
         qty: {

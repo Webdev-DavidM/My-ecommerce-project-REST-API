@@ -46,8 +46,6 @@ class OrderDetails extends Component {
     });
   };
 
-  updateError = {};
-
   submitReview = () => {
     let { submitUserReview, order } = this.props;
     console.log(order.user._id);

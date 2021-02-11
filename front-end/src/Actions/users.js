@@ -12,7 +12,6 @@ export const userSignIn = (email, password) => {
           password,
         },
       });
-
       if (response.status === 202) {
         dispatch({ type: 'LOGIN_SUCCESS', user: response.data });
         storeTokeninLocalStorage(response.data);
@@ -35,7 +34,6 @@ export const userSignUp = ({
 }) => {
   return async (dispatch) => {
     dispatch(loginStarted());
-
     try {
       let response = await axios({
         method: 'post',
@@ -71,7 +69,6 @@ export const isTokenValid = () => {
   // Here I want to check if
   let user = null;
   let userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
   if (userInfo) {
     // My jwt token has been set on the server to expire in one hour, therefore I want to check if there
     // is a jwt token in local storage and if over 1 hour old then delete it and the user
@@ -81,7 +78,6 @@ export const isTokenValid = () => {
     let seconds = Object.entries(userInfo).filter(
       (key) => key[0] === 'seconds'
     );
-
     if (parseInt(seconds[0][1]) + 3600000 < parseInt(currentTimeInSeconds)) {
       // This means it has been over an hour and I need to clear the JWT from local storage as it
       // has expired and other user info

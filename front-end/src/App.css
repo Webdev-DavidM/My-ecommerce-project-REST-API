@@ -7,6 +7,10 @@
   position: relative;
 }
 
+/* When using react-transition group I found that the transitions could not find the css modules I am using for each component.
+/* So all the CSS below is in relation to vai react css transitons which take place in the application which wont work in their 
+/* CSS modules */
+
 .generic-loading-container {
   position: absolute;
   z-index: 1000;
@@ -27,6 +31,8 @@
   justify-content: center;
   align-items: center;
 }
+
+/* dropdown menu */
 
 .menufade-enter {
   opacity: 0;
@@ -62,6 +68,8 @@
   transform: scale(0.9);
   transition: opacity 0.3s, transform 0.3s;
 }
+
+/* Moving menu arrow css */
 
 .menuarrow {
   position: fixed;
@@ -127,6 +135,8 @@
   transition: opacity 0.3s, transform 0.3s;
 }
 
+/* Drop down reviews on the product screen */
+
 .reviews-enter {
   opacity: 0;
   transform: translateY(-100px);
@@ -144,6 +154,8 @@
   transform: translateY(-100px);
   transition: opacity 200ms, transform 400ms;
 }
+
+/* search results dropdown */
 
 .searchresultsdropdown-enter {
   opacity: 0;

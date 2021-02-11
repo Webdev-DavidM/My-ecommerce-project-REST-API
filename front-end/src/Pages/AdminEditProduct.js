@@ -1,6 +1,10 @@
+/* NPM packages */
 import React, { Component } from 'react';
-import styles from './AdminEditProduct.module.css';
 import { Link } from 'react-router-dom';
+
+/* CSS */
+
+import styles from './AdminEditProduct.module.css';
 
 export default class SignUp extends Component {
   state = {
@@ -19,7 +23,6 @@ export default class SignUp extends Component {
   };
 
   handleChange(e) {
-    console.log(e);
     this.setState({ [e.target.name]: e.target.value });
   }
 

@@ -9,7 +9,7 @@ import User from '../models/User.js';
 
 // Note all admin routes are protected routes so I have chosen to store in them in a separate route from the
 // users, I have added middleware to check there is a valid JWT token before adding the user. I will also check that the
-// user requesting to change the products has admin rights with the server before making changes. i have also added a
+// user requesting to change the products has admin rights with the server before making changes. I have also added a
 // middleware called productDetailsCorrect to make sure that all the data required has been provided
 
 /* POST route- this will create a new product in the database, */
@@ -41,56 +41,7 @@ app.post(
             .json('You dont have authority to make these changes')
             .end();
         } else if (adminUser.admin === true) {
-          switch (req.body.category) {
-            case 'cycle':
-              try {
-                let newProduct = new Cycle(req.body);
-                let createdProduct = await newProduct.save();
-                if (createdProduct) {
-                  return res.status(201).json(createdProduct);
-                }
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'run':
-              try {
-                products = await Run.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'cycle':
-              try {
-                products = await Cycle.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'swim':
-              try {
-                products = await Swim.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'outdoors':
-              try {
-                products = await Outdoor.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'triathlon':
-              try {
-                products = await Triathlon.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            default:
-              res.status(401).json('No matching category').end();
-          }
+          // route to be completed when I have completed the admin section
         }
       }
     } catch (err) {
@@ -100,7 +51,6 @@ app.post(
 );
 
 /* PUT route- this will update an existing product in the database, */
-// Below I am checking which category it is for so I know which model to update
 
 app.put(
   '/update/:productId',
@@ -130,59 +80,7 @@ app.put(
             .json('You dont have authority to make these changes')
             .end();
         } else if (adminUser.admin === true) {
-          switch (req.body.category) {
-            case 'cycle':
-              console.log(req.params.productId);
-              try {
-                let updatedProduct = await Cycle.findByIdAndUpdate(
-                  { _id: productId },
-                  req.body
-                );
-                if (updatedProduct) {
-                  return res.status(201).json(updatedProduct);
-                }
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'run':
-              try {
-                products = await Run.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'cycle':
-              try {
-                products = await Cycle.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'swim':
-              try {
-                products = await Swim.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'outdoors':
-              try {
-                products = await Outdoor.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            case 'triathlon':
-              try {
-                products = await Triathlon.find();
-              } catch (err) {
-                res.json(err);
-              }
-              break;
-            default:
-              res.status(401).json('No matching category').end();
-          }
+          //route to be completed when I have started the admin section
         }
       }
     } catch (err) {
@@ -192,7 +90,6 @@ app.put(
 );
 
 /* PUT route- this will update an existing product in the database, */
-// Below I am checking which category it is for so I know which model to update
 
 app.delete('/delete/:productId', jwtVerify, async (req, res) => {
   const { productId } = req.params;
@@ -209,56 +106,6 @@ app.delete('/delete/:productId', jwtVerify, async (req, res) => {
       } else if (adminUser.admin === true) {
         switch (req.headers.category) {
           case 'cycle':
-            console.log(req.params.productId);
-            try {
-              let updatedProduct = await Cycle.findByIdAndDelete(
-                { _id: productId },
-                req.body
-              );
-              if (updatedProduct) {
-                return res.status(204).json('Product deleted');
-              }
-            } catch (err) {
-              res.json(err);
-            }
-            break;
-          case 'run':
-            try {
-              products = await Run.find();
-            } catch (err) {
-              res.json(err);
-            }
-            break;
-          case 'cycle':
-            try {
-              products = await Cycle.find();
-            } catch (err) {
-              res.json(err);
-            }
-            break;
-          case 'swim':
-            try {
-              products = await Swim.find();
-            } catch (err) {
-              res.json(err);
-            }
-            break;
-          case 'outdoors':
-            try {
-              products = await Outdoor.find();
-            } catch (err) {
-              res.json(err);
-            }
-            break;
-          case 'triathlon':
-            try {
-              products = await Triathlon.find();
-            } catch (err) {
-              res.json(err);
-            }
-            break;
-          default:
-            res.status(401).json('No matching category').end();
         }
       }
     }

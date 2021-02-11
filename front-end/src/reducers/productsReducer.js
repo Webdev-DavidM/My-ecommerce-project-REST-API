@@ -19,12 +19,10 @@ const initialState = {
       bikes: ['Mountain bikes', 'Hybrid bikes', 'Road bikes'],
       helmets: ['Helmets', 'Protection'],
     },
-
     run: {
       clothing: ['Tops', 'Legwear', 'Jackets'],
       footwear: ['Running Shoes', 'Trail Shoes'],
     },
-
     swim: {
       shorts: ['Swimming shorts', 'Swimming briefs'],
       swimsuits: ['One piece', 'Two piece'],
@@ -44,16 +42,12 @@ function productsReducer(state = initialState, action) {
         return product.stock !== 0;
       });
       return { ...state, products: productsCopyInStock };
-
     case 'CLEAR_PRODUCTS':
       return { ...state, products: [] };
-
     case 'ALLPRODUCTS_SUCCESS':
       return { ...state, searchProducts: action.products };
-
     case 'CLEAR_REVIEW_STATUS':
       return { ...state, reviewError: null, reviewSuccess: null };
-
     case 'PRODUCTS_REQUESTED':
       return { ...state, loading: true };
     case 'REVIEW_SENT':
@@ -67,25 +61,21 @@ function productsReducer(state = initialState, action) {
         reviewError: action.error,
         reviewSuccess: false,
       };
-
     case 'FILTERED_BRANDS':
       return { ...state, filteredBrands: action.brands };
     case 'PRODUCTS_SUCCESS':
       return { ...state, products: action.products, loading: false };
     case 'PRODUCT_SUCCESS':
       return { ...state, selectedProduct: action.product, loading: false };
-
     case 'SEARCH_PRODUCTS':
       let productMatches = state.searchProducts.filter((product) =>
         product.name.toLowerCase().includes(action.searchValue.toLowerCase())
       );
       return { ...state, searchProducts: productMatches };
-
     case 'SORT_BY_BEST_REVIEWS':
       return { ...state, products: action.products };
     case 'CLEAR_REVIEW_FILTER':
       return { ...state, products: action.products };
-
     case 'PRODUCTS_FAIL':
       return { ...state, error: action.error, loading: false };
     case 'CHOSEN_BRAND':
@@ -142,7 +132,6 @@ function productsReducer(state = initialState, action) {
         (product) => product._id === action.id
       );
       return { ...state, selectedProduct: product[0] };
-
     default:
       return state;
   }

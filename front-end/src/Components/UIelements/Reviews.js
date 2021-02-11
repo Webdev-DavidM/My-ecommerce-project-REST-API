@@ -1,7 +1,11 @@
+/* NPM packages */
+
 import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
+
+/* CSS */
 
 import styles from './Reviews.module.css';
-import { CSSTransition } from 'react-transition-group';
 
 class Reviews extends Component {
   state = {

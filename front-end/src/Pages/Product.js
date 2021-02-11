@@ -63,6 +63,7 @@ class Product extends Component {
   addToBasket = () => {
     /* Destructuring action creators */
     let { addProductToBasket } = this.props;
+
     /* Destructuring state from redux */
     let { images, price, _id, name } = this.props.product;
 
@@ -84,6 +85,9 @@ class Product extends Component {
   };
 
   componentDidUpdate = (newProps) => {
+    // i have used component did mount because if the user searches for a product and clicks on it and the screen is
+    // already on a product, the router will not re render, to make this happen I am using this lifecycle method to
+    // check if the product id has changed and if so get the new product
     if (newProps.location.pathname !== this.props.match.url) {
       let { getProductFromServer } = this.props;
       let id = newProps.history.location.pathname.split('/')[2];
@@ -105,7 +109,9 @@ class Product extends Component {
     let { product } = this.props;
 
     let { showBasketModal } = this.state;
+
     let dropdown = null;
+
     if (product.length !== 0) {
       let sizeKeys = Object.keys(product.size[0]);
       dropdown = (
@@ -142,7 +148,6 @@ class Product extends Component {
                     className={styles.continueshoppingbtn}>
                     Continue shopping
                   </button>
-
                   <Link
                     className={styles.checkoutbtn}
                     style={{ textDecoration: 'none', color: 'white' }}

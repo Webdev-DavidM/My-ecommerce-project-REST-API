@@ -35,7 +35,6 @@ class Products extends Component {
     getUserProducts(category);
     // This will filter the products via category and then create a list of brands which the brand filter can use to
     // populate buttons names
-
     // Below will create a list of the brands from the bikes available and make sure no
     // brands is duplicated
     let productToFilter = products.filter(
@@ -53,13 +52,13 @@ class Products extends Component {
 
   render() {
     let { subcat, type, category } = this.props.match.params;
+
     let { products } = this.props;
 
-    // In hindsight this should have been done in redux as it has caused products with the filters which need
-    // this information
     let productsToDisplay = products.filter(
       (product) => product.subcategory === subcat
     );
+
     productsToDisplay = productsToDisplay.map((product, index) => (
       <ProductItem details={product} key={index} />
     ));

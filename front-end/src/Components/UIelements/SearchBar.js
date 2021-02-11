@@ -18,6 +18,7 @@ class SearchBar extends Component {
     showResults: false,
     input: '',
   };
+
   componentDidMount = () => {
     this.props.getProducts();
   };

@@ -53,8 +53,11 @@ class BrandFilter extends Component {
       this.state.menu || this.props.showDropDown
         ? styles.dropdownclicked
         : null;
+
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
+
     let { brands } = this.props;
+
     if (this.props.brands.length !== 0) {
       brandsButtons = brands.map((category, index) => {
         return (

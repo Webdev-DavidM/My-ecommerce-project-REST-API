@@ -23,18 +23,6 @@ const importData = async () => {
     });
     await Products.insertMany(productList);
 
-    // await Order.deleteMany();
-    // const ordersList = orders.map((order) => {
-    //   console.log(order);
-    //   return { ...order };
-    // });
-    // await Order.insertMany(ordersList);
-
-    // as I need to hash the password on my admin users in my seeder file before I put them in the database,
-    // I have had to map over each user and hash the password and I have used promise all so this works with
-
-    // a map function
-
     const hashUserPassword = async (user) => {
       const hashedPassword = await bcrypt.hash(user.password, 10);
       user.password = hashedPassword;
@@ -53,8 +41,6 @@ const importData = async () => {
     process.exit(1);
   }
 };
-
-//   console.error(`${error}`);
 
 const destroyData = async () => {
   try {

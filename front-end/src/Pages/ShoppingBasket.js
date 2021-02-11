@@ -59,7 +59,9 @@ class ShoppingBasket extends Component {
   };
   render() {
     let { basket, basketTotal } = this.props;
+
     let total = basketTotal();
+
     return (
       <div className={styles.shoppingbasket}>
         <h2>Your Shopping Basket</h2>
@@ -81,7 +83,6 @@ class ShoppingBasket extends Component {
           </button>
           <br />
         </div>
-
         {basket.map((item, index) => {
           return (
             !item.token && (

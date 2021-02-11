@@ -46,7 +46,9 @@ class CustomerReviewFilter extends Component {
       this.state.menu || this.props.showDropDown
         ? styles.dropdownclicked
         : null;
+
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
+
     let buttons = this.state.categories.map((category, index) => {
       return (
         <div key={index}>

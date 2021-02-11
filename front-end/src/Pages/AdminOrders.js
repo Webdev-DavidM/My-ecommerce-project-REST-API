@@ -1,7 +1,12 @@
+/* NPM packages */
+
 import React from 'react';
-import styles from './AdminOrders.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+/* CSS */
+
+import styles from './AdminOrders.module.css';
 
 // this can be stateless as it just needs the orders as props
 // and just needs to display them

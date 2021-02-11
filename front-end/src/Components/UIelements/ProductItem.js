@@ -1,12 +1,15 @@
+/* NPM packages */
+
 import React from 'react';
-import styles from './ProductItem.module.css';
 import { Link } from 'react-router-dom';
 
-import Reviews from '../UIelements/Reviews.js';
+/* CSS */
+
+import styles from './ProductItem.module.css';
 
 const ProductItem = (props) => {
   console.log(props);
-  let { images, _id, name, price, stock, reviews, rating } = props.details;
+  let { images, _id, name, price, stock, rating } = props.details;
 
   let mainImage = images[0];
   return (
@@ -26,7 +29,6 @@ const ProductItem = (props) => {
           <div className={styles.stars}>
             <p style={{ color: '#27ae60' }}>Average rating: {rating}</p>
           </div>
-
           {stock === 0 && (
             <h2 className={styles.outofstock}>Sorry out of stock</h2>
           )}

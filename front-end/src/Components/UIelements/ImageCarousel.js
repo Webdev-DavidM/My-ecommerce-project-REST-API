@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 /* css */
 import styles from './ImageCarousel.module.css';
 
-/* Components */
-
 export default class ImageCarousel extends Component {
   state = {
     currentImageIndex: 0,

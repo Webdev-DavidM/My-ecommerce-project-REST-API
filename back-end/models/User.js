@@ -22,7 +22,6 @@ const usersSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a value for 'address'"],
     },
-    // /* a user is not required to make reviews so again not required */
     reviews: [],
     admin: {
       type: Boolean,

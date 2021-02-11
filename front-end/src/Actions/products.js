@@ -60,7 +60,6 @@ export const getProduct = (id) => {
         dispatch({ type: 'PRODUCT_SUCCESS', product: response.data });
       }
     } catch (err) {
-      console.log(err);
       dispatch({ type: 'PRODUCTS_FAIL', error: err.response.data });
     }
   };
@@ -160,7 +159,6 @@ export const sortByBestReviews = (products) => {
   let sortedProductsByRating = addRatingToProducts.sort((a, b) => {
     return a.rating < b.rating ? 1 : -1;
   });
-
   return { type: 'SORT_BY_BEST_REVIEWS', products: sortedProductsByRating };
 };
 

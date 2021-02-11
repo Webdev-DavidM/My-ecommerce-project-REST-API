@@ -54,7 +54,8 @@ class NavBar extends Component {
                 height: '1.3rem',
                 color: '#ecf0f1',
               }}>
-              {/* <i
+              {/* // i have may add a store feature using google maps in the future
+              <i
                 className='fas fa-store'
                 style={{ width: '100%', height: '100%' }}></i> */}
             </div>
@@ -73,7 +74,6 @@ class NavBar extends Component {
                 style={{ width: '100%', height: '100%' }}></i>
             </div>
             <Basket />
-
             <div className={styles.links}>
               {signedIn ? (
                 <Link to='/account'>Your Account</Link>
