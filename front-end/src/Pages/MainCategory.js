@@ -119,7 +119,7 @@ class MainCategory extends Component {
             <div className={styles.category}>
               {categoryArray.map((section, index) => {
                 return (
-                  <div key={index}>
+                  <div key={index} className={styles.catcontainer}>
                     {categoriesToShow[section].map((subcat, index) => {
                       let image = products.filter(
                         (product) => product.subcategory === subcat
@@ -139,7 +139,7 @@ class MainCategory extends Component {
                             )
                           }>
                           <img src={`http://localhost:5000/${image}`} alt='' />
-                          <div>
+                          <div className={styles.catoverlay}>
                             <span>{subcat}</span>
                           </div>
                         </div>

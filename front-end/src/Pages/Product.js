@@ -37,7 +37,7 @@ class Product extends Component {
   selectQuantity = (operator) => {
     let { product } = this.props;
     if (this.state.size === '') {
-      this.setState({ error: 'Please select a size first' });
+      return this.setState({ error: 'Please select a size first' });
     }
     if (operator === '-') {
       if (this.state.quantity !== 0) {
@@ -47,7 +47,7 @@ class Product extends Component {
         }));
       }
     }
-    if (operator === '+') {
+    if (operator === '+' && this.state.size !== 0) {
       if (this.state.quantity < product.size[0][this.state.size]) {
         this.setState((prevState) => ({
           quantity: prevState.quantity + 1,
@@ -206,7 +206,13 @@ class Product extends Component {
                     onClick={() => this.selectQuantity('-')}>
                     -
                   </button>
-                  <input type='input' value={this.state.quantity}></input>
+                  <input
+                    onChange={(e) =>
+                      this.setState({ quantity: e.target.value })
+                    }
+                    value={this.state.quantity}
+                    className={styles.quantityinput}
+                    type='input'></input>
                   <button
                     className={styles.qtybtn2}
                     onClick={() => this.selectQuantity('+')}>

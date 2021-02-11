@@ -32,7 +32,6 @@ app.get('/:category', async (req, res) => {
   try {
     let products = await Product.find({ category });
     if (products) {
-      console.log(products);
       res.status(200).json(products).end();
     } else {
       res.status(401).json(`No ${category} found`).end();

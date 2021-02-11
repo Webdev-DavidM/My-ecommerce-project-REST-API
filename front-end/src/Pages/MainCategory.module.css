@@ -72,12 +72,15 @@
   align-items: center;
 }
 
-.imgcontainer div {
+/* This is the category text overay for the 
+/* image */
+
+.catoverlay {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 80%;
   height: 100%;
   font-size: 1rem;
   color: rgba(236, 240, 241, 1);
@@ -86,7 +89,7 @@
   transition: opacity 0.3s;
 }
 
-.imgcontainer div:hover {
+.catoverlay:hover {
   opacity: 1;
   cursor: pointer;
 }
@@ -96,7 +99,7 @@
   height: 80%;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 900px) {
   .maincategory {
     width: 80%;
     padding: 1rem;
@@ -110,13 +113,18 @@
     justify-content: space-evenly;
   }
 
+  .catcontainer {
+    width: 50%;
+    align-self: flex-start;
+  }
+
   .categorybody aside {
     width: 30%;
     margin: 0.5rem;
   }
 
   .imgcontainer {
-    width: 30%;
+    width: 100%;
     min-height: 200px;
   }
   .imgcontainer div {

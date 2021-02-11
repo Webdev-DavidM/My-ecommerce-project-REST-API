@@ -27,7 +27,7 @@ export const getProducts = (category) => {
         dispatch({ type: 'PRODUCTS_SUCCESS', products: addRatingToProducts });
       }
     } catch (err) {
-      dispatch({ type: 'PRODUCTS_FAIL', error: err.response.data });
+      dispatch({ type: 'PRODUCTS_FAIL', error: err.response });
     }
   };
 };
@@ -44,7 +44,10 @@ export const returnAllProducts = () => {
         });
       }
     } catch (err) {
-      dispatch({ type: 'ALLPRODUCTS_FAIL', error: err.response.data });
+      dispatch({
+        type: 'ALLPRODUCTS_FAIL',
+        error: err.response || err.message,
+      });
     }
   };
 };
@@ -60,7 +63,8 @@ export const getProduct = (id) => {
         dispatch({ type: 'PRODUCT_SUCCESS', product: response.data });
       }
     } catch (err) {
-      dispatch({ type: 'PRODUCTS_FAIL', error: err.response.data });
+      console.log(err);
+      dispatch({ type: 'PRODUCTS_FAIL', error: err.response || err.message });
     }
   };
 };

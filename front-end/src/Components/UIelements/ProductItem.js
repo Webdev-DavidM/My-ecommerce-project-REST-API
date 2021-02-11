@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import styles from './ProductItem.module.css';
 
 const ProductItem = (props) => {
-  console.log(props);
   let { images, _id, name, price, stock, rating } = props.details;
 
   let mainImage = images[0];
