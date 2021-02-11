@@ -83,6 +83,16 @@ class Product extends Component {
     }
   };
 
+  componentDidUpdate = (newProps) => {
+    if (newProps.location.pathname !== this.props.match.url) {
+      let { getProductFromServer } = this.props;
+      console.log(newProps);
+      let id = newProps.history.location.pathname.split('/')[2];
+      console.log(id);
+      getProductFromServer(id);
+    }
+  };
+
   componentDidMount = () => {
     let { getProductFromServer } = this.props;
     let { id } = this.props.match.params;

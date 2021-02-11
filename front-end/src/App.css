@@ -144,3 +144,18 @@
   transform: translateY(-100px);
   transition: opacity 200ms, transform 400ms;
 }
+
+.searchresultsdropdown-enter {
+  opacity: 0;
+}
+.searchresultsdropdown-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+.searchresultsdropdown-exit {
+  opacity: 1;
+}
+.searchresultsdropdown-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}

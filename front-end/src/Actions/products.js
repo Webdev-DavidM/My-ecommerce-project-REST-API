@@ -78,6 +78,10 @@ export const clearProducts = () => {
   return { type: 'CLEAR_PRODUCTS' };
 };
 
+export const searchProducts = (value) => {
+  return { type: 'SEARCH_PRODUCTS', searchValue: value };
+};
+
 export const clearReviewStatus = () => {
   return { type: 'CLEAR_REVIEW_STATUS' };
 };

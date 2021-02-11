@@ -77,6 +77,14 @@ function productsReducer(state = initialState, action) {
     case 'PRODUCT_SUCCESS':
       return { ...state, selectedProduct: action.product, loading: false };
 
+    case 'SEARCH_PRODUCTS':
+      let productMatches = state.searchProducts.filter((product) =>
+        product.name.toLowerCase().includes(action.searchValue.toLowerCase())
+      );
+      console.log(productMatches);
+
+      return { ...state, searchProducts: productMatches };
+
     case 'SORT_BY_BEST_REVIEWS':
       return { ...state, products: action.products };
     case 'CLEAR_REVIEW_FILTER':

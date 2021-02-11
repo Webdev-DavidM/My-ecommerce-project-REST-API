@@ -41,7 +41,7 @@
   z-index: 2000;
   background-color: #ecf0f1;
   position: absolute;
-  height: 300px;
+  max-height: 300px;
   overflow: hidden;
   top: 1.4rem;
 }
