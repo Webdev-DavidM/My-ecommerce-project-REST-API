@@ -31,6 +31,12 @@
   font-size: 1rem;
 }
 
+.stars {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+}
+
 .reviews {
   display: flex;
   flex-direction: row;

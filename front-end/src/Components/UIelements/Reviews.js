@@ -12,10 +12,13 @@ class Reviews extends Component {
 
   componentDidMount = () => {
     let { reviews } = this.props;
+
     let averageRating =
-      reviews.reduce((a, b) => {
-        return a.rating + b.rating;
-      }) / reviews.length;
+      reviews.length > 0
+        ? reviews.reduce((a, b) => {
+            return a.rating + b.rating;
+          }) / reviews.length
+        : 0;
     this.setState({ averageReviewRating: averageRating });
   };
 

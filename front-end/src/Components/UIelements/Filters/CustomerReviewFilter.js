@@ -18,6 +18,7 @@ class CustomerReviewFilter extends Component {
     menu: false,
     categories: ['Best Customer reviews'],
     selectedDropDown: '',
+    selected: false,
   };
 
   dropdownMenu = () => {
@@ -26,8 +27,18 @@ class CustomerReviewFilter extends Component {
     }));
   };
 
+  reset = () => {
+    this.setState({ selected: false });
+    this.props.clearFilter(this.props.match.params.category);
+  };
+
   componentDidMount = () => {
     this.props.mobile && this.setState({ menu: true });
+  };
+
+  selected = () => {
+    this.setState({ selected: true });
+    this.props.bestReviews(this.props.products);
   };
 
   render() {
@@ -36,19 +47,14 @@ class CustomerReviewFilter extends Component {
         ? styles.dropdownclicked
         : null;
     let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
-    let { bestReviews } = this.props;
     let buttons = this.state.categories.map((category, index) => {
       return (
         <div key={index}>
           <button
             className={styles.inputbtn}
             name={category}
-            style={
-              this.state.selectedDropDown === category
-                ? { backgroundColor: '#f1c40f' }
-                : null
-            }
-            onClick={() => bestReviews(this.props.products)}
+            style={this.state.selected ? { backgroundColor: '#f1c40f' } : null}
+            onClick={() => this.selected()}
           />
           <span>&nbsp;&nbsp;&nbsp;{category}</span>
           <br />
@@ -74,9 +80,8 @@ class CustomerReviewFilter extends Component {
           <div className={`${styles.dropdowncontent} ${dropdownClicked}`}>
             {buttons}
             <button
-              onClick={() =>
-                this.props.clearFilter(this.props.match.params.category)
-              }
+              disabled={!this.state.selected}
+              onClick={() => this.reset()}
               className={styles.resetbest}>
               {' '}
               Reset

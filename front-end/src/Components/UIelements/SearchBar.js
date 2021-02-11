@@ -52,7 +52,7 @@ class SearchBar extends Component {
       <>
         <div className={styles.search}>
           <input
-            autocomplete='off'
+            autoComplete='off'
             value={this.state.input}
             onChange={(e) => this.userInput(e)}></input>
           <div className={styles.searchicon}>
