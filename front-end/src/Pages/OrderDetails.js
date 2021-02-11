@@ -145,7 +145,7 @@ class OrderDetails extends Component {
                                       this.setState({ rating: star })
                                     }
                                     style={color}>
-                                    <i class='fas fa-star'></i>
+                                    <i className='fas fa-star'></i>
                                   </span>
                                 );
                               })}

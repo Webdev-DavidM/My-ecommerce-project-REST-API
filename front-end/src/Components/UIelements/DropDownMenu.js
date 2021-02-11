@@ -62,14 +62,16 @@ class DropDownMenu extends Component {
         </div>
         <div className={styles.subcategories}>
           {showSubCategory
-            ? categories[chosenCategory][chosenSubCategory].map((subCat) => (
-                <div>
-                  <Link
-                    to={`/${chosenCategory}/${chosenSubCategory}/${subCat}`}>
-                    {subCat}
-                  </Link>
-                </div>
-              ))
+            ? categories[chosenCategory][chosenSubCategory].map(
+                (subCat, index) => (
+                  <div key={index}>
+                    <Link
+                      to={`/${chosenCategory}/${chosenSubCategory}/${subCat}`}>
+                      {subCat}
+                    </Link>
+                  </div>
+                )
+              )
             : null}
         </div>
       </div>

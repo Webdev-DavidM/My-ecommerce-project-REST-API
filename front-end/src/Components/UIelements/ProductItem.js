@@ -1,12 +1,9 @@
 import React from 'react';
 import styles from './ProductItem.module.css';
 import { Link } from 'react-router-dom';
-import { noAuto } from '@fortawesome/fontawesome-svg-core';
-
-import Reviews from '../UIelements/Reviews.js';
 
 const ProductItem = (props) => {
-  let { images, _id, name, price, stock, reviews } = props.details;
+  let { images, _id, name, price, stock } = props.details;
   let mainImage = images[0];
   return (
     <div className={styles.productitem}>

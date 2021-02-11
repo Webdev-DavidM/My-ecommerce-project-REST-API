@@ -43,7 +43,6 @@ function productsReducer(state = initialState, action) {
       let productsCopyInStock = state.products.filter((product) => {
         return product.stock !== 0;
       });
-      console.log(productsCopyInStock);
       return { ...state, products: productsCopyInStock };
 
     case 'CLEAR_PRODUCTS':
@@ -70,7 +69,6 @@ function productsReducer(state = initialState, action) {
       };
 
     case 'FILTERED_BRANDS':
-      console.log(action.brands);
       return { ...state, filteredBrands: action.brands };
     case 'PRODUCTS_SUCCESS':
       return { ...state, products: action.products, loading: false };
@@ -81,8 +79,6 @@ function productsReducer(state = initialState, action) {
       let productMatches = state.searchProducts.filter((product) =>
         product.name.toLowerCase().includes(action.searchValue.toLowerCase())
       );
-      console.log(productMatches);
-
       return { ...state, searchProducts: productMatches };
 
     case 'SORT_BY_BEST_REVIEWS':
@@ -119,7 +115,6 @@ function productsReducer(state = initialState, action) {
       return { ...state, basket: [] };
     case 'DELETE_ITEM_FROM_BASKET':
       let newBasketCopy = [...state.basket];
-      console.log(action.id);
       let indexOfItem = newBasketCopy.findIndex(
         (item) => item.id === action.id
       );

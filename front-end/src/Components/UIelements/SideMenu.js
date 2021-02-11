@@ -48,11 +48,12 @@ class SideMenu extends Component {
           onMouseLeave={() => showSideMenu(false)}>
           <div className={styles.maincats}></div>
           <div className={styles.sidecategories}>
-            {categoryToShow.map((cat) => {
+            {categoryToShow.map((cat, index) => {
               let iconMove =
                 chosenSubCategory === cat ? styles.categoryItemMove : '';
               return (
                 <div
+                  key={index}
                   className={`${styles.categoryItem} ${iconMove} `}
                   // I have changed this from hover to click for the mobile side menu
                   onClick={(e) => {

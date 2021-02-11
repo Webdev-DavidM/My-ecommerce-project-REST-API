@@ -24,7 +24,6 @@ class SignIn extends Component {
   };
 
   fieldsCompleted = (userType) => {
-    console.log(userType);
     if (userType === 'signin') {
       if (this.state.email && this.state.password !== '') {
         this.setState({ localErrorSignIn: null });
@@ -47,7 +46,6 @@ class SignIn extends Component {
   };
 
   render() {
-    console.log(this.props.serverError);
     let { serverError, isSignedIn } = this.props;
     if (isSignedIn) {
       this.props.history.goBack();

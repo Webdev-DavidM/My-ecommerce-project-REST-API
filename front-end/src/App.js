@@ -19,7 +19,7 @@ import './App.css';
 
 /* Action creators */
 
-import { isTokenValid, userSignIn } from './Actions/users.js';
+import { isTokenValid } from './Actions/users.js';
 
 // Here I am using lazy loading which is code splitting which will only loads components when needed and
 // hopefully should speed up my application
@@ -69,7 +69,7 @@ class App extends Component {
   };
 
   render() {
-    let { userSignedIn, adminUser } = this.props;
+    let { adminUser } = this.props;
     return (
       <div>
         <div className='App'>

@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const sendOrderToServer = (orderInfo) => {
-  console.log(orderInfo);
   return async (dispatch) => {
     dispatch({ type: 'ORDER_SENT' });
     try {
@@ -16,7 +15,6 @@ export const sendOrderToServer = (orderInfo) => {
         },
       });
       if (response.status === 201) {
-        console.log(response.data);
         dispatch({ type: 'ORDER_SUCCESS', products: response.data });
       }
     } catch (err) {
@@ -62,7 +60,6 @@ export const getOrdersForUser = ({ token, user }) => {
         },
       });
       if (response.status === 200) {
-        console.log(response.data);
         dispatch({ type: 'ORDER_LIST_RECEIVED', orders: response.data });
       }
     } catch (err) {

@@ -6,7 +6,6 @@ export const getProducts = (category) => {
     try {
       let response = await axios(`http://localhost:5000/products/${category}`);
       if (response.status === 200) {
-        console.log(response.data);
         dispatch({ type: 'PRODUCTS_SUCCESS', products: response.data });
       }
     } catch (err) {
@@ -21,7 +20,6 @@ export const returnAllProducts = () => {
     try {
       let response = await axios(`http://localhost:5000/products/all`);
       if (response.status === 200) {
-        console.log(response.data);
         dispatch({ type: 'ALLPRODUCTS_SUCCESS', products: response.data });
       }
     } catch (err) {
@@ -38,7 +36,6 @@ export const getProduct = (id) => {
         `http://localhost:5000/products/product/${id}`
       );
       if (response.status === 200) {
-        console.log(response.data);
         dispatch({ type: 'PRODUCT_SUCCESS', product: response.data });
       }
     } catch (err) {
@@ -63,12 +60,9 @@ export const submitReview = ({ productId, ...data }) => {
         },
       });
       if (response.status === 200) {
-        console.log(response.data);
         dispatch({ type: 'REVIEW_SUCCESS', product: response.data });
       }
     } catch (err) {
-      console.log(err.response.data);
-
       dispatch({ type: 'REVIEW_FAIL', error: err.response.data.error });
     }
   };
@@ -119,7 +113,6 @@ export const addToBasket = (itemInfo) => {
 };
 
 export const updateToBasket = (noPos, quantity) => {
-  console.log(noPos, quantity);
   return { type: 'UPDATE_BASKET', noPos, quantity };
 };
 

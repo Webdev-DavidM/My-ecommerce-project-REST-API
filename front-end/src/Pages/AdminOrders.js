@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './AdminOrders.module.css';
-import Media from 'react-media';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 

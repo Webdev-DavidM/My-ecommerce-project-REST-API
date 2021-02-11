@@ -32,7 +32,6 @@ app.post(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      console.log(req.email);
       let adminUser = await User.findOne({ email: req.email });
 
       if (adminUser) {

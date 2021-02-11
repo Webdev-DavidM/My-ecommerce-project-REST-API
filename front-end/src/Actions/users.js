@@ -14,7 +14,6 @@ export const userSignIn = (email, password) => {
       });
 
       if (response.status === 202) {
-        console.log(response.data);
         dispatch({ type: 'LOGIN_SUCCESS', user: response.data });
         storeTokeninLocalStorage(response.data);
       }
@@ -52,7 +51,6 @@ export const userSignUp = ({
       });
 
       if (response.status === 201) {
-        console.log(response.data);
         dispatch({ type: 'LOGIN_SUCCESS', user: response.data });
         storeTokeninLocalStorage(response.data);
       }

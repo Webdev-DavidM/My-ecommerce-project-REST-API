@@ -32,7 +32,6 @@ class CheckoutItem extends Component {
     let { updateBasket } = this.props;
     let { qtyOfSizeInStock } = this.props.details;
     let { id, localStorageKey } = this.props;
-    console.log(localStorageKey);
     if (operator === '-') {
       if (this.state.quantity !== 0) {
         updateBasket(id, this.state.quantity - 1);
@@ -76,9 +75,7 @@ class CheckoutItem extends Component {
   };
 
   render() {
-    console.log(this.props.details);
     let { name, images, price, size, id } = this.props.details;
-
     let { localStorageKey } = this.props;
 
     return (
@@ -117,7 +114,7 @@ class CheckoutItem extends Component {
           <button
             className={styles.bin}
             onClick={() => this.removeItem(id, localStorageKey)}>
-            <i class='fa fa-trash' aria-hidden='true'></i>
+            <i className='fa fa-trash' aria-hidden='true'></i>
           </button>
 
           <h2 className={styles.itemcost} style={{ color: '#3498db' }}>

@@ -14,18 +14,14 @@ import { sendOrderToServer, closeModal } from '../Actions/orders';
 
 class Checkout extends Component {
   componentDidMount = () => {
-    let { basket, addBasket, basketTotal } = this.props;
+    let { basket, addBasket } = this.props;
 
-    let total = basketTotal().Total;
-    console.log(total);
     // here we check if there is something in the basket which means the user has come
     // from the product screen, if so then add to local storage
     if (basket.length !== 0) {
       let localStorageItems = Object.keys(localStorage);
       localStorageItems.map((item) => {
-        if (item !== 'userInfo') {
-          return localStorage.removeItem(`${item}`);
-        }
+        return item !== 'userInfo' && localStorage.removeItem(`${item}`);
       });
       basket.map((item, index) => {
         return localStorage.setItem(`item${index}`, JSON.stringify(item));
@@ -35,24 +31,21 @@ class Checkout extends Component {
     // here we check if the page has been refreshed and there is nothing in the basket, if there
     // is an item in local storage then dispatch it to be added to basket in redux so it can populate this screen
     let localStorageItems = Object.keys(localStorage);
-    let itemsFromLocalStorage = localStorageItems.map((item) => {
-      return JSON.parse(localStorage.getItem(`${item}`));
-    });
+    let itemsFromLocalStorage = localStorageItems.map((item) =>
+      JSON.parse(localStorage.getItem(`${item}`))
+    );
 
     if (basket.length === 0 && itemsFromLocalStorage)
       // Here I will store the basket in local storage and reload if the user refreshes the page,
       // I am mapping over the array and adding each item at a time which is what the reducer is expecting
       itemsFromLocalStorage.map((item) => {
-        if (item['firstName'] === undefined) {
-          addBasket(item);
-        }
+        return item['firstName'] === undefined && addBasket(item);
       });
   };
 
   placeOrder = () => {
     let { userDetails, basket, basketTotal, sendOrder } = this.props;
     let total = basketTotal();
-    console.log(basket);
     total = total.Total;
     const now = new Date();
     let formattedDate = date.format(now, 'YYYY/MM/DD HH:mm:ss');
@@ -77,9 +70,7 @@ class Checkout extends Component {
     clearBasket();
     let localStorageItems = Object.keys(localStorage);
     localStorageItems.map((key) => {
-      if (key !== 'userInfo') {
-        localStorage.removeItem(`${key}`);
-      }
+      return key !== 'userInfo' && localStorage.removeItem(`${key}`);
     });
     clearModal();
     this.props.history.push('/');
@@ -87,9 +78,8 @@ class Checkout extends Component {
 
   render() {
     let { firstName, lastName, address } = this.props.userDetails;
-    let { basket, basketTotal, showModal } = this.props;
+    let { basket, basketTotal } = this.props;
     let total = basketTotal();
-    console.log(showModal);
     return (
       <div className={styles.checkoutcontainer}>
         {this.props.showModal && (
@@ -97,7 +87,7 @@ class Checkout extends Component {
             <div className={styles.basket}>
               <h2>
                 {' '}
-                <i class='fas fa-check'></i>
+                <i className='fas fa-check'></i>
                 &nbsp;Order confirmed!{' '}
               </h2>
               <button
@@ -140,8 +130,8 @@ class Checkout extends Component {
         <div className={styles.paymentmethod}></div>
         <div className={styles.ordersummary}>
           <div className={styles.itemcontainer}>
-            {basket.map((item) => (
-              <div className={styles.details}>
+            {basket.map((item, index) => (
+              <div className={styles.details} key={index}>
                 <div className={styles.imagecontainer}>
                   <img src={`http://localhost:5000/${item.images[0]}`} alt='' />
                 </div>

@@ -12,7 +12,6 @@ class Reviews extends Component {
 
   componentDidMount = () => {
     let { reviews } = this.props;
-    console.log(reviews);
     let averageRating =
       reviews.reduce((a, b) => {
         return a.rating + b.rating;
@@ -31,10 +30,15 @@ class Reviews extends Component {
             showReviews: !prevState.showReviews,
           }))
         }>
-        {this.state.stars.map((star) => {
+        {this.state.stars.map((star, index) => {
           let colour =
             star <= this.state.averageReviewRating ? '#f1c40f' : null;
-          return <i class='fas fa-star' style={{ color: `${colour}` }}></i>;
+          return (
+            <i
+              key={index}
+              className='fas fa-star'
+              style={{ color: `${colour}` }}></i>
+          );
         })}
         &nbsp; ({reviews.length})<span>&nbsp;Click for review details</span>
         {reviews.length === 0 && (
@@ -46,11 +50,14 @@ class Reviews extends Component {
           classNames='reviews'
           unmountOnExit>
           <div>
-            {reviews.map((review) => {
+            {reviews.map((review, index) => {
               let stars = this.state.stars.map((star) => {
                 let colour = star <= review.rating ? '#f1c40f' : null;
                 return (
-                  <i class='fas fa-star' style={{ color: `${colour}` }}></i>
+                  <i
+                    key={index}
+                    className='fas fa-star'
+                    style={{ color: `${colour}` }}></i>
                 );
               });
               return (

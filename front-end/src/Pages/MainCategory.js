@@ -38,8 +38,6 @@ class MainCategory extends Component {
       images.push('swimming-image1.jpg', 'adidas-Beach-Women-Short:image1.jpg');
     }
 
-    console.log(images);
-
     return (
       <div className={styles.maincategory}>
         <ImageCarousel url={images} cat={category} />
@@ -94,15 +92,15 @@ class MainCategory extends Component {
         </div>
         <div className={styles.categorybody}>
           <aside>
-            {categoryArray.map((section) => {
+            {categoryArray.map((section, index) => {
               return (
-                <>
+                <div key={index}>
                   <p className={styles.heading}>{section}</p>
                   <hr></hr>
                   <ul>
-                    {categoriesToShow[section].map((subcat) => {
+                    {categoriesToShow[section].map((subcat, index) => {
                       return (
-                        <li>
+                        <li key={index}>
                           <Link to={`/${category}/${section}/${subcat}`}>
                             {subcat}
                           </Link>
@@ -110,7 +108,7 @@ class MainCategory extends Component {
                       );
                     })}
                   </ul>
-                </>
+                </div>
               );
             })}
           </aside>
@@ -119,21 +117,21 @@ class MainCategory extends Component {
               // Here I will get the user products and map over them use the images for the interactive image gallery
             }
             <div className={styles.category}>
-              {categoryArray.map((section) => {
+              {categoryArray.map((section, index) => {
                 return (
-                  <>
-                    {categoriesToShow[section].map((subcat) => {
+                  <div key={index}>
+                    {categoriesToShow[section].map((subcat, index) => {
                       let image = products.filter(
                         (product) => product.subcategory === subcat
                       );
 
                       if (image.length !== 0) {
                         image = image[0].images[0];
-                        console.log(image);
                       }
 
                       return (
                         <div
+                          key={index}
                           className={styles.imgcontainer}
                           onClick={() =>
                             this.props.history.push(
@@ -147,7 +145,7 @@ class MainCategory extends Component {
                         </div>
                       );
                     })}
-                  </>
+                  </div>
                 );
               })}
             </div>

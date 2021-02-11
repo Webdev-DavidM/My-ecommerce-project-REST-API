@@ -26,11 +26,8 @@ class ShoppingBasket extends Component {
     // from the product screen, if so then add to local storage
     if (basket.length !== 0) {
       let localStorageItems = Object.keys(localStorage);
-      console.log(localStorageItems);
       localStorageItems.map((item) => {
-        if (item !== 'userInfo') {
-          return localStorage.removeItem(`${item}`);
-        }
+        return item !== 'userInfo' && localStorage.removeItem(`${item}`);
       });
       basket.map((item, index) => {
         return localStorage.setItem(`item${index}`, JSON.stringify(item));
@@ -48,9 +45,7 @@ class ShoppingBasket extends Component {
       // Here I will store the basket in local storage and reload if the user refreshes the page,
       // I am mapping over the array and adding each item at a time which is what the reducer is expecting
       itemsFromLocalStorage.map((item) => {
-        if (item['firstName'] === undefined) {
-          addBasket(item);
-        }
+        return item['firstName'] === undefined && addBasket(item);
       });
   };
 
@@ -63,7 +58,6 @@ class ShoppingBasket extends Component {
     }
   };
   render() {
-    let { goBack, push } = this.props.history;
     let { basket, basketTotal } = this.props;
     let total = basketTotal();
     return (
@@ -89,9 +83,9 @@ class ShoppingBasket extends Component {
         </div>
 
         {basket.map((item, index) => {
-          if (!item.token) {
-            return (
-              <>
+          return (
+            !item.token && (
+              <div key={index}>
                 <CheckoutItem
                   details={item}
                   key={index}
@@ -99,9 +93,9 @@ class ShoppingBasket extends Component {
                   localStorageKey={`item${index}`}
                 />
                 <hr></hr>
-              </>
-            );
-          }
+              </div>
+            )
+          );
         })}
         {basket.length === 0 && (
           <h2 style={{ color: '#e74c3c' }}>Basket empty </h2>

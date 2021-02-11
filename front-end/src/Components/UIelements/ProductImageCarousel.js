@@ -48,6 +48,7 @@ export default class ProductImageCarousel extends Component {
 
     let imageGallery = this.state.images.map((image, index) => (
       <span
+        key={index}
         onClick={() => this.moveImagesByDot(index)}
         style={
           index === this.state.selectedImage
@@ -66,7 +67,7 @@ export default class ProductImageCarousel extends Component {
               disabled={this.state.selectedImage === 0}
               className={styles.prev}
               onClick={() => this.moveImageByArrow('left')}>
-              <i class='fas fa-angle-left'></i>
+              <i className='fas fa-angle-left'></i>
             </button>
             <img
               src={`http://localhost:5000/${
@@ -76,16 +77,17 @@ export default class ProductImageCarousel extends Component {
             <button
               className={styles.next}
               onClick={() => this.moveImageByArrow('right')}>
-              <i class='fas fa-angle-right'></i>
+              <i className='fas fa-angle-right'></i>
             </button>
           </div>
         </div>
         <br></br>
         <div style={{ textAlign: 'center' }}>
           {' '}
-          <i class='fas fa-angle-left'></i> &nbsp;{this.state.selectedImage + 1}{' '}
-          &nbsp; / &nbsp; {this.state.images.length} &nbsp;
-          <i class='fas fa-angle-right'></i>
+          <i className='fas fa-angle-left'></i> &nbsp;
+          {this.state.selectedImage + 1} &nbsp; / &nbsp;{' '}
+          {this.state.images.length} &nbsp;
+          <i className='fas fa-angle-right'></i>
         </div>
         <Media
           query={'(max-width: 768px)'}

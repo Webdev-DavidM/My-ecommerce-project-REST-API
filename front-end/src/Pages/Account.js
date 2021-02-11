@@ -70,10 +70,10 @@ class Account extends Component {
           />
           {orders !== undefined &&
             orders.length !== 0 &&
-            orders.map((order) => {
+            orders.map((order, index) => {
               return (
-                <>
-                  <div className={styles.ordersdetails}>
+                <div key={index}>
+                  <div className={styles.ordersdetails} key={index}>
                     <span>{order.dateOfOrder.split(' ')[0]}</span>
                     <span style={{ color: '#2980b9' }}>{order._id}</span>
                     <span>Total cost: £{order.total}</span>
@@ -94,7 +94,7 @@ class Account extends Component {
                       marginLeft: 5,
                       marginRight: 5,
                     }}></div>
-                </>
+                </div>
               );
             })}
         </div>

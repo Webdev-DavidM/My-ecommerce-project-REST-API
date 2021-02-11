@@ -40,8 +40,6 @@ class SearchBar extends Component {
   };
 
   render() {
-    let { products } = this.props;
-
     return (
       <>
         <div className={styles.search}>
@@ -61,8 +59,9 @@ class SearchBar extends Component {
             <div className={styles.results}>
               {' '}
               {this.props.products &&
-                this.props.products.map((product) => (
+                this.props.products.map((product, index) => (
                   <div
+                    key={index}
                     onClick={() =>
                       this.props.history.push(`/product/${product._id}`)
                     }>

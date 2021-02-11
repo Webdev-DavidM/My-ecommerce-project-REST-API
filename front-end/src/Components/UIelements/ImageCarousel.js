@@ -6,8 +6,6 @@ import styles from './ImageCarousel.module.css';
 
 /* Components */
 
-import ShopButton from './ShopButton';
-
 export default class ImageCarousel extends Component {
   state = {
     currentImageIndex: 0,

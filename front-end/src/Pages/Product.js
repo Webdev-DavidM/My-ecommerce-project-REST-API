@@ -86,9 +86,7 @@ class Product extends Component {
   componentDidUpdate = (newProps) => {
     if (newProps.location.pathname !== this.props.match.url) {
       let { getProductFromServer } = this.props;
-      console.log(newProps);
       let id = newProps.history.location.pathname.split('/')[2];
-      console.log(id);
       getProductFromServer(id);
     }
   };
@@ -96,7 +94,6 @@ class Product extends Component {
   componentDidMount = () => {
     let { getProductFromServer } = this.props;
     let { id } = this.props.match.params;
-    console.log(id);
     getProductFromServer(id);
   };
 
@@ -109,8 +106,6 @@ class Product extends Component {
 
     let { showBasketModal } = this.state;
     let dropdown = null;
-    console.log(product);
-
     if (product.length !== 0) {
       let sizeKeys = Object.keys(product.size[0]);
       dropdown = (
@@ -129,7 +124,6 @@ class Product extends Component {
         </>
       );
     }
-    console.log(product);
 
     return (
       <>
@@ -140,7 +134,7 @@ class Product extends Component {
                 <div className={styles.basket}>
                   <h2>
                     {' '}
-                    <i class='fas fa-check'></i>
+                    <i className='fas fa-check'></i>
                     &nbsp;Added to cart{' '}
                   </h2>
                   <button
@@ -193,7 +187,7 @@ class Product extends Component {
                     )}{' '}
                     {!this.state.dropdownSelected && (
                       <span>
-                        <i class='fas fa-arrow-down'></i>
+                        <i className='fas fa-arrow-down'></i>
                       </span>
                     )}
                     {this.state.dropdownSelected && dropdown}
