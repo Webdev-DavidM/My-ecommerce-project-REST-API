@@ -39,15 +39,22 @@ class SearchBar extends Component {
     }
   };
 
+  selectedItem = (id) => {
+    this.setState({
+      showResults: false,
+      input: '',
+    });
+    this.props.history.push(`/product/${id}`);
+  };
+
   render() {
     return (
       <>
         <div className={styles.search}>
           <input
-            onChange={(e) => this.userInput(e)}
-            type='text'
-            id='fname'
-            name='fname'></input>
+            autocomplete='off'
+            value={this.state.input}
+            onChange={(e) => this.userInput(e)}></input>
           <div className={styles.searchicon}>
             <i className='fas fa-search '></i>{' '}
           </div>
@@ -61,10 +68,9 @@ class SearchBar extends Component {
               {this.props.products &&
                 this.props.products.map((product, index) => (
                   <div
+                    className={styles.searchitem}
                     key={index}
-                    onClick={() =>
-                      this.props.history.push(`/product/${product._id}`)
-                    }>
+                    onClick={() => this.selectedItem(product._id)}>
                     {product.name}
                     <hr />
                   </div>

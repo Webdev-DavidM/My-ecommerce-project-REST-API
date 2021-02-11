@@ -13,6 +13,15 @@
   cursor: pointer;
 }
 
+.searchitem {
+  transition: color 0.3s;
+}
+
+.searchitem:hover {
+  color: #2ecc71;
+  cursor: pointer;
+}
+
 .logo {
   width: 8rem;
   height: 5rem;

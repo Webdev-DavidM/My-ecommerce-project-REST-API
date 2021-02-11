@@ -1,16 +1,13 @@
 import styles from './ProductImageCarousel.module.css';
 import React, { Component } from 'react';
 import Media from 'react-media';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-export default class ProductImageCarousel extends Component {
+class ProductImageCarousel extends Component {
   state = {
     productId: '',
-    images: [],
     selectedImage: 0,
-  };
-
-  componentDidMount = () => {
-    this.setState({ images: this.props.images });
   };
 
   moveImageByArrow = (direction) => {
@@ -35,7 +32,9 @@ export default class ProductImageCarousel extends Component {
   };
 
   render() {
-    let imageButtons = this.state.images.map((image, index) => (
+    let { images } = this.props.product;
+
+    let imageButtons = images.map((image, index) => (
       <span
         className={styles.dot}
         onClick={() => this.moveImagesByDot(index)}
@@ -46,7 +45,7 @@ export default class ProductImageCarousel extends Component {
         }></span>
     ));
 
-    let imageGallery = this.state.images.map((image, index) => (
+    let imageGallery = images.map((image, index) => (
       <span
         key={index}
         onClick={() => this.moveImagesByDot(index)}
@@ -70,9 +69,7 @@ export default class ProductImageCarousel extends Component {
               <i className='fas fa-angle-left'></i>
             </button>
             <img
-              src={`http://localhost:5000/${
-                this.state.images[this.state.selectedImage]
-              }`}
+              src={`http://localhost:5000/${images[this.state.selectedImage]}`}
               alt={'hello'}></img>
             <button
               className={styles.next}
@@ -85,8 +82,7 @@ export default class ProductImageCarousel extends Component {
         <div style={{ textAlign: 'center' }}>
           {' '}
           <i className='fas fa-angle-left'></i> &nbsp;
-          {this.state.selectedImage + 1} &nbsp; / &nbsp;{' '}
-          {this.state.images.length} &nbsp;
+          {this.state.selectedImage + 1} &nbsp; / &nbsp; {images.length} &nbsp;
           <i className='fas fa-angle-right'></i>
         </div>
         <Media
@@ -109,3 +105,11 @@ export default class ProductImageCarousel extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    product: state.products.selectedProduct,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(ProductImageCarousel));
