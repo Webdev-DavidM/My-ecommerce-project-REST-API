@@ -8,6 +8,9 @@
   padding: 16px;
   font-size: 16px;
   width: 9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   border-bottom: 1px solid#bdc3c7;
   border-top: 1px solid#bdc3c7;
@@ -18,6 +21,7 @@
 
 .dropbtn:hover {
   border-left: 10px solid #f1c40f;
+  cursor: pointer;
 }
 
 .dropbtnclicked {

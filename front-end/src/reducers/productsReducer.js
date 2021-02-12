@@ -38,32 +38,14 @@ const initialState = {
 
 function productsReducer(state = initialState, action) {
   switch (action.type) {
-    case 'FILTER_IN_STOCK':
-      let productsCopyInStock = state.products.filter((product) => {
-        return product.stock !== 0;
-      });
-      return { ...state, products: productsCopyInStock };
+    // Products //
+
     case 'CLEAR_PRODUCTS':
       return { ...state, products: [] };
     case 'ALLPRODUCTS_SUCCESS':
       return { ...state, searchProducts: action.products };
-    case 'CLEAR_REVIEW_STATUS':
-      return { ...state, reviewError: null, reviewSuccess: null };
     case 'PRODUCTS_REQUESTED':
       return { ...state, loading: true };
-    case 'REVIEW_SENT':
-      return { ...state, loading: true, reviewError: null };
-    case 'REVIEW_SUCCESS':
-      return { ...state, loading: false, reviewSuccess: true };
-    case 'REVIEW_FAIL':
-      return {
-        ...state,
-        loading: false,
-        reviewError: action.error,
-        reviewSuccess: false,
-      };
-    case 'FILTERED_BRANDS':
-      return { ...state, filteredBrands: action.brands };
     case 'PRODUCTS_SUCCESS':
       return { ...state, products: action.products, loading: false };
     case 'PRODUCT_SUCCESS':
@@ -73,20 +55,10 @@ function productsReducer(state = initialState, action) {
         product.name.toLowerCase().includes(action.searchValue.toLowerCase())
       );
       return { ...state, searchProducts: productMatches };
-    case 'SORT_BY_BEST_REVIEWS':
-      return { ...state, products: action.products };
-    case 'CLEAR_REVIEW_FILTER':
-      return { ...state, products: action.products };
     case 'PRODUCTS_FAIL':
       return { ...state, serverError: action.error, loading: false };
     case 'ALLPRODUCTS_FAIL':
       return { ...state, serverError: action.error, loading: false };
-    case 'CHOSEN_BRAND':
-      let productsByBrand = [...state.products];
-      let products = productsByBrand.filter(
-        (product) => product.brand === action.brand
-      );
-      return { ...state, products };
     case 'CATEGORY_CHOSEN':
       return { ...state, chosenCategory: action.category };
     case 'SHOW_DROP_DOWN':
@@ -95,11 +67,21 @@ function productsReducer(state = initialState, action) {
       return { ...state, showSideMenu: action.bool };
     case 'SHOW_SUB_CATEGORY':
       return { ...state, showSubCategory: action.bool };
-    case 'FILTER_PRICE_RANGE':
-      let productsCopy = state.products.filter((product) => {
-        return (product.price > action.lower) & (product.price < action.higher);
-      });
-      return { ...state, products: productsCopy };
+    case 'CHOSEN_PRODUCT':
+      let product = state.products.filter(
+        (product) => product._id === action.id
+      );
+      return { ...state, selectedProduct: product[0] };
+    case 'SUB_CAT_SELECTED':
+      return { ...state, chosenSubCategory: action.subcat };
+    case 'CLEAR_SELECTED_PRODUCTS':
+      return { ...state, selectedProduct: [] };
+
+    // Filters //
+    case 'FILTERED_BRANDS':
+      return { ...state, filteredBrands: action.brands };
+
+    // Basket //
     case 'UPDATE_BASKET':
       let updateBasketCopy = [...state.basket];
       updateBasketCopy[action.noPos].quantity = action.quantity;
@@ -113,10 +95,6 @@ function productsReducer(state = initialState, action) {
       );
       newBasketCopy.splice(indexOfItem, 1);
       return { ...state, basket: newBasketCopy };
-    case 'SUB_CAT_SELECTED':
-      return { ...state, chosenSubCategory: action.subcat };
-    case 'CLEAR_SELECTED_PRODUCTS':
-      return { ...state, selectedProduct: [] };
     case 'ADD_TO_BASKET':
       let basketCopy = [...state.basket];
       basketCopy.push(action.itemInfo);
@@ -130,11 +108,40 @@ function productsReducer(state = initialState, action) {
               return total + basketItem.price * basketItem.quantity;
             }, action.itemInfo.price);
       return { ...state, basket: basketCopy, basketValue: totalBasketValue };
-    case 'CHOSEN_PRODUCT':
-      let product = state.products.filter(
-        (product) => product._id === action.id
+
+    //Review //
+
+    case 'CLEAR_REVIEW_STATUS':
+      return { ...state, reviewError: null, reviewSuccess: null };
+    case 'REVIEW_SENT':
+      return { ...state, loading: true, reviewError: null };
+    case 'REVIEW_SUCCESS':
+      return { ...state, loading: false, reviewSuccess: true };
+    case 'REVIEW_FAIL':
+      return {
+        ...state,
+        loading: false,
+        reviewError: action.error,
+        reviewSuccess: false,
+      };
+    case 'SORT_BY_BEST_REVIEWS':
+      return { ...state, products: action.products };
+    case 'CLEAR_REVIEW_FILTER':
+      return { ...state, products: action.products };
+    case 'CHOSEN_BRAND':
+      let productsByBrand = [...state.products];
+      let products = productsByBrand.filter(
+        (product) => product.brand === action.brand
       );
-      return { ...state, selectedProduct: product[0] };
+      return { ...state, products };
+    case 'FILTER_PRICE_RANGE':
+      let productsCopy = state.products.filter((product) => {
+        return (
+          (product.price >= action.lower) & (product.price <= action.higher)
+        );
+      });
+      return { ...state, products: productsCopy };
+
     default:
       return state;
   }
