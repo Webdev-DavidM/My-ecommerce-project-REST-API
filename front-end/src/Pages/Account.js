@@ -10,12 +10,19 @@ import styles from './Account.module.css';
 /* Action creators */
 
 import { getOrdersForUser } from '../Actions/orders.js';
+import { logUserOut } from '../Actions/users.js';
 
 class Account extends Component {
   componentDidMount = () => {
     let { getOrders } = this.props;
     let user = JSON.parse(localStorage.getItem('userInfo'));
     getOrders({ user: user.id, token: user.token });
+  };
+
+  logOut = () => {
+    let { logOutUser } = this.props;
+    logOutUser();
+    this.props.history.push('/');
   };
 
   render() {
@@ -33,7 +40,11 @@ class Account extends Component {
                 </p>
               )}
 
-              <button className={styles.logoutbtn}>Log out</button>
+              <button
+                onClick={() => this.logOut()}
+                className={styles.logoutbtn}>
+                Log out
+              </button>
             </div>
           )}
         />
@@ -109,6 +120,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getOrders: (userInfo) => dispatch(getOrdersForUser(userInfo)),
+    logOutUser: () => dispatch(logUserOut()),
   };
 };
 

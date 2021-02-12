@@ -25,6 +25,13 @@ export const userSignIn = (email, password) => {
   };
 };
 
+export const logUserOut = () => {
+  localStorage.removeItem('userInfo');
+  return {
+    type: 'USER_LOGGED_OUT',
+  };
+};
+
 export const userSignUp = ({
   email,
   address,

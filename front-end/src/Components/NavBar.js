@@ -62,7 +62,11 @@ class NavBar extends Component {
             <SearchBar />
             <div
               className={styles.user}
-              onClick={() => this.props.history.push('sign-in')}
+              onClick={() => {
+                signedIn
+                  ? this.props.history.push('/account')
+                  : this.props.history.push('sign-in');
+              }}
               style={{
                 width: '1.3rem',
                 height: '1.3rem',

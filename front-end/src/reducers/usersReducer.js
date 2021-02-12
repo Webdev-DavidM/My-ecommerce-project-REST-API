@@ -15,6 +15,8 @@ function usersReducer(state = initialState, action) {
   switch (action.type) {
     case 'LOGIN_STARTED':
       return { ...state, loading: true };
+    case 'USER_LOGGED_OUT':
+      return { ...state, signedIn: false };
     case 'LOGIN_SUCCESS':
       return {
         ...state,
