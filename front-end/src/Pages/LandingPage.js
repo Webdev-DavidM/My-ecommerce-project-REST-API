@@ -34,7 +34,7 @@ const LandingPage = () => {
         NEXT DAY DELIVERY AND FREE RETURNS FOR ONLY &#127;{' '}
         <strong>£9.99</strong>
         <div>
-          <ShopButton url='/running' name='SHOP NOW' width='8rem' />
+          <ShopButton url='/run' name='SHOP NOW' width='8rem' />
         </div>
       </header>
       <div className={styles.running}>
@@ -45,7 +45,7 @@ const LandingPage = () => {
         <div className={styles.catdetailsrunning}>
           {' '}
           <p>RUN</p>
-          <ShopButton url='/running' name='SHOP' />
+          <ShopButton url='/run' name='SHOP' />
         </div>
       </div>
 
@@ -57,7 +57,7 @@ const LandingPage = () => {
         <div className={styles.catdetailscycling}>
           {' '}
           <p>CYCLE</p>
-          <ShopButton url='/cycling' name='SHOP' />
+          <ShopButton url='/cycle' name='SHOP' />
         </div>
       </div>
       <div className={styles.swimming}>
@@ -68,7 +68,7 @@ const LandingPage = () => {
         <div className={styles.catdetailsswimming}>
           {' '}
           <p>SWIM</p>
-          <ShopButton url='/swimming' name='SHOP' />
+          <ShopButton url='/swim' name='SHOP' />
         </div>
       </div>
     </div>

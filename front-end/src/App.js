@@ -102,6 +102,9 @@ class App extends Component {
                 account button and dont have one} */}
                 <Route exact path='/sign-in' component={SignIn} />
                 <Route exact path='/sign-up/:email' component={SignUp} />
+                <Route exact path='/run' component={MainCategory} />
+                <Route exact path='/cycle' component={MainCategory} />
+                <Route exact path='/swim' component={MainCategory} />
                 <Route
                   exact
                   path='/account'
@@ -138,7 +141,6 @@ class App extends Component {
                   path='/admin/product/:id'
                   component={AdminEditProduct}
                 />
-
                 <Route exact path='/admin-orders' component={AdminOrders} />
                 <Route
                   exact
@@ -168,8 +170,6 @@ class App extends Component {
                   path='/:category/:type/:subcat'
                   component={Products}
                 />
-                <Route exact path='/:category' component={MainCategory} />
-
                 <Route component={NotFound} />
               </Switch>
             </Suspense>

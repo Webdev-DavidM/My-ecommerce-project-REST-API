@@ -65,7 +65,7 @@ class NavBar extends Component {
               onClick={() => {
                 signedIn
                   ? this.props.history.push('/account')
-                  : this.props.history.push('sign-in');
+                  : this.props.history.push('/sign-in');
               }}
               style={{
                 width: '1.3rem',

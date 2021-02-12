@@ -114,6 +114,7 @@ class BrandFilter extends Component {
 const mapStateToProps = (state) => {
   return {
     brands: state.products.filteredBrands,
+    products: state.products.products,
   };
 };
 

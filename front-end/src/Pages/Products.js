@@ -28,11 +28,18 @@ class Products extends Component {
   };
 
   componentDidMount = () => {
-    let { getUserProducts, filterBrands, clearSelected } = this.props;
-    let { category, subcat } = this.props.match.params;
-    let { products } = this.props;
+    let { getUserProducts, clearSelected } = this.props;
+    let { category } = this.props.match.params;
     clearSelected();
     getUserProducts(category);
+  };
+
+  componentDidUpdate = () => {
+    //If the user refreshes the page this will get the brands and give them to the brand filter
+    let { filterBrands } = this.props;
+    let { subcat } = this.props.match.params;
+    let { products } = this.props;
+
     // This will filter the products via category and then create a list of brands which the brand filter can use to
     // populate buttons names
     // Below will create a list of the brands from the bikes available and make sure no

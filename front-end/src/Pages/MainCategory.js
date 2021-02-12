@@ -24,7 +24,8 @@ class MainCategory extends Component {
 
   render() {
     let { categories, products } = this.props;
-    let { category } = this.props.match.params;
+    let category = this.props.match.url;
+    category = category.substring(1);
     let categoriesToShow = categories[category];
     let categoryArray = Object.keys(categoriesToShow);
     let images = [];
