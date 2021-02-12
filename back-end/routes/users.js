@@ -26,6 +26,7 @@ import jwtVerify from '../middleware/jwtVerify.js';
 app.post('/register', async (req, res) => {
   // Firstly I will make sure the user doesnt exist on the database already
   let existingUser = await User.find({ email: req.body.email });
+  console.log(existingUser);
   if (existingUser.length !== 0) {
     return res
       .status(401)
