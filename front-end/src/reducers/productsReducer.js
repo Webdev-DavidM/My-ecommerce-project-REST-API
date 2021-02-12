@@ -76,10 +76,27 @@ function productsReducer(state = initialState, action) {
       return { ...state, chosenSubCategory: action.subcat };
     case 'CLEAR_SELECTED_PRODUCTS':
       return { ...state, selectedProduct: [] };
+    case 'CHOSEN_BRAND':
+      let productsByBrand = [...state.products];
+      let products = productsByBrand.filter(
+        (product) => product.brand === action.brand
+      );
+      return { ...state, products };
 
     // Filters //
     case 'FILTERED_BRANDS':
       return { ...state, filteredBrands: action.brands };
+    case 'SORT_BY_BEST_REVIEWS':
+      return { ...state, products: action.products };
+    case 'CLEAR_REVIEW_FILTER':
+      return { ...state, products: action.products };
+    case 'FILTER_PRICE_RANGE':
+      let productsCopy = state.products.filter((product) => {
+        return (
+          (product.price >= action.lower) & (product.price <= action.higher)
+        );
+      });
+      return { ...state, products: productsCopy };
 
     // Basket //
     case 'UPDATE_BASKET':
@@ -124,23 +141,6 @@ function productsReducer(state = initialState, action) {
         reviewError: action.error,
         reviewSuccess: false,
       };
-    case 'SORT_BY_BEST_REVIEWS':
-      return { ...state, products: action.products };
-    case 'CLEAR_REVIEW_FILTER':
-      return { ...state, products: action.products };
-    case 'CHOSEN_BRAND':
-      let productsByBrand = [...state.products];
-      let products = productsByBrand.filter(
-        (product) => product.brand === action.brand
-      );
-      return { ...state, products };
-    case 'FILTER_PRICE_RANGE':
-      let productsCopy = state.products.filter((product) => {
-        return (
-          (product.price >= action.lower) & (product.price <= action.higher)
-        );
-      });
-      return { ...state, products: productsCopy };
 
     default:
       return state;
