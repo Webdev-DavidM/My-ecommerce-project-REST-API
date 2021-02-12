@@ -34,7 +34,7 @@ class ProductItem extends Component {
               {this.state.stars.map((star, index) => {
                 let colour = star <= rating ? '#f1c40f' : '#2c3e50';
                 return (
-                  <span style={{ color: `${colour}` }}>
+                  <span key={index} style={{ color: `${colour}` }}>
                     <FontAwesomeIcon icon={faStar} key={index} />
                   </span>
                 );

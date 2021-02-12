@@ -21,7 +21,7 @@ class ProductImageCarousel extends Component {
       }));
     } else if (
       direction === 'right' &&
-      this.state.selectedImage !== this.state.images.length - 1
+      this.state.selectedImage !== this.props.product.images.length - 1
     ) {
       return this.setState((prevState) => ({
         selectedImage: prevState.selectedImage + 1,
@@ -40,6 +40,7 @@ class ProductImageCarousel extends Component {
 
     let imageButtons = images.map((image, index) => (
       <span
+        key={index}
         className={styles.dot}
         onClick={() => this.moveImagesByDot(index)}
         style={

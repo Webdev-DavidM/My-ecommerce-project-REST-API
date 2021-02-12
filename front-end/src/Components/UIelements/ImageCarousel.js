@@ -11,21 +11,27 @@ export default class ImageCarousel extends Component {
     moveleft: false,
   };
 
-  componentDidMount = () => {
-    this.setState({ moveleft: true });
-    this.carouselInterval();
-  };
-
   carouselInterval = () => {
-    setInterval(() => {
+    this.moveImage = setInterval(() => {
       this.setState((prevState) => ({
         moveleft: !prevState.moveleft,
         moveright: !prevState.moveright,
       }));
     }, 8000);
-    setInterval(() => {
+
+    this.moveButton = setInterval(() => {
       this.setState({ showButton: true });
     }, 11000);
+  };
+
+  componentDidMount = () => {
+    this.setState({ moveleft: true });
+    this.carouselInterval();
+  };
+
+  componentWillUnmount = () => {
+    clearInterval(this.moveButton);
+    clearInterval(this.moveImage);
   };
 
   render() {

@@ -18,8 +18,13 @@ import { getProducts, clearProducts } from '../Actions/products.js';
 class MainCategory extends Component {
   componentDidMount = () => {
     this.props.clearOldProducts();
-    let { category } = this.props.match.params;
+    let category = this.props.match.url;
+    category = category.substring(1);
     this.props.getUserProducts(category);
+  };
+
+  componentWillUnmount = () => {
+    this.props.clearOldProducts();
   };
 
   render() {
