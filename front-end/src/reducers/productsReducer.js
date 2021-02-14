@@ -14,6 +14,13 @@ const initialState = {
   reviewSuccess: null,
   searchProducts: null,
   serverError: null,
+  globalFilterReset: false,
+  filterStock: false,
+  filterBrand: false,
+  filterPrice: false,
+  filterLowerPrice: 0,
+  filterHigherPrice: 0,
+  filterReview: false,
 
   categories: {
     cycle: {
@@ -76,27 +83,66 @@ function productsReducer(state = initialState, action) {
       return { ...state, chosenSubCategory: action.subcat };
     case 'CLEAR_SELECTED_PRODUCTS':
       return { ...state, selectedProduct: [] };
-    case 'CHOSEN_BRAND':
-      let productsByBrand = [...state.products];
-      let products = productsByBrand.filter(
-        (product) => product.brand === action.brand
-      );
-      return { ...state, products };
 
     // Filters //
     case 'FILTERED_BRANDS':
       return { ...state, filteredBrands: action.brands };
+    case 'CHOSEN_BRAND':
+      console.log(action);
+      let productsByBrand = [...state.products];
+      let products = productsByBrand.filter(
+        (product) => product.brand === action.brand
+      );
+      return { ...state, products, filterBrand: action.brand };
+    case 'RESET_ALL_FILTERS':
+      console.log(action.bool);
+      if (action.bool) {
+        return {
+          ...state,
+          globalFilterReset: action.bool,
+          filterStock: false,
+          filterBrand: false,
+          filterPrice: false,
+          filterReview: false,
+          filterHigherPrice: 0,
+          filterLowerPrice: 0,
+        };
+      } else {
+        return {
+          ...state,
+          globalFilterReset: action.bool,
+        };
+      }
+
+    case 'FILTERED_IN_STOCK':
+      let productsInStock = state.products.filter(
+        (product) => product.stock !== 0
+      );
+      console.log(productsInStock);
+      return { ...state, products: productsInStock, filterStock: true };
     case 'SORT_BY_BEST_REVIEWS':
-      return { ...state, products: action.products };
+      return { ...state, products: action.products, filterReview: true };
     case 'CLEAR_REVIEW_FILTER':
       return { ...state, products: action.products };
+    case 'UPDATE_PRICE_RANGE':
+      if (action.higher === true) {
+        return {
+          ...state,
+          filterHigherPrice: action.price,
+        };
+      } else {
+        return {
+          ...state,
+          filterLowerPrice: action.price,
+        };
+      }
     case 'FILTER_PRICE_RANGE':
       let productsCopy = state.products.filter((product) => {
         return (
           (product.price >= action.lower) & (product.price <= action.higher)
         );
       });
-      return { ...state, products: productsCopy };
+      return { ...state, products: productsCopy, filterPrice: true };
 
     // Basket //
     case 'UPDATE_BASKET':

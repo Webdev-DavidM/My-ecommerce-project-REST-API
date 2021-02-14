@@ -11,14 +11,17 @@ import styles from './CustomerReview.module.css';
 
 /* Action creators */
 
-import { sortByBestReviews, getProducts } from '../../../Actions/products';
+import {
+  sortByBestReviews,
+  getProducts,
+  resetFilterAll,
+} from '../../../Actions/products';
 
 class CustomerReviewFilter extends Component {
   state = {
     menu: false,
     categories: ['Best Customer reviews'],
     selectedDropDown: '',
-    selected: false,
   };
 
   dropdownMenu = () => {
@@ -28,8 +31,10 @@ class CustomerReviewFilter extends Component {
   };
 
   reset = () => {
-    this.setState({ selected: false });
-    this.props.clearFilter(this.props.match.params.category);
+    this.setState({ selectedDropDown: false });
+
+    this.props.getProducts(this.props.match.params.category);
+    this.props.globalReset(true);
   };
 
   componentDidMount = () => {
@@ -37,17 +42,16 @@ class CustomerReviewFilter extends Component {
   };
 
   selected = () => {
-    this.setState({ selected: true });
+    this.props.globalReset(false);
     this.props.bestReviews(this.props.products);
   };
 
   render() {
-    let dropdownClicked =
-      this.state.menu || this.props.showDropDown
-        ? styles.dropdownclicked
-        : null;
+    console.log(this.props.reset);
+    let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
 
-    let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
+    let dropbtnClicked =
+      this.props.reset || this.state.menu ? styles.dropbtnclicked : null;
 
     let buttons = this.state.categories.map((category, index) => {
       return (
@@ -55,7 +59,12 @@ class CustomerReviewFilter extends Component {
           <button
             className={styles.inputbtn}
             name={category}
-            style={this.state.selected ? { backgroundColor: '#f1c40f' } : null}
+            style={
+              // the reset doesnt make this selected false whcih it needs to
+              !this.props.reset && this.props.selected
+                ? { backgroundColor: '#f1c40f' }
+                : null
+            }
             onClick={() => this.selected()}
           />
           <span>&nbsp;&nbsp;&nbsp;{category}</span>
@@ -82,11 +91,11 @@ class CustomerReviewFilter extends Component {
           <div className={`${styles.dropdowncontent} ${dropdownClicked}`}>
             {buttons}
             <button
-              disabled={!this.state.selected}
+              disabled={!this.props.selected || this.props.reset}
               onClick={() => this.reset()}
               className={styles.resetbest}>
               {' '}
-              Reset
+              Reset all filters
             </button>
           </div>
         </div>
@@ -98,12 +107,17 @@ class CustomerReviewFilter extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     bestReviews: (products) => dispatch(sortByBestReviews(products)),
-    clearFilter: (category) => dispatch(getProducts(category)),
+    getProducts: (category) => dispatch(getProducts(category)),
+    globalReset: (bool) => dispatch(resetFilterAll(bool)),
   };
 };
 
 const mapStateToProps = (state) => {
-  return { products: state.products.products };
+  return {
+    products: state.products.products,
+    reset: state.products.globalFilterReset,
+    selected: state.products.filterReview,
+  };
 };
 
 export default withRouter(

@@ -11,14 +11,16 @@ import styles from './PriceRangeFilter.module.css';
 
 /* Action creators */
 
-import { sortViaPriceRange, getProducts } from '../../../Actions/products.js';
+import {
+  sortViaPriceRange,
+  getProducts,
+  resetFilterAll,
+  updatePriceFilter,
+} from '../../../Actions/products.js';
 
 class PriceRangeFilter extends Component {
   state = {
     menu: false,
-    lowerPriceRange: 0,
-    higherPriceRange: 0,
-    selectedDropDown: '',
   };
 
   dropdownMenu = () => {
@@ -30,32 +32,31 @@ class PriceRangeFilter extends Component {
   inputLowerPriceRange = (value) => {
     let number = parseInt(value);
     if (Number.isInteger(number)) {
-      this.setState({ lowerPriceRange: number });
+      this.props.updateFilter({ price: number, higher: false });
     }
   };
 
   inputHigherPriceRange = (value) => {
     let number = parseInt(value);
     if (Number.isInteger(number)) {
-      this.setState({ higherPriceRange: number });
+      this.props.updateFilter({ price: number, higher: true });
     }
   };
 
   submitValues = () => {
-    let { lowerPriceRange, higherPriceRange } = this.state;
     let { submitRange } = this.props;
-    if (lowerPriceRange !== 0 && higherPriceRange !== 0) {
-      submitRange(lowerPriceRange, higherPriceRange);
+    if (this.props.lowerPrice !== 0 && this.props.higherPrice !== 0) {
+      submitRange(this.props.lowerPrice, this.props.higherPrice);
+      this.props.globalReset(false);
     }
   };
 
   resetValues = () => {
     let { category } = this.props.match.params;
-    this.setState({
-      lowerPriceRange: 0,
-      higherPriceRange: 0,
-    });
+    this.props.updateFilter({ price: 0, higher: true });
+    this.props.updateFilter({ price: 0, higher: false });
     this.props.resetProducts(category);
+    this.props.globalReset(true);
   };
 
   componentDidMount = () => {
@@ -63,11 +64,10 @@ class PriceRangeFilter extends Component {
   };
 
   render() {
-    let dropdownClicked =
-      this.state.menu || this.props.showDropDown
-        ? styles.dropdownclicked
-        : null;
-    let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
+    let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
+    let dropbtnClicked = this.props.reset
+      ? this.state.menu && styles.dropbtnclicked
+      : null;
 
     return (
       <>
@@ -90,12 +90,12 @@ class PriceRangeFilter extends Component {
               <span>£</span>
               <input
                 type='text'
-                onFocus={() => this.setState({ lowerPriceRange: '' })}
-                onBlur={() =>
-                  this.state.lowerPriceRange === 0 &&
-                  this.setState({ lowerPriceRange: 0 })
-                }
-                value={this.state.lowerPriceRange}
+                // onFocus={() => this.setState({ lowerPriceRange: '' })}
+                // onBlur={() =>
+                //   this.state.lowerPriceRange === 0 &&
+                //   this.setState({ lowerPriceRange: 0 })
+                // }
+                value={this.props.lowerPrice}
                 onChange={(e) => this.inputLowerPriceRange(e.target.value)}
               />
             </div>
@@ -104,12 +104,12 @@ class PriceRangeFilter extends Component {
               <span>£</span>
               <input
                 onFocus={() => this.setState({ higherPriceRange: '' })}
-                onBlur={() =>
-                  this.state.lowerPriceRange === 0 &&
-                  this.setState({ higherPriceRange: 0 })
-                }
+                // onBlur={() =>
+                //   this.props.higher === 0 &&
+                //   this.setState({ higherPriceRange: 0 })
+                // }
                 type='text'
-                value={this.state.higherPriceRange}
+                value={this.props.higherPrice}
                 onChange={(e) => this.inputHigherPriceRange(e.target.value)}
               />
             </div>
@@ -120,13 +120,15 @@ class PriceRangeFilter extends Component {
             </button>
             <button
               disabled={
-                this.state.higherPriceRange === 0 ||
-                this.state.lowerPriceRange === 0
+                this.props.higherPrice === 0 ||
+                this.props.lowerPrice === 0 ||
+                this.props.reset ||
+                !this.props.selected
               }
               onClick={() => this.resetValues()}
               className={styles.resetprice}>
               {' '}
-              Reset
+              Reset all filters
             </button>
           </div>
         </div>
@@ -139,7 +141,22 @@ const mapDispatchToProps = (dispatch) => {
   return {
     submitRange: (low, high) => dispatch(sortViaPriceRange(low, high)),
     resetProducts: (category) => dispatch(getProducts(category)),
+    globalReset: (bool) => dispatch(resetFilterAll(bool)),
+    updateFilter: (data) => dispatch(updatePriceFilter(data)),
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(PriceRangeFilter));
+const mapStateToProps = (state) => {
+  return {
+    brands: state.products.filteredBrands,
+    products: state.products.products,
+    reset: state.products.globalFilterReset,
+    selected: state.products.filterPrice,
+    lowerPrice: state.products.filterLowerPrice,
+    higherPrice: state.products.filterHigherPrice,
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PriceRangeFilter)
+);

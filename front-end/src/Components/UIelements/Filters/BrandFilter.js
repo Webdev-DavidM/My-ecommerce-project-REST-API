@@ -11,12 +11,15 @@ import styles from './BrandFilter.module.css';
 
 /* Action creators */
 
-import { chosenBrand, getProducts } from '../../../Actions/products.js';
+import {
+  chosenBrand,
+  getProducts,
+  resetFilterAll,
+} from '../../../Actions/products.js';
 
 class BrandFilter extends Component {
   state = {
     menu: false,
-    selectedDropDown: '',
   };
 
   dropdownMenu = () => {
@@ -30,6 +33,7 @@ class BrandFilter extends Component {
     this.setState((prevState) => ({
       selectedDropDown: name,
     }));
+    this.props.globalReset(false);
     brandToFilter(name);
   };
 
@@ -38,8 +42,9 @@ class BrandFilter extends Component {
       selectedDropDown: '',
     }));
     let { category } = this.props.match.params;
-    let { resetProducts } = this.props;
+    let { resetProducts, globalReset } = this.props;
     resetProducts(category);
+    globalReset(true);
   };
 
   componentDidMount = () => {
@@ -49,12 +54,10 @@ class BrandFilter extends Component {
   render() {
     let brandsButtons;
 
-    let dropdownClicked =
-      this.state.menu || this.props.showDropDown
-        ? styles.dropdownclicked
-        : null;
+    let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
 
-    let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
+    let dropbtnClicked =
+      this.props.reset || this.state.menu ? styles.dropbtnclicked : null;
 
     let { brands } = this.props;
 
@@ -63,11 +66,11 @@ class BrandFilter extends Component {
         return (
           <div key={index}>
             <button
-              disabled={this.state.selectedDropDown !== ''}
+              disabled={this.state.filterBrand}
               className={styles.inputbtn}
               name={category}
               style={
-                this.state.selectedDropDown === category
+                this.props.selected === category && !this.props.reset
                   ? { backgroundColor: '#f1c40f' }
                   : null
               }
@@ -98,11 +101,11 @@ class BrandFilter extends Component {
           <div className={`${styles.dropdowncontent} ${dropdownClicked}`}>
             {brandsButtons}
             <button
-              disabled={this.state.selectedDropDown === ''}
+              disabled={!this.props.selected || this.props.reset}
               onClick={() => this.reset()}
               className={styles.clearbrand}>
               {' '}
-              Reset
+              Reset all filters
             </button>
           </div>
         </div>
@@ -115,6 +118,8 @@ const mapStateToProps = (state) => {
   return {
     brands: state.products.filteredBrands,
     products: state.products.products,
+    reset: state.products.globalFilterReset,
+    selected: state.products.filterBrand,
   };
 };
 
@@ -122,6 +127,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     brandToFilter: (brand) => dispatch(chosenBrand(brand)),
     resetProducts: (category) => dispatch(getProducts(category)),
+    globalReset: (bool) => dispatch(resetFilterAll(bool)),
   };
 };
 

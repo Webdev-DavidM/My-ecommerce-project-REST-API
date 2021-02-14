@@ -11,12 +11,15 @@ import styles from './StockFilter.module.css';
 
 /* Action creators */
 
-import { showInStock, getProducts } from '../../../Actions/products.js';
+import {
+  showInStock,
+  getProducts,
+  resetFilterAll,
+} from '../../../Actions/products.js';
 
 class StockFilter extends Component {
   state = {
     menu: false,
-    inStockSelected: false,
   };
 
   dropdownMenu = () => {
@@ -28,14 +31,15 @@ class StockFilter extends Component {
   reset = () => {
     let { resetProducts } = this.props;
     let { category } = this.props.match.params;
-    this.setState({ inStockSelected: false });
+
     resetProducts(category);
+    this.props.globalReset(true);
   };
 
   returnOnlyInStock = () => {
     let { inStock } = this.props;
-    this.setState({ inStockSelected: true });
     inStock();
+    this.props.globalReset(false);
   };
 
   componentDidMount = () => {
@@ -43,18 +47,19 @@ class StockFilter extends Component {
   };
 
   render() {
-    let dropdownClicked =
-      this.state.menu || this.props.showDropDown
-        ? styles.dropdownclicked
-        : null;
+    let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
 
-    let dropbtnClicked = this.state.menu ? styles.dropbtnclicked : null;
+    let dropbtnClicked =
+      this.props.reset || this.state.menu ? styles.dropbtnclicked : null;
 
     let stockBtn = (
       <button
         className={styles.inputbtn}
         style={
-          this.state.inStockSelected ? { backgroundColor: '#f1c40f' } : null
+          // I need to set each filter to false if reset is true and then it will
+          !this.props.reset && this.props.selected
+            ? { backgroundColor: '#f1c40f' }
+            : null
         }
         onClick={() => this.returnOnlyInStock()}
       />
@@ -81,10 +86,10 @@ class StockFilter extends Component {
               <span>&nbsp;&nbsp;&nbsp;In stock</span>
 
               <button
-                disabled={!this.state.inStockSelected}
+                disabled={!this.props.selected || this.props.reset}
                 className={styles.clearselection}
                 onClick={() => this.reset()}>
-                Reset
+                Reset all filters
               </button>
               <br />
             </div>
@@ -99,7 +104,19 @@ const mapDispatchToProps = (dispatch) => {
   return {
     inStock: () => dispatch(showInStock()),
     resetProducts: (category) => dispatch(getProducts(category)),
+    globalReset: (bool) => dispatch(resetFilterAll(bool)),
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(StockFilter));
+const mapStateToProps = (state) => {
+  return {
+    brands: state.products.filteredBrands,
+    products: state.products.products,
+    reset: state.products.globalFilterReset,
+    selected: state.products.filterStock,
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(StockFilter)
+);

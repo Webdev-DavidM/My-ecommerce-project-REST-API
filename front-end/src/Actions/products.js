@@ -171,7 +171,7 @@ export const sortViaPriceRange = (lower, higher) => {
 };
 
 export const showInStock = () => {
-  return { type: 'FILTER_IN_STOCK' };
+  return { type: 'FILTERED_IN_STOCK' };
 };
 
 export const productBrands = (brands) => {
@@ -189,4 +189,13 @@ export const deleteItemFromBasket = (id) => {
 
 export const emptyBasket = (id) => {
   return { type: 'EMPTY_BASKET' };
+};
+
+export const resetFilterAll = (bool) => {
+  return { type: 'RESET_ALL_FILTERS', bool };
+};
+
+export const updatePriceFilter = ({ price, higher }) => {
+  console.log(price, higher);
+  return { type: 'UPDATE_PRICE_RANGE', price, higher };
 };
