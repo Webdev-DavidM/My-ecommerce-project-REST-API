@@ -59,6 +59,7 @@ class NavBar extends Component {
                 className='fas fa-store'
                 style={{ width: '100%', height: '100%' }}></i> */}
             </div>
+
             <SearchBar />
             <div
               className={styles.user}

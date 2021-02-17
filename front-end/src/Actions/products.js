@@ -15,7 +15,8 @@ export const getProducts = (category) => {
             return { ...product, rating: 0 };
           }
           if (product.reviews.length === 1) {
-            return { ...product, rating: product.rating };
+            console.log(product);
+            return { ...product, rating: product.reviews[0].rating };
           } else {
             let length = product.reviews.length;
             let average = product.reviews.reduce((total, product) => {
@@ -48,6 +49,7 @@ export const returnAllProducts = () => {
         });
       }
     } catch (err) {
+      console.log(err);
       dispatch({
         type: 'ALLPRODUCTS_FAIL',
         error: err.response || err.message,
@@ -149,17 +151,19 @@ export const clearReviewsFilter = (products) => {
 };
 
 export const sortByBestReviews = (products) => {
-  //This will sort the products which now having rating into order from top to bottom
+  // This will sort the products which now having rating into order from top to bottom
   let addRatingToProducts = products.map((product) => {
+    console.log(product.rating);
     if (product.reviews.length === 0) {
       return { ...product, rating: 0 };
     }
     if (product.reviews.length === 1) {
-      return { ...product, rating: 1 };
+      console.log(product);
+      return { ...product, rating: product.rating };
     } else {
       let length = product.reviews.length;
       let average = product.reviews.reduce((a, b) => {
-        return a.rating + b.rating;
+        return a + b.rating;
       }, 0);
       return { ...product, rating: average / length };
     }

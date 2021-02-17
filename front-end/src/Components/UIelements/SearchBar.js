@@ -66,16 +66,18 @@ class SearchBar extends Component {
             unmountOnExit>
             <div className={styles.results}>
               {' '}
-              {this.props.products &&
-                this.props.products.map((product, index) => (
-                  <div
-                    className={styles.searchitem}
-                    key={index}
-                    onClick={() => this.selectedItem(product._id)}>
-                    {product.name}
-                    <hr />
-                  </div>
-                ))}
+              {this.props.product
+                ? Object.keys(this.props.products) !== 0 &&
+                  this.props.products.map((product, index) => (
+                    <div
+                      className={styles.searchitem}
+                      key={index}
+                      onClick={() => this.selectedItem(product._id)}>
+                      {product.name}
+                      <hr />
+                    </div>
+                  ))
+                : null}
             </div>
           </CSSTransition>
         </div>

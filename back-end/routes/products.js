@@ -14,6 +14,7 @@ import Product from '../models/Products.js';
 app.get('/all', async (req, res) => {
   try {
     let products = await Product.find({});
+    console.log(products);
     if (products) {
       res.status(200).json(products).end();
     } else {
