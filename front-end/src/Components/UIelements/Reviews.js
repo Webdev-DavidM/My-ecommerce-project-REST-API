@@ -1,7 +1,9 @@
 /* NPM packages */
 
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CSSTransition } from 'react-transition-group';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 /* CSS */
 
@@ -16,18 +18,22 @@ class Reviews extends Component {
 
   componentDidMount = () => {
     let { reviews } = this.props;
+    console.log(reviews);
 
     let averageRating =
       reviews.length > 0
         ? reviews.reduce((a, b) => {
-            return a.rating + b.rating;
-          }) / reviews.length
+            return a + b.rating;
+          }, 0) / reviews.length
         : 0;
+    console.log(averageRating);
     this.setState({ averageReviewRating: averageRating });
   };
 
   render() {
-    let { reviews } = this.props;
+    console.log(this.props);
+    let { reviews, rating } = this.props;
+    console.log(reviews, rating);
 
     return (
       <div
@@ -37,16 +43,17 @@ class Reviews extends Component {
             showReviews: !prevState.showReviews,
           }))
         }>
-        {this.state.stars.map((star, index) => {
-          let colour =
-            star <= this.state.averageReviewRating ? '#f1c40f' : null;
-          return (
-            <i
-              key={index}
-              className='fas fa-star'
-              style={{ color: `${colour}` }}></i>
-          );
-        })}
+        {this.state.averageReviewRating &&
+          this.state.stars.map((star, index) => {
+            console.log(star);
+            let colour =
+              star <= this.state.averageReviewRating ? '#f1c40f' : null;
+            return (
+              <span key={index} style={{ color: `${colour}` }}>
+                <FontAwesomeIcon icon={faStar} />
+              </span>
+            );
+          })}
         &nbsp; ({reviews.length})<span>&nbsp;Click for review details</span>
         {reviews.length === 0 && (
           <span>(0) Be the first to review this product</span>
@@ -58,13 +65,12 @@ class Reviews extends Component {
           unmountOnExit>
           <div>
             {reviews.map((review, index) => {
-              let stars = this.state.stars.map((star) => {
+              let stars = this.state.stars.map((star, index) => {
                 let colour = star <= review.rating ? '#f1c40f' : null;
                 return (
-                  <i
-                    key={index}
-                    className='fas fa-star'
-                    style={{ color: `${colour}` }}></i>
+                  <span key={index} style={{ color: `${colour}` }}>
+                    <FontAwesomeIcon icon={faStar} />
+                  </span>
                 );
               });
               return (

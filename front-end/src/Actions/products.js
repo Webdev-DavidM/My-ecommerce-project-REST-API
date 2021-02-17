@@ -15,15 +15,19 @@ export const getProducts = (category) => {
             return { ...product, rating: 0 };
           }
           if (product.reviews.length === 1) {
-            return { ...product, rating: 1 };
+            return { ...product, rating: product.rating };
           } else {
             let length = product.reviews.length;
-            let average = product.reviews.reduce((a, b) => {
-              return a.rating + b.rating;
-            });
-            return { ...product, rating: average / length };
+            let average = product.reviews.reduce((total, product) => {
+              return total + product.rating;
+            }, 0);
+            let rating = average / length;
+            console.log(rating);
+            console.log(rating);
+            return { ...product, rating: rating };
           }
         });
+        console.log(addRatingToProducts);
         dispatch({ type: 'PRODUCTS_SUCCESS', products: addRatingToProducts });
       }
     } catch (err) {
@@ -156,7 +160,7 @@ export const sortByBestReviews = (products) => {
       let length = product.reviews.length;
       let average = product.reviews.reduce((a, b) => {
         return a.rating + b.rating;
-      });
+      }, 0);
       return { ...product, rating: average / length };
     }
   });

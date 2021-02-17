@@ -47,7 +47,6 @@ class CustomerReviewFilter extends Component {
   };
 
   render() {
-    console.log(this.props.reset);
     let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
 
     let dropbtnClicked =

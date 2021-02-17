@@ -65,9 +65,8 @@ class PriceRangeFilter extends Component {
 
   render() {
     let dropdownClicked = this.state.menu ? styles.dropdownclicked : null;
-    let dropbtnClicked = this.props.reset
-      ? this.state.menu && styles.dropbtnclicked
-      : null;
+    let dropbtnClicked =
+      this.props.reset || this.state.menu ? styles.dropbtnclicked : null;
 
     return (
       <>

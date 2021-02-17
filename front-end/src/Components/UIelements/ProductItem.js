@@ -15,6 +15,7 @@ class ProductItem extends Component {
   };
   render() {
     let { images, _id, name, price, stock, rating } = this.props.details;
+    console.log(rating);
     let mainImage = images[0];
     return (
       <div className={styles.productitem}>
@@ -31,14 +32,17 @@ class ProductItem extends Component {
             </Link>
             <p className={styles.price}>£{price}</p>
             <div className={styles.stars}>
-              {this.state.stars.map((star, index) => {
-                let colour = star <= rating ? '#f1c40f' : '#2c3e50';
-                return (
-                  <span key={index} style={{ color: `${colour}` }}>
-                    <FontAwesomeIcon icon={faStar} key={index} />
-                  </span>
-                );
-              })}
+              {name &&
+                this.state.stars.map((star, index) => {
+                  let colour = star <= rating ? '#f1c40f' : '#2c3e50';
+                  return (
+                    <span
+                      key={`productItem${index}`}
+                      style={{ color: `${colour}` }}>
+                      <FontAwesomeIcon icon={faStar} />
+                    </span>
+                  );
+                })}
             </div>
             {stock === 0 && (
               <h2 className={styles.outofstock}>Sorry out of stock</h2>
