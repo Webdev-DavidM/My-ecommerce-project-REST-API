@@ -50,6 +50,11 @@ class Account extends Component {
         />
         <div className={styles.adminorderscontainer}>
           <h3>Your Recent orders</h3>
+          <button
+            onClick={() => this.logOut()}
+            className={styles.logoutbtnmobile}>
+            Log out
+          </button>
         </div>
         <div
           style={{

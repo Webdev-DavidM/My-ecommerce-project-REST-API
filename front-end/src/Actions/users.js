@@ -20,7 +20,18 @@ export const userSignIn = (email, password) => {
         dispatch({ type: 'LOGIN_FAIL', error: response.data });
       }
     } catch (err) {
-      dispatch({ type: 'LOGIN_FAIL', error: err.response.data });
+      console.log(err);
+      // this will catch a network error( server down)
+      if (err.request && err.request.status === 0) {
+        dispatch({
+          type: 'LOGIN_FAIL',
+          error: 'Network error, please try again',
+        });
+      }
+      // This will catch an error when the user's request is invalid
+      if (err.request && err.request.status === 401) {
+        dispatch({ type: 'LOGIN_FAIL', error: 'Unauthorised' });
+      }
     }
   };
 };
@@ -60,7 +71,12 @@ export const userSignUp = ({
         storeTokeninLocalStorage(response.data);
       }
     } catch (err) {
-      dispatch({ type: 'LOGIN_FAIL', error: err.response.data });
+      if (err.request && err.request.status === 0) {
+        dispatch({
+          type: 'LOGIN_FAIL',
+          error: 'Network error, please try again',
+        });
+      }
     }
   };
 };

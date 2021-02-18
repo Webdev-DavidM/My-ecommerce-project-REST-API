@@ -53,6 +53,8 @@ class SearchBar extends Component {
       <>
         <div className={styles.search}>
           <input
+            // if there is a network error and i cant get the products this field will be disabled
+            disabled={!this.props.searchProducts}
             autoComplete='off'
             value={this.state.input}
             onChange={(e) => this.userInput(e)}></input>
