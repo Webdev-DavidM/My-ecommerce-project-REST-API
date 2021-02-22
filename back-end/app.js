@@ -60,16 +60,21 @@ app.get('/', (req, res) => {
   res.json('welcome to the e-commerce api');
 });
 
-app.get('*', (req, res) => {
-  console.log('route hit');
-  res.status(404).json('Sorry cant find that route');
-});
-
 // Below will serve my images for the products and also uploaded images when new products are
 // created
 
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static(path.join(__dirname, '/front-end/build')));
+let dir = path.resolve(__dirname, '/../front-end/build/index.html');
+console.log(dir);
+
+app.get(
+  '*',
+  (req, res) => res.send('hello world')
+  //   res.sendFile(path.resolve(__dirname, '/front-end/build/index.html'))
+);
 
 const port = process.env.PORT || 5000;
 
