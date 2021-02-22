@@ -67,13 +67,16 @@ class Checkout extends Component {
   closeModal = () => {
     // This method will clear the basket and local storage, close the modal and then send the user back to the homepage
     let { clearBasket, clearModal } = this.props;
-    clearBasket();
-    let localStorageItems = Object.keys(localStorage);
-    localStorageItems.map((key) => {
-      return key !== 'userInfo' && localStorage.removeItem(`${key}`);
-    });
+    if (!this.props.error) {
+      clearBasket();
+      let localStorageItems = Object.keys(localStorage);
+      localStorageItems.map((key) => {
+        return key !== 'userInfo' && localStorage.removeItem(`${key}`);
+      });
+      clearModal();
+      this.props.history.push('/');
+    }
     clearModal();
-    this.props.history.push('/');
   };
 
   render() {
@@ -82,18 +85,27 @@ class Checkout extends Component {
     let total = basketTotal();
     return (
       <div className={styles.checkoutcontainer}>
-        {this.props.showModal && (
+        {this.props.showModal ? (
           <div className={styles.ordermodal}>
             <div className={styles.basket}>
               <h2>
                 {' '}
                 <i className='fas fa-check'></i>
-                &nbsp;Order confirmed!{' '}
+                &nbsp;
+                {!this.props.error ? (
+                  <span>Order confirmed!</span>
+                ) : (
+                  <span>Order failed!Please try again</span>
+                )}
               </h2>
               <button
                 onClick={() => this.closeModal()}
                 className={styles.continueshoppingbtn}>
-                Continue shopping
+                {!this.props.error ? (
+                  <span>Continue shopping</span>
+                ) : (
+                  <span>Try again</span>
+                )}
               </button>
 
               <Link
@@ -104,7 +116,7 @@ class Checkout extends Component {
               </Link>
             </div>
           </div>
-        )}
+        ) : null}
         <h2>
           <span
             className={styles.gobackbtn}
@@ -174,6 +186,7 @@ const mapStateToProps = (state) => {
     userDetails: state.user.user,
     showModal: state.orders.showOrdersModal,
     basket: state.products.basket,
+    error: state.orders.errors,
     basketTotal: () => {
       let Total = 0;
       if (state.products.basket.length !== 0) {

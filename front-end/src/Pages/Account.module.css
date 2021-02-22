@@ -9,6 +9,24 @@
   margin: 1rem 0;
 }
 
+.logoutbtnmobile {
+  margin: 1rem 0;
+  width: 5rem;
+  padding: 0;
+  height: 2.5rem;
+  background-color: #bdc3c7;
+  border-radius: 3px;
+  transition: all 1s;
+  border: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+.logoutbtnmobile:hover {
+  cursor: pointer;
+  color: #7f8c8d;
+}
+
 .ordersdetails {
   display: flex;
   flex-direction: column;

@@ -18,8 +18,15 @@ export const sendOrderToServer = (orderInfo) => {
         dispatch({ type: 'ORDER_SUCCESS', products: response.data });
       }
     } catch (err) {
-      dispatch({ type: 'ORDER_FAIL', error: err.response.data });
+      console.log(err.request);
+      if (err.request && err.request.status === 0) {
+        dispatch({
+          type: 'ORDER_FAIL',
+          error: 'Network error, please try again',
+        });
+      }
     }
+    // dispatch({ type: 'ORDER_FAIL', error: err.response.data });
   };
 };
 

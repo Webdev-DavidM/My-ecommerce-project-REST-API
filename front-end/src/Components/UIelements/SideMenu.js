@@ -55,7 +55,7 @@ class SideMenu extends Component {
                     subCatToShow(e.target.textContent);
                     showSubCat(true);
                   }}>
-                  <Link to={`/${cat}`}>{cat}</Link>
+                  {cat}
                   <i className={`fas fa-arrow-right ${iconMove}`}></i>
                 </div>
               );

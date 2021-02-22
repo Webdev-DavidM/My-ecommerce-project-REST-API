@@ -17,7 +17,7 @@ const LandingPage = () => {
 
       <div className={styles.mainimagemobile}>
         <img
-          src={`${process.env.PUBLIC_URL}/images/landing-page-main-image.jpg`}
+          src={`${process.env.PUBLIC_URL}/images/cycling-desktop.jpg`}
           alt='Man on a bike smiling'></img>
       </div>
 

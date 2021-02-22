@@ -8,6 +8,8 @@
   height: 200px;
   margin: 1rem auto;
   max-height: 320px;
+  width: 90%;
+  object-fit: contain;
 }
 
 /* Slideshow container */
@@ -23,6 +25,8 @@
   background-color: white;
   display: flex;
   align-items: center;
+  width: 100%;
+  position: relative;
 }
 
 /* Next & previous buttons */
@@ -30,7 +34,7 @@
 .next {
   cursor: pointer;
   width: auto;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   margin-top: -22px;
   color: #2c3e50;
   font-weight: bold;
@@ -48,7 +52,6 @@
 
 .dot {
   cursor: pointer;
-  height: 15px;
   width: 15px;
   margin: 0 2px;
   background-color: #bbb;
