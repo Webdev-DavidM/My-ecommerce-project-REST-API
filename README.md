@@ -2,6 +2,8 @@
 
 This e-commerce project provides the full functionality of a e-commerce website. I have created it as a personal project using the MERN tech stack, MongoDB, Express, Node and React.
 
+The front end app can viewed in a separate repository- React-e-commerce front-end
+
 ## Images
 
 ![](/read-me-images/My-e-commerce-store.png ) ![](/read-me-images/main-image.jpg )
