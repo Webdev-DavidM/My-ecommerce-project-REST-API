@@ -4,7 +4,7 @@ This e-commerce project provides the full functionality of a e-commerce website.
 
 ## Images
 
-![](/read-me-images/My-e-commerce-store.png )
+![](/read-me-images/My-e-commerce-store.png ) ![](/read-me-images/main-image.jpg )
 
 ![](/read-me-images/My-e-commerce-store-product-page.png ) ![](/read-me-images/My-e-commerce-store-shopping-basket.png )
  
