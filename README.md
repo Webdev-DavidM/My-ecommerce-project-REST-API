@@ -4,10 +4,10 @@ This e-commerce project provides the full functionality of a e-commerce website.
 
 ## Images
 
-![](/github-preview-images/main-image.png)
+![](/read-me-images/My-ecommerce-store.png )
 
-![](/github-preview-images/My-e-commerce-store-product-page.png ){:height="50%" width="50%"}
-
+![](/read-me-images/My-e-commerce-store-product-page.png ) ![](/read-me-images/My-e-commerce-store-shopping-basket.png )
+ 
 ## Video preview
 
 
