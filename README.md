@@ -4,9 +4,11 @@ This e-commerce project provides the full functionality of a e-commerce website.
 
 ## Images
 
-![](./todo-app.jpg)
+![](/front-end/public/images/github-preview-images/main-image.png)
 
 ## Video preview
+
+
 
 ## Features
 
