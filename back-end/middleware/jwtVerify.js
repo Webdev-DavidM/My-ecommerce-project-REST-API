@@ -5,7 +5,7 @@ const jwtVerify = async (req, res, next) => {
   let { token, email } = req.headers;
 
   try {
-    await jwt.verify(token, 'crystal palace are the best');
+    await jwt.verify(token, process.env.jwtSecret);
     req.email = email;
 
     next();
